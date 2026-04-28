@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { colors } from '../theme/colors';
+import { StarRating } from './StarRating';
 import PropTypes from 'prop-types';
 
 export const LocationCard = ({ loc }) => {
