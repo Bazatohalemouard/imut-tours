@@ -5,6 +5,8 @@ import { colors } from "../theme/colors";
 import { Spinner } from "../components/Spinner";
 import { TripCard } from "../components/TripCard";
 import { StarRating } from "../components/StarRating";
+import locationIcon from "../assets/icons/placeholder.png";
+
 // ─── Home Page ────────────────────────────────────────────────────────────────
 export const HomePage = ({ setPage }) => {
   const [trips, setTrips] = useState([]);
@@ -160,7 +162,8 @@ export const HomePage = ({ setPage }) => {
                 marginBottom: 24,
               }}
             >
-              <span style={{ fontSize: 12 }}>🌍</span>
+              {/* <span style={{ fontSize: 12 }}>🌍</span> */}
+              <img src={locationIcon} alt="globe" width={12} height={12} />
               <span
                 style={{
                   fontSize: 12,
@@ -170,7 +173,7 @@ export const HomePage = ({ setPage }) => {
                   textTransform: "uppercase",
                 }}
               >
-                Rwanda & Uganda Specialists
+                East Africa Specialists
               </span>
             </div>
 
@@ -203,7 +206,7 @@ export const HomePage = ({ setPage }) => {
             >
               Embark on the journey of a lifetime — trekking with mountain
               gorillas, tracking chimpanzees, and witnessing the Big Five across
-              Rwanda and Uganda.
+              East African Parks.
             </p>
 
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>

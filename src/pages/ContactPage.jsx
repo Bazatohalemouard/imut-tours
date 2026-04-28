@@ -1,5 +1,12 @@
 import { useState } from "react";
 import { colors } from "../theme/colors";
+import whatsappIcon from "../assets/icons/whatsapp.png";
+import rwandaFlag from "../assets/icons/rwanda.png";
+import phoneIcon from "../assets/icons/phone.png";
+import locationIcon from "../assets/icons/location.png";
+import emailIcon from "../assets/icons/email.png";
+import fastResponseIcon from "../assets/icons/fast-response.png";
+
 
 // ─── Contact Page ─────────────────────────────────────────────────────────────
 export const ContactPage = () => {
@@ -43,21 +50,21 @@ export const ContactPage = () => {
 
   const offices = [
     {
-      flag: "🇷🇼",
+      flag: rwandaFlag,
       city: "Kigali",
       country: "Rwanda",
       address: "KG 11 Ave, Gasabo District, Kigali",
-      phone: "+250 788 123 456",
+      phone: "+250 788 608 794",
       email: "rwanda@imuttours.com",
     },
-    {
-      flag: "🇺🇬",
-      city: "Kampala",
-      country: "Uganda",
-      address: "Plot 14, Nakasero Hill Road, Kampala",
-      phone: "+256 700 987 654",
-      email: "uganda@imuttours.com",
-    },
+    // {
+    //   flag: "🇺🇬",
+    //   city: "Kampala",
+    //   country: "Uganda",
+    //   address: "Plot 14, Nakasero Hill Road, Kampala",
+    //   phone: "+256 700 987 654",
+    //   email: "uganda@imuttours.com",
+    // },
   ];
 
   return (
@@ -331,7 +338,7 @@ export const ContactPage = () => {
                 </label>
                 <textarea
                   id="message"
-                  placeholder="Tell us about your dream East Africa experience..."
+                  placeholder="Tell us about your dream East African experience..."
                   rows={4}
                   value={form.message}
                   onChange={(e) => handleChange("message", e.target.value)}
@@ -401,7 +408,8 @@ export const ContactPage = () => {
                     marginBottom: 14,
                   }}
                 >
-                  <span style={{ fontSize: 28 }}>{o.flag}</span>
+                  {/* <span style={{ fontSize: 28 }}>{o.flag}</span> */}
+                  <img src={o.flag} alt="globe" width={42} height={42} />
                   <div>
                     <div
                       style={{
@@ -417,17 +425,15 @@ export const ContactPage = () => {
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   {[
-                    { icon: "📍", val: o.address },
-                    { icon: "📞", val: o.phone },
-                    { icon: "✉️", val: o.email },
+                    { icon: locationIcon, val: o.address },
+                    { icon: phoneIcon, val: o.phone },
+                    { icon: emailIcon, val: o.email },
                   ].map((item, i) => (
                     <div
                       key={i}
                       style={{ display: "flex", gap: 10, alignItems: "flex-start" }}
                     >
-                      <span style={{ fontSize: 14, flexShrink: 0 }}>
-                        {item.icon}
-                      </span>
+                      <img src={item.icon} alt="globe" width={18} height={14} />
                       <span style={{ fontSize: 14, color: colors.textMuted }}>
                         {item.val}
                       </span>
@@ -461,23 +467,30 @@ export const ContactPage = () => {
                   fontSize: 22,
                 }}
               >
-                💬
+                <img src={whatsappIcon} alt="globe" width={42} height={42} />
               </div>
-              <div>
-                <div
-                  style={{
-                    fontSize: 14,
-                    fontWeight: 700,
-                    color: "#fff",
-                    marginBottom: 2,
-                  }}
-                >
-                  Chat on WhatsApp
+              <a
+                href="https://wa.me/250788608794"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: "none" }}
+              >
+                <div>
+                  <div
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 700,
+                      color: "#fff",
+                      marginBottom: 2,
+                    }}
+                  >
+                    Chat on WhatsApp
+                  </div>
+                  <div style={{ fontSize: 13, color: "rgba(255,255,255,0.85)" }}>
+                    Available Mon–Sat · 7am–8pm EAT
+                  </div>
                 </div>
-                <div style={{ fontSize: 13, color: "rgba(255,255,255,0.85)" }}>
-                  Available Mon–Sat · 7am–8pm EAT
-                </div>
-              </div>
+              </a>
             </div>
 
             {/* Response time */}
@@ -492,7 +505,7 @@ export const ContactPage = () => {
                 alignItems: "center",
               }}
             >
-              <span style={{ fontSize: 24 }}>⚡</span>
+              <img src={fastResponseIcon} alt="globe" width={42} height={42} />
               <div>
                 <div
                   style={{

@@ -4,30 +4,30 @@ import { colors } from "../theme/colors";
 // ─── About Page ───────────────────────────────────────────────────────────────
 export const AboutPage = ({ setPage }) => {
   const team = [
-    {
-      name: "Claude Ndayisaba",
-      role: "Founder & CEO",
-      bio: "Born and raised in Kigali, Claude has 15+ years guiding gorilla treks and building sustainable safari experiences.",
-      emoji: "👨🏾‍💼",
-    },
-    {
-      name: "Amara Tugume",
-      role: "Head of Uganda Operations",
-      bio: "Kampala native and wildlife biologist, Amara manages all Uganda safaris with unmatched ecological expertise.",
-      emoji: "👩🏾‍🔬",
-    },
-    {
-      name: "Patrick Nkurunziza",
-      role: "Chief Experience Officer",
-      bio: "Patrick designs every itinerary to balance adventure with comfort and authentic local culture.",
-      emoji: "🧭",
-    },
-    {
-      name: "Diane Uwimana",
-      role: "Conservation Coordinator",
-      bio: "Diane liaises with national park authorities to ensure every trip supports local conservation efforts.",
-      emoji: "🌿",
-    },
+    // {
+    //   name: "Claude Ndayisaba",
+    //   role: "Founder & CEO",
+    //   bio: "Born and raised in Kigali, Claude has 15+ years guiding gorilla treks and building sustainable safari experiences.",
+    //   emoji: "👨🏾‍💼",
+    // },
+    // {
+    //   name: "Amara Tugume",
+    //   role: "Head of Uganda Operations",
+    //   bio: "Kampala native and wildlife biologist, Amara manages all Uganda safaris with unmatched ecological expertise.",
+    //   emoji: "👩🏾‍🔬",
+    // },
+    // {
+    //   name: "Patrick Nkurunziza",
+    //   role: "Chief Experience Officer",
+    //   bio: "Patrick designs every itinerary to balance adventure with comfort and authentic local culture.",
+    //   emoji: "🧭",
+    // },
+    // {
+    //   name: "Diane Uwimana",
+    //   role: "Conservation Coordinator",
+    //   bio: "Diane liaises with national park authorities to ensure every trip supports local conservation efforts.",
+    //   emoji: "🌿",
+    // },
   ];
 
   const values = [
