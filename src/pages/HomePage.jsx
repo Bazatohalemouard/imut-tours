@@ -6,6 +6,13 @@ import { Spinner } from "../components/Spinner";
 import { TripCard } from "../components/TripCard";
 import { StarRating } from "../components/StarRating";
 import locationIcon from "../assets/icons/placeholder.png";
+import gorillaIcon from "../assets/icons/gorilla.png";
+import elephantIcon from "../assets/icons/elephant.png";
+import monkeyIcon from "../assets/icons/monkey.png";
+import kayakIcon from "../assets/icons/kayaking.png";
+import hikingIcon from "../assets/icons/hiking.png";
+import birdWatchingIcon from "../assets/icons/birds.png";
+
 
 // ─── Home Page ────────────────────────────────────────────────────────────────
 export const HomePage = ({ setPage }) => {
@@ -27,12 +34,12 @@ export const HomePage = ({ setPage }) => {
   ];
 
   const categories = [
-    { icon: "🦍", label: "Gorilla Trekking", count: "4 experiences" },
-    { icon: "🐘", label: "Big Five Safari", count: "6 experiences" },
-    { icon: "🐒", label: "Chimp Tracking", count: "3 experiences" },
-    { icon: "🚣", label: "River Safaris", count: "2 experiences" },
-    { icon: "🌿", label: "Forest Walks", count: "5 experiences" },
-    { icon: "📸", label: "Photo Safaris", count: "3 experiences" },
+    { icon: gorillaIcon, label: "Gorilla Trekking", count: "4 experiences" },
+    { icon: elephantIcon, label: "Big Five Safari", count: "6 experiences" },
+    { icon: monkeyIcon, label: "Chimp Tracking", count: "3 experiences" },
+    { icon: kayakIcon, label: "Kayaking", count: "2 experiences" },
+    { icon: hikingIcon, label: "Hiking", count: "5 experiences" },
+    { icon: birdWatchingIcon, label: "Bird Watching", count: "3 experiences" },
   ];
 
   const testimonials = [
@@ -162,7 +169,6 @@ export const HomePage = ({ setPage }) => {
                 marginBottom: 24,
               }}
             >
-              {/* <span style={{ fontSize: 12 }}>🌍</span> */}
               <img src={locationIcon} alt="globe" width={12} height={12} />
               <span
                 style={{
@@ -388,7 +394,7 @@ export const HomePage = ({ setPage }) => {
                   e.currentTarget.style.borderColor = colors.sand;
                 }}
               >
-                <span style={{ fontSize: 36 }}>{cat.icon}</span>
+                <img src={cat.icon} alt={cat.label} width={52} height={52} />
                 <div
                   style={{
                     fontSize: 14,
