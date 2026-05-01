@@ -3,8 +3,26 @@ import { colors } from '../theme/colors';
 import { StarRating } from './StarRating';
 import PropTypes from 'prop-types';
 
+import rwandaFlag from "../assets/flags/rwanda.png";
+import ugandaFlag from "../assets/flags/uganda.png";
+import tanzaniaFlag from "../assets/flags/tanzania.png";
+import burundiFlag from "../assets/flags/burundi.png";
+import kenyaFlag from "../assets/flags/kenya.png";
+import calendarIcon from "../assets/icons/calendar.png";
+
 export const LocationCard = ({ loc }) => {
   const [hovered, setHovered] = useState(false);
+
+
+  const fetchCountryFlag = (country) => {
+    if (country === "Rwanda") return rwandaFlag;
+    if (country === "Uganda") return ugandaFlag;
+    if (country === "Tanzania") return tanzaniaFlag;
+    if (country === "Burundi") return burundiFlag;
+    if (country === "Kenya") return kenyaFlag;
+    return "";
+  }
+
   return (
     <button
       type="button"
@@ -58,7 +76,13 @@ export const LocationCard = ({ loc }) => {
             backdropFilter: "blur(4px)",
           }}
         >
-          {loc.country_flag} {loc.country}
+          {fetchCountryFlag(loc.country) && (
+            <img
+              src={fetchCountryFlag(loc.country)}
+              alt={loc.country}
+              style={{ width: 16, height: 16, borderRadius: "50%", objectFit: "cover", marginRight: 6 }}
+            />
+          )}
         </div>
         <div
           style={{
@@ -133,8 +157,14 @@ export const LocationCard = ({ loc }) => {
             paddingTop: 12,
           }}
         >
+
           <span style={{ fontSize: 12, color: colors.textMuted }}>
-            🗓 Best: {loc.bestTime}
+            <img
+              src={calendarIcon}
+              alt={loc.bestTime}
+              style={{ width: 14, height: 14 }}
+            />
+            Best: {loc.bestTime}
           </span>
           <span
             style={{

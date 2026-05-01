@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { fetchTrips } from "../api/APIHandler";
+import { fetchTrips, fetchCountries } from "../api/APIHandler";
 import { colors } from "../theme/colors";
 import { Spinner } from "../components/Spinner";
 import { TripCard } from "../components/TripCard";
@@ -11,6 +11,8 @@ export const TripsPage = ({ setPage }) => {
   const [loading, setLoading] = useState(true);
   const [country, setCountry] = useState("All");
   const [category, setCategory] = useState("All");
+  const [countries, setCountries] = useState([]);
+  const [countriesLoading, setCountriesLoading] = useState(true);
 
   useEffect(() => {
     fetchTrips().then((data) => {
@@ -18,6 +20,17 @@ export const TripsPage = ({ setPage }) => {
       setLoading(false);
     });
   }, []);
+
+useEffect(() => {
+  fetchCountries().then((data) => {
+    const countriesWithAll = [
+      { id: "all", name: "All" },
+      ...data
+    ];
+    setCountries(countriesWithAll);
+    setCountriesLoading(false);
+  });
+}, []);
 
   const categories = [
     "All",
@@ -27,7 +40,6 @@ export const TripsPage = ({ setPage }) => {
     "Multi-Country",
     "Leisure",
   ];
-  const countries = ["All", "Rwanda", "Uganda", "Both"];
 
   const filtered = trips.filter(
     (t) =>
@@ -84,14 +96,15 @@ export const TripsPage = ({ setPage }) => {
                 Country
               </p>
               <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                {countries.map((c) => (
+                {countriesLoading && <Spinner />}
+                {!countriesLoading && countries.map((c) => (
                   <button
                     key={c}
-                    onClick={() => setCountry(c)}
+                    onClick={() => setCountry(c.name)}
                     style={{
                       background:
-                        country === c ? "#fff" : "rgba(255,255,255,0.15)",
-                      color: country === c ? colors.jungle : "#fff",
+                        country === c.name ? "#fff" : "rgba(255,255,255,0.15)",
+                      color: country === c.name ? colors.jungle : "#fff",
                       border: "1px solid rgba(255,255,255,0.3)",
                       cursor: "pointer",
                       padding: "6px 14px",
@@ -100,7 +113,7 @@ export const TripsPage = ({ setPage }) => {
                       fontWeight: country === c ? 700 : 400,
                     }}
                   >
-                    {c}
+                    {c.name}
                   </button>
                 ))}
               </div>
@@ -119,7 +132,7 @@ export const TripsPage = ({ setPage }) => {
                 Category
               </p>
               <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                {categories.map((c) => (
+                {!countriesLoading && categories.map((c) => (
                   <button
                     key={c}
                     onClick={() => setCategory(c)}

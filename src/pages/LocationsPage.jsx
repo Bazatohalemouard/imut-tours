@@ -1,19 +1,45 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { fetchLocations } from "../api/APIHandler";
+import { fetchLocations, fetchCountries } from "../api/APIHandler";
 import { colors } from "../theme/colors";
 import { Spinner } from "../components/Spinner";
 import { LocationCard } from "../components/LocationCard";
+import rwandaFlag from "../assets/flags/rwanda.png";
+import ugandaFlag from "../assets/flags/uganda.png";
+import tanzaniaFlag from "../assets/flags/tanzania.png";
+import burundiFlag from "../assets/flags/burundi.png";
+import kenyaFlag from "../assets/flags/kenya.png";
+
 // ─── Locations Page ───────────────────────────────────────────────────────────
 export const LocationsPage = ({ setPage }) => {
   const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [countries, setCountries] = useState([]);
+  const [countriesLoading, setCountriesLoading] = useState(true);
+
   const [filter, setFilter] = useState("All");
+
+  const fetchCountryFlag = (country) => {
+    if (country === "Rwanda") return rwandaFlag;
+    if (country === "Uganda") return ugandaFlag;
+    if (country === "Tanzania") return tanzaniaFlag;
+    if (country === "Burundi") return burundiFlag;
+    if (country === "Kenya") return kenyaFlag;
+    return "";
+  }
+
 
   useEffect(() => {
     fetchLocations().then((data) => {
       setLocations(data);
       setLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    fetchCountries().then((data) => {
+      setCountries(data);
+      setCountriesLoading(false);
     });
   }, []);
 
@@ -64,32 +90,53 @@ export const LocationsPage = ({ setPage }) => {
             lineHeight: 1.7,
           }}
         >
-          From the misty volcanoes of Rwanda to Uganda's sweeping plains —
-          discover the heart of East Africa.
+          You gate way to East Africa starts here. Discover:Rwanda, Uganda, Tanzania, Kenya and Burundi.
         </p>
 
         {/* Filter tabs */}
         <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap" }}>
-          {["All", "Rwanda", "Uganda"].map((f) => (
+          {countriesLoading && <Spinner />}
+          {!countriesLoading && countries.map((f) => (
             <button
-              key={f}
-              onClick={() => setFilter(f)}
+              key={f.name}
+              onClick={() => setFilter(f.name)}
               style={{
                 background:
-                  filter === f ? colors.gold : "rgba(255,255,255,0.12)",
+                  filter === f.name ? colors.gold : "rgba(255,255,255,0.12)",
                 color: "#fff",
                 border: "1px solid rgba(255,255,255,0.25)",
                 cursor: "pointer",
                 padding: "8px 20px",
                 borderRadius: 99,
                 fontSize: 14,
-                fontWeight: filter === f ? 700 : 400,
+                fontWeight: filter === f.name ? 700 : 400,
                 transition: "all 0.2s",
               }}
             >
-              {f === "Rwanda" && "🇷🇼 "}
-              {f === "Uganda" && "🇺🇬 "}
-              {f}
+
+              {fetchCountryFlag(f.name) ? (
+
+                <img
+                  src={fetchCountryFlag(f.name)}
+                  alt={f.name}
+                  style={{ width: 16, height: 16, borderRadius: "50%", objectFit: "cover" }}
+                />
+
+              ) : (
+                <span
+                  style={{
+                    width: 16,
+                    height: 16,
+                    borderRadius: "50%",
+                    background: "rgba(255,255,255,0.3)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 9,
+                  }}
+                >
+                </span>
+              )}
             </button>
           ))}
         </div>
