@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { fetchTrips } from "../api/APIHandler";
+import { fetchTrips, fetchCountries } from "../api/APIHandler";
+
 import { colors } from "../theme/colors";
 import { Spinner } from "../components/Spinner";
 import { TripCard } from "../components/TripCard";
@@ -23,6 +24,17 @@ import burundiFlag from "../assets/flags/burundi.png";
 export const HomePage = ({ setPage }) => {
   const [trips, setTrips] = useState([]);
   const [tripsLoading, setTripsLoading] = useState(true);
+  const [countries, setCountries] = useState([]);
+  const [countriesLoading, setCountriesLoading] = useState(true);
+
+  const fetchCountryFlag = (country) => {
+    if (country === "Rwanda") return rwandaFlag;
+    if (country === "Uganda") return ugandaFlag;
+    if (country === "Tanzania") return tanzaniaFlag;
+    if (country === "Burundi") return burundiFlag;
+    if (country === "Kenya") return kenyaFlag;
+    return "";
+  }
 
   useEffect(() => {
     fetchTrips().then((data) => {
@@ -31,40 +43,15 @@ export const HomePage = ({ setPage }) => {
     });
   }, []);
 
-  const opsCountries = [
-    {
-      flag: rwandaFlag,
-      name: "Rwanda",
-      desc: "Land of a Thousand Hills",
-      experiences: 8,
-    },
-    {
-      flag: ugandaFlag,
-      name: "Uganda",
-      desc: "Pearl of Africa",
-      experiences: 10,
-    },
-    {
-      flag: tanzaniaFlag,
-      name: "Tanzania",
-      desc: "Savanna, Peaks & Spice Islands",
-      experiences: 12,
-    },
-    {
-      flag: kenyaFlag,
-      name: "Kenya",
-      desc: "Classic Safari & Coastal Splendor",
-      experiences: 11,
-    },
-    {
-      flag: burundiFlag,
-      name: "Burundi",
-      desc: "Hidden Lakes & Cultural Trails",
-      experiences: 4,
-    },
-  ];
 
-  const countryList = opsCountries.map((c) => c.name);
+  useEffect(() => {
+    fetchCountries().then((data) => {
+      setCountries(data);
+      setCountriesLoading(false);
+    });
+  }, []);
+
+  const countryList = countries.map((c) => c.name);
   const countryText =
     countryList.length > 1
       ? `${countryList.slice(0, -1).join(", ")} and ${countryList.slice(-1)}`
@@ -637,7 +624,8 @@ export const HomePage = ({ setPage }) => {
               gap: 16,
             }}
           >
-            {opsCountries.map((c) => (
+            {countriesLoading && (<Spinner />)}
+            {!countriesLoading && countries.map((c) => (
               <div
                 key={c.name}
                 style={{
@@ -649,7 +637,7 @@ export const HomePage = ({ setPage }) => {
                 }}
               >
                 <img
-                  src={c.flag}
+                  src={fetchCountryFlag(c.name)}
                   alt={`${c.name} flag`}
                   width={56}
                   height={40}
