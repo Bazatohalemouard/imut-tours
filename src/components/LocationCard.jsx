@@ -67,23 +67,51 @@ export const LocationCard = ({ loc }) => {
             position: "absolute",
             top: 14,
             left: 14,
-            background: "rgba(0,0,0,0.45)",
-            color: "#fff",
             fontSize: 12,
             fontWeight: 600,
             padding: "4px 10px",
-            borderRadius: 99,
-            backdropFilter: "blur(4px)",
           }}
         >
-          {fetchCountryFlag(loc.country) && (
-            <img
-              src={fetchCountryFlag(loc.country)}
-              alt={loc.country}
-              style={{ width: 16, height: 16, borderRadius: "50%", objectFit: "cover", marginRight: 6 }}
-            />
-          )}
+          <span
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 5,
+              background: "rgba(0,0,0,0.45)",
+              color: "#fff",
+              fontSize: 11,
+              fontWeight: 600,
+              padding: "3px 9px",
+              borderRadius: 99,
+              backdropFilter: "blur(4px)",
+            }}
+          >
+
+            {fetchCountryFlag(loc.country) ? (
+              <img
+                src={fetchCountryFlag(loc.country)}
+                alt={loc.country}
+                style={{ width: 16, height: 16, borderRadius: "50%", objectFit: "cover" }}
+              />
+            ) : (
+              <span
+                style={{
+                  width: 16,
+                  height: 16,
+                  borderRadius: "50%",
+                  background: "rgba(255,255,255,0.3)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 9,
+                }}
+              >
+              </span>
+            )}
+            {loc.country}
+          </span>
         </div>
+
         <div
           style={{
             position: "absolute",
