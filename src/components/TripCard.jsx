@@ -4,9 +4,27 @@ import { useState } from "react";
 import { colors } from "../theme/colors";
 import { StarRating } from "./StarRating";
 import { Badge } from "./Badge";
+import rwandaFlag from "../assets/flags/rwanda.png";
+import ugandaFlag from "../assets/flags/uganda.png";
+import tanzaniaFlag from "../assets/flags/tanzania.png";
+import burundiFlag from "../assets/flags/burundi.png";
+import kenyaFlag from "../assets/flags/kenya.png";
+import clockIcon from "../assets/icons/clock.png";
+import groupIcon from "../assets/icons/group-users.png";
+import difficultyIcon from "../assets/icons/challenge.png";
 
 export const TripCard = ({ trip, setPage }) => {
   const [hovered, setHovered] = useState(false);
+
+  const fetchCountryFlag = (country) => {
+    if (country === "Rwanda") return rwandaFlag;
+    if (country === "Uganda") return ugandaFlag;
+    if (country === "Tanzania") return tanzaniaFlag;
+    if (country === "Burundi") return burundiFlag;
+    if (country === "Kenya") return kenyaFlag;
+    return "";
+  }
+
   return (
     <button
       style={{
@@ -60,6 +78,9 @@ export const TripCard = ({ trip, setPage }) => {
           {trip.badge && <Badge>{trip.badge}</Badge>}
           <span
             style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 5,
               background: "rgba(0,0,0,0.45)",
               color: "#fff",
               fontSize: 11,
@@ -69,24 +90,30 @@ export const TripCard = ({ trip, setPage }) => {
               backdropFilter: "blur(4px)",
             }}
           >
-            {trip.country === "Both" ? "🇷🇼🇺🇬" : trip.country === "Rwanda" ? "🇷🇼" : "🇺🇬"}{" "}
+
+            {fetchCountryFlag(trip.country) ? (
+              <img
+                src={fetchCountryFlag(trip.country)}
+                alt={trip.country}
+                style={{ width: 16, height: 16, borderRadius: "50%", objectFit: "cover" }}
+              />
+            ) : (
+              <span
+                style={{
+                  width: 16,
+                  height: 16,
+                  borderRadius: "50%",
+                  background: "rgba(255,255,255,0.3)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 9,
+                }}
+              >
+              </span>
+            )}
             {trip.country}
           </span>
-        </div>
-        <div
-          style={{
-            position: "absolute",
-            bottom: 12,
-            right: 12,
-            background: colors.gold,
-            color: "#fff",
-            fontSize: 13,
-            fontWeight: 700,
-            padding: "5px 12px",
-            borderRadius: 99,
-          }}
-        >
-          ${trip.price.toLocaleString()}
         </div>
       </div>
       <div style={{ padding: "20px 20px 22px" }}>
@@ -125,13 +152,19 @@ export const TripCard = ({ trip, setPage }) => {
           }}
         >
           {[
-            { icon: "🕐", val: trip.duration },
-            { icon: "👥", val: `${trip.groupSize} pax` },
-            { icon: "🥾", val: trip.difficulty },
-          ].map((m, i) => (
+            { icon: clockIcon, val: trip.duration },
+            { icon: groupIcon, val: `${trip.groupSize} pax` },
+            { icon: difficultyIcon, val: trip.difficulty },
+          ].map((m, i) => (<>
+            <img
+              src={m.icon}
+              alt={m.val}
+              style={{ width: 16, height: 16, borderRadius: "50%", objectFit: "cover" }}
+            />
             <span key={i} style={{ fontSize: 12, color: colors.textMuted }}>
-              {m.icon} {m.val}
+               {m.val}
             </span>
+          </>
           ))}
         </div>
         <div

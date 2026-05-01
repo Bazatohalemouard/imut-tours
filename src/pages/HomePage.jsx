@@ -12,6 +12,11 @@ import monkeyIcon from "../assets/icons/monkey.png";
 import kayakIcon from "../assets/icons/kayaking.png";
 import hikingIcon from "../assets/icons/hiking.png";
 import birdWatchingIcon from "../assets/icons/birds.png";
+import rwandaFlag from "../assets/flags/rwanda.png";
+import ugandaFlag from "../assets/flags/uganda.png";
+import tanzaniaFlag from "../assets/flags/tanzania.png";
+import kenyaFlag from "../assets/flags/kenya.png";
+import burundiFlag from "../assets/flags/burundi.png";
 
 
 // ─── Home Page ────────────────────────────────────────────────────────────────
@@ -26,10 +31,49 @@ export const HomePage = ({ setPage }) => {
     });
   }, []);
 
+  const opsCountries = [
+    {
+      flag: rwandaFlag,
+      name: "Rwanda",
+      desc: "Land of a Thousand Hills",
+      experiences: 8,
+    },
+    {
+      flag: ugandaFlag,
+      name: "Uganda",
+      desc: "Pearl of Africa",
+      experiences: 10,
+    },
+    {
+      flag: tanzaniaFlag,
+      name: "Tanzania",
+      desc: "Savanna, Peaks & Spice Islands",
+      experiences: 12,
+    },
+    {
+      flag: kenyaFlag,
+      name: "Kenya",
+      desc: "Classic Safari & Coastal Splendor",
+      experiences: 11,
+    },
+    {
+      flag: burundiFlag,
+      name: "Burundi",
+      desc: "Hidden Lakes & Cultural Trails",
+      experiences: 4,
+    },
+  ];
+
+  const countryList = opsCountries.map((c) => c.name);
+  const countryText =
+    countryList.length > 1
+      ? `${countryList.slice(0, -1).join(", ")} and ${countryList.slice(-1)}`
+      : countryList[0];
+
   const stats = [
     { value: "500+", label: "Safaris Completed" },
     { value: "98%", label: "Happy Travelers" },
-    { value: "2", label: "Countries" },
+    { value: countryList.length.toString(), label: "Countries" },
     { value: "10+", label: "Years Experience" },
   ];
 
@@ -45,21 +89,21 @@ export const HomePage = ({ setPage }) => {
   const testimonials = [
     {
       name: "Sarah M.",
-      country: "🇬🇧 United Kingdom",
+      country: "United Kingdom",
       text: "Watching mountain gorillas in their natural habitat was the single most profound experience of my life. IMUT made every detail seamless.",
       trip: "Rwanda Gorilla Trek",
       rating: 5,
     },
     {
       name: "James K.",
-      country: "🇺🇸 United States",
+      country: "United States",
       text: "From the moment we landed to our departure, everything was handled with incredible professionalism. The guides' knowledge was unmatched.",
       trip: "Uganda Double Gorilla Safari",
       rating: 5,
     },
     {
       name: "Amara N.",
-      country: "🇩🇪 Germany",
+      country: "Germany",
       text: "Lake Kivu at sunset with a cup of freshly brewed Rwandan coffee — I still dream about it. IMUT knows how to curate magical moments.",
       trip: "Lake Kivu Weekend",
       rating: 5,
@@ -554,7 +598,7 @@ export const HomePage = ({ setPage }) => {
                 margin: "0 0 20px",
               }}
             >
-              Two Countries,
+              East Africa,
               <br />
               Endless Wonder
             </h2>
@@ -566,9 +610,9 @@ export const HomePage = ({ setPage }) => {
                 margin: "0 0 32px",
               }}
             >
-              IMUT Tours operates deep in the heart of East Africa — from
-              Rwanda's misty volcanic peaks to Uganda's sprawling savannas and
-              ancient forests.
+              IMUT Tours operates deep in the heart of East Africa — our
+              destinations span {countryText}, each with its own wild beauty and
+              unforgettable experiences.
             </p>
             <button
               onClick={() => setPage("locations")}
@@ -593,20 +637,7 @@ export const HomePage = ({ setPage }) => {
               gap: 16,
             }}
           >
-            {[
-              {
-                flag: "🇷🇼",
-                name: "Rwanda",
-                desc: "Land of a Thousand Hills",
-                experiences: 8,
-              },
-              {
-                flag: "🇺🇬",
-                name: "Uganda",
-                desc: "Pearl of Africa",
-                experiences: 10,
-              },
-            ].map((c) => (
+            {opsCountries.map((c) => (
               <div
                 key={c.name}
                 style={{
@@ -617,7 +648,17 @@ export const HomePage = ({ setPage }) => {
                   backdropFilter: "blur(8px)",
                 }}
               >
-                <div style={{ fontSize: 40, marginBottom: 12 }}>{c.flag}</div>
+                <img
+                  src={c.flag}
+                  alt={`${c.name} flag`}
+                  width={56}
+                  height={40}
+                  style={{
+                    objectFit: "contain",
+                    marginBottom: 12,
+                    display: "block",
+                  }}
+                />
                 <div
                   style={{
                     fontSize: 18,

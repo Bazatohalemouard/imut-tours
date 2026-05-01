@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { colors } from "../theme/colors";
 import whatsappIcon from "../assets/icons/whatsapp.png";
-import rwandaFlag from "../assets/icons/rwanda.png";
+import rwandaFlag from "../assets/flags/rwanda.png";
 import phoneIcon from "../assets/icons/phone.png";
 import locationIcon from "../assets/icons/location.png";
 import emailIcon from "../assets/icons/email.png";
