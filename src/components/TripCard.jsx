@@ -15,6 +15,7 @@ import difficultyIcon from "../assets/icons/challenge.png";
 
 export const TripCard = ({ trip, setPage }) => {
   const [hovered, setHovered] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const fetchCountryFlag = (country) => {
     if (country === "Rwanda") return rwandaFlag;
@@ -45,15 +46,28 @@ export const TripCard = ({ trip, setPage }) => {
     >
       <div style={{ position: "relative", paddingBottom: "60%", overflow: "hidden" }}>
         <img
+          src={`/images/img_placeholder.png`}
+          alt={`${trip.title} placeholder`}
+          aria-hidden
+          style={{
+            position: "absolute", inset: 0, width: "100%", height: "100%",
+            objectFit: "cover", filter: "blur(12px)", transform: "scale(1.05)"
+          }}
+        />
+        <img
           src={trip.image}
           alt={trip.title}
+          loading="lazy"
+          decoding="async"
+          onLoad={() => setLoaded(true)}
           style={{
             position: "absolute",
             inset: 0,
             width: "100%",
             height: "100%",
+            opacity: loaded ? 1 : 0,
             objectFit: "cover",
-            transition: "transform 0.4s",
+            transition: "opacity 0.4s, transform 0.5s",
             transform: hovered ? "scale(1.05)" : "scale(1)",
           }}
         />
@@ -162,7 +176,7 @@ export const TripCard = ({ trip, setPage }) => {
               style={{ width: 16, height: 16, borderRadius: "50%", objectFit: "cover" }}
             />
             <span key={i} style={{ fontSize: 12, color: colors.textMuted }}>
-               {m.val}
+              {m.val}
             </span>
           </>
           ))}

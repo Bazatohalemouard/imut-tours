@@ -12,6 +12,7 @@ import calendarIcon from "../assets/icons/calendar.png";
 
 export const LocationCard = ({ loc }) => {
   const [hovered, setHovered] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
 
   const fetchCountryFlag = (country) => {
@@ -43,15 +44,25 @@ export const LocationCard = ({ loc }) => {
     >
       <div style={{ position: "relative", paddingBottom: "56%", overflow: "hidden" }}>
         <img
+          src={`/images/img_placeholder.png`}
+          alt={`${loc.name} placeholder`}
+          aria-hidden
+          style={{
+            position: "absolute", inset: 0, width: "100%", height: "100%",
+            objectFit: "cover", filter: "blur(12px)", transform: "scale(1.05)"
+          }}
+        />
+        <img
           src={loc.image}
           alt={loc.name}
+          loading="lazy"
+          decoding="async"
+          onLoad={() => setLoaded(true)}
           style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
+            position: "absolute", inset: 0, width: "100%", height: "100%",
             objectFit: "cover",
-            transition: "transform 0.5s",
+            opacity: loaded ? 1 : 0,
+            transition: "opacity 0.4s, transform 0.5s",
             transform: hovered ? "scale(1.07)" : "scale(1)",
           }}
         />
