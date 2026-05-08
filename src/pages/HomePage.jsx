@@ -266,29 +266,6 @@ export const HomePage = ({ setPage }) => {
               >
                 Explore Trips →
               </button>
-              <button
-                onClick={() => setPage("locations")}
-                style={{
-                  background: "rgba(255,255,255,0.1)",
-                  color: "#fff",
-                  border: "1px solid rgba(255,255,255,0.3)",
-                  cursor: "pointer",
-                  padding: "16px 32px",
-                  borderRadius: 12,
-                  fontSize: 16,
-                  fontWeight: 500,
-                  backdropFilter: "blur(4px)",
-                  transition: "background 0.2s",
-                }}
-                onMouseEnter={(e) =>
-                  (e.target.style.background = "rgba(255,255,255,0.18)")
-                }
-                onMouseLeave={(e) =>
-                  (e.target.style.background = "rgba(255,255,255,0.1)")
-                }
-              >
-                View Destinations
-              </button>
             </div>
           </div>
         </div>
@@ -601,21 +578,6 @@ export const HomePage = ({ setPage }) => {
               destinations span {countryText}, each with its own wild beauty and
               unforgettable experiences.
             </p>
-            <button
-              onClick={() => setPage("locations")}
-              style={{
-                background: colors.gold,
-                color: "#fff",
-                border: "none",
-                cursor: "pointer",
-                padding: "14px 28px",
-                borderRadius: 10,
-                fontSize: 15,
-                fontWeight: 600,
-              }}
-            >
-              Explore Destinations
-            </button>
           </div>
           <div
             style={{
