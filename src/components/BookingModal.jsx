@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { colors } from "../theme/colors";
+import { sendToWhatsApp } from "../api/APIHandler";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const STEPS = ["Your Details", "Trip Preferences", "Review & Confirm"];
@@ -242,13 +243,13 @@ export const BookingModal = ({ trip, isOpen, onClose }) => {
   };
 
   const handleSubmit = () => {
-    setSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-    }, 1600);
-  };
+  setSubmitting(true);
+  setTimeout(() => {
+    sendToWhatsApp(form, trip);
+    setSubmitting(false);
+    setSubmitted(true);
+  }, 600);
+};
 
   if (!isOpen) return null;
 

@@ -854,3 +854,31 @@ export const fetchTrips = () =>
       ]);
     }, 900)
   );
+
+
+export const sendToWhatsApp = (form, trip) => {
+  const msg = `
+*New Booking Request*
+
+*Trip:* ${trip.title}
+*Duration:* ${trip.duration} | *Country:* ${trip.country}
+
+*Traveler Details*
+- Name: ${form.firstName} ${form.lastName}
+- Email: ${form.email}
+- Phone: ${form.phone}
+- Nationality: ${form.nationality}
+
+*Trip Preferences*
+- Travelers: ${form.travelers}
+- Start Date: ${form.startDate}
+- Accommodation: ${form.accommodation || "No preference"}
+- Dietary Needs: ${form.dietaryNeeds || "None"}
+- Special Requests: ${form.specialRequests || "None"}
+
+*Estimated Total:* $${(trip.price * Number.parseInt(form.travelers)).toLocaleString()} ${trip.currency}
+  `.trim();
+
+  const encoded = encodeURIComponent(msg);
+  window.open(`https://wa.me/250788608794?text=${encoded}`, "_blank");
+};
