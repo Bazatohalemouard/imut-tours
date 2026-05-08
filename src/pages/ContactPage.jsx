@@ -56,7 +56,7 @@ export const ContactPage = () => {
       country: "Rwanda",
       address: "KK 35 Ave, Kigali",
       phone: "+250 788 608 794",
-      email: "intermut.rwanda@gmail.com",
+      email: "intermut.rwanda7@gmail.com",
     },
   ];
 
