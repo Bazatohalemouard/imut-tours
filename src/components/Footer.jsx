@@ -41,28 +41,28 @@ export const Footer = ({ setPage }) => (
             links: ["Home", "Trips", "About Us", "Contact"],
             pages: ["home", "trips", "about", "contact"],
           },
-          {
-            title: "Destinations",
-            links: [
-              "Volcanoes NP",
-              "Nyungwe Forest",
-              "Lake Kivu",
-              "Bwindi Forest",
-              "Queen Elizabeth NP",
-            ],
-            pages: new Array(5).fill("trips"),
-          },
-          {
-            title: "Experiences",
-            links: [
-              "Gorilla Trekking",
-              "Chimp Tracking",
-              "Big Five Safari",
-              "River Safaris",
-              "Cultural Tours",
-            ],
-            pages: new Array(5).fill("trips"),
-          },
+          // {
+          //   title: "Destinations",
+          //   links: [
+          //     "Volcanoes NP",
+          //     "Nyungwe Forest",
+          //     "Lake Kivu",
+          //     "Bwindi Forest",
+          //     "Queen Elizabeth NP",
+          //   ],
+          //   pages: new Array(5).fill("trips"),
+          // },
+          // {
+          //   title: "Experiences",
+          //   links: [
+          //     "Gorilla Trekking",
+          //     "Chimp Tracking",
+          //     "Big Five Safari",
+          //     "River Safaris",
+          //     "Cultural Tours",
+          //   ],
+          //   pages: new Array(5).fill("trips"),
+          // },
         ].map((col) => (
           <div key={col.title}>
             <h4
