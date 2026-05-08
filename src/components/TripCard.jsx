@@ -13,7 +13,7 @@ import clockIcon from "../assets/icons/clock.png";
 import groupIcon from "../assets/icons/group-users.png";
 import difficultyIcon from "../assets/icons/challenge.png";
 
-export const TripCard = ({ trip, setPage }) => {
+export const TripCard = ({ trip, setPage, setSelectedTrip }) => {
   const [hovered, setHovered] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
@@ -41,7 +41,7 @@ export const TripCard = ({ trip, setPage }) => {
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onClick={() => setPage("trips")}
+      onClick={() => setPage("trip-detail", trip)}
       onKeyDown={(e) => e.key === "Enter" && setPage("trips")}
     >
       <div style={{ position: "relative", paddingBottom: "60%", overflow: "hidden" }}>

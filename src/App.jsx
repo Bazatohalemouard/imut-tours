@@ -7,13 +7,17 @@ import { LocationsPage } from "./pages/LocationsPage";
 import { TripsPage } from "./pages/TripsPage";
 import { AboutPage } from "./pages/AboutPage";
 import { ContactPage } from "./pages/ContactPage";
+import { TripDetailsPage } from "./pages/TripDetailsPage";
+
 export default function App() {
   const [activePage, setActivePage] = useState("home");
+  const [selectedTrip, setSelectedTrip] = useState(null);
 
-  const setPage = (page) => {
-    setActivePage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+const setPage = (page, trip = null) => {
+  if (trip) setSelectedTrip(trip);
+  setActivePage(page);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 
   const renderPage = () => {
     switch (activePage) {
@@ -27,6 +31,8 @@ export default function App() {
         return <AboutPage setPage={setPage} />;
       case "contact":
         return <ContactPage />;
+      case "trip-detail":
+        return <TripDetailsPage trip={selectedTrip} setPage={setPage} />;
       default:
         return <HomePage setPage={setPage} />;
     }
