@@ -1,5 +1,9 @@
 import PropTypes from "prop-types";
 import { colors } from "../theme/colors";
+import conservationIcon from "../assets/icons/forest-conservation.png";
+import communityIcon from "../assets/icons/teamwork.png";
+import authenticIcon from "../assets/icons/authenticity.png";
+import excellenceIcon from "../assets/icons/excellence.png";
 
 // ─── About Page ───────────────────────────────────────────────────────────────
 export const AboutPage = ({ setPage }) => {
@@ -32,22 +36,22 @@ export const AboutPage = ({ setPage }) => {
 
   const values = [
     {
-      icon: "🦍",
+      icon: conservationIcon,
       title: "Conservation First",
       desc: "10% of every booking goes directly to gorilla and chimpanzee conservation programs.",
     },
     {
-      icon: "🏘️",
+      icon: communityIcon,
       title: "Community Rooted",
       desc: "We employ local guides, partner with community lodges, and support village development.",
     },
     {
-      icon: "🌍",
+      icon: authenticIcon,
       title: "Authentic Experiences",
       desc: "No cookie-cutter tours — every itinerary is crafted to feel genuinely East African.",
     },
     {
-      icon: "⭐",
+      icon: excellenceIcon,
       title: "Excellence Always",
       desc: "From airport pickup to the last game drive, every detail is carefully managed.",
     },
@@ -204,9 +208,9 @@ export const AboutPage = ({ setPage }) => {
               { val: "98%", label: "Satisfaction Rate" },
               { val: "12", label: "Expert Guides" },
               { val: "6", label: "Core Destinations" },
-            ].map((s, i) => (
+            ].map((s) => (
               <div
-                key={i}
+                key={s.label}
                 style={{
                   background: "#fff",
                   border: `1px solid ${colors.sand}`,
@@ -275,9 +279,9 @@ export const AboutPage = ({ setPage }) => {
               gap: 24,
             }}
           >
-            {values.map((v, i) => (
+            {values.map((v) => (
               <div
-                key={i}
+                key={v.title}
                 style={{
                   background: colors.cream,
                   borderRadius: 16,
@@ -285,7 +289,7 @@ export const AboutPage = ({ setPage }) => {
                   border: `1px solid ${colors.sand}`,
                 }}
               >
-                <div style={{ fontSize: 36, marginBottom: 14 }}>{v.icon}</div>
+                <img alt={v.title} src={v.icon} style={{width: 48, height: 48, marginBottom: 14 }} />
                 <h3
                   style={{
                     fontSize: 17,
@@ -348,9 +352,9 @@ export const AboutPage = ({ setPage }) => {
               gap: 24,
             }}
           >
-            {team.map((member, i) => (
+            {team.map((member) => (
               <div
-                key={i}
+                key={member.name}
                 style={{
                   background: "#fff",
                   borderRadius: 20,

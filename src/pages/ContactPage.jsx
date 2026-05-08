@@ -53,9 +53,9 @@ export const ContactPage = () => {
       flag: rwandaFlag,
       city: "Kigali",
       country: "Rwanda",
-      address: "KG 11 Ave, Gasabo District, Kigali",
+      address: "KK 35 Ave, Kigali",
       phone: "+250 788 608 794",
-      email: "rwanda@imuttours.com",
+      email: "intermut.rwanda@gmail.com",
     },
     // {
     //   flag: "🇺🇬",
