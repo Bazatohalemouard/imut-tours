@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { colors } from "../theme/colors";
 import { StarRating } from "../components/StarRating";
 import { Badge } from "../components/Badge";
+import { BookingModal } from "../components/BookingModal";
 import rwandaFlag from "../assets/flags/rwanda.png";
 import ugandaFlag from "../assets/flags/uganda.png";
 import tanzaniaFlag from "../assets/flags/tanzania.png";
@@ -71,6 +72,7 @@ SectionTitle.propTypes = { children: PropTypes.node.isRequired };
 export const TripDetailsPage = ({ trip, setPage }) => {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [activeDay, setActiveDay] = useState(0);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   if (!trip) {
     return (
@@ -399,7 +401,7 @@ export const TripDetailsPage = ({ trip, setPage }) => {
 
               {/* CTA */}
               <button
-                onClick={() => setPage("contact")}
+                onClick={() => setBookingOpen(true)}
                 style={{
                   width: "100%", background: colors.gold, color: "#fff",
                   border: "none", borderRadius: 12, padding: "15px",
@@ -474,6 +476,13 @@ export const TripDetailsPage = ({ trip, setPage }) => {
           }
         }
       `}</style>
+
+      <BookingModal
+        trip={trip}
+        isOpen={bookingOpen}
+        onClose={() => setBookingOpen(false)}
+      />
+
     </div>
   );
 };
