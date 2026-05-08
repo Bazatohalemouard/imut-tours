@@ -6,10 +6,8 @@ import { colors } from "../theme/colors";
 
 const navItems = [
   { id: "home", label: "Home" },
-  { id: "locations", label: "Locations" },
   { id: "trips", label: "Trips" },
   { id: "about", label: "About Us" },
-  { id: "contact", label: "Contact" },
 ];
 
 export const Navbar = ({ activePage, setPage }) => {
@@ -111,7 +109,7 @@ export const Navbar = ({ activePage, setPage }) => {
             onMouseEnter={(e) => (e.target.style.background = colors.goldLight)}
             onMouseLeave={(e) => (e.target.style.background = colors.gold)}
           >
-            Book Now
+            Contact Us
           </button>
         </div>
 
@@ -198,7 +196,7 @@ export const Navbar = ({ activePage, setPage }) => {
               fontWeight: 600,
             }}
           >
-            Book Now
+            Contact Us
           </button>
         </div>
       )}

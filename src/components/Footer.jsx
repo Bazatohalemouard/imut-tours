@@ -38,8 +38,8 @@ export const Footer = ({ setPage }) => (
         {[
           {
             title: "Explore",
-            links: ["Home", "Locations", "Trips", "About Us", "Contact"],
-            pages: ["home", "locations", "trips", "about", "contact"],
+            links: ["Home", "Trips", "About Us", "Contact"],
+            pages: ["home", "trips", "about", "contact"],
           },
           {
             title: "Destinations",
@@ -50,7 +50,7 @@ export const Footer = ({ setPage }) => (
               "Bwindi Forest",
               "Queen Elizabeth NP",
             ],
-            pages: new Array(5).fill("locations"),
+            pages: new Array(5).fill("trips"),
           },
           {
             title: "Experiences",
@@ -121,7 +121,7 @@ export const Footer = ({ setPage }) => (
           © 2026 IMUT Tours. A division of International Marathon United Technology Rwanda Ltd.
         </p>
         <div style={{ display: "flex", gap: 16 }}>
-          {["Privacy", "Terms", "Cookies"].map((item) => (
+          {[].map((item) => (
             <button
               key={item}
               style={{
