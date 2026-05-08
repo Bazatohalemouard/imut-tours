@@ -798,7 +798,7 @@ export const HomePage = ({ setPage }) => {
                 fontWeight: 500,
               }}
             >
-              Browse Itineraries
+              Browse Trips
             </button>
           </div>
         </div>
