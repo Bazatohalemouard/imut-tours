@@ -413,7 +413,7 @@ export const TripDetailsPage = ({ trip, setPage }) => {
               </button>
 
               <a
-                href="https://wa.me/250788123456"
+                href="https://wa.me/250788608794"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ textDecoration: "none" }}
