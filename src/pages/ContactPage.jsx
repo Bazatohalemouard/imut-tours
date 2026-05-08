@@ -6,6 +6,7 @@ import phoneIcon from "../assets/icons/phone.png";
 import locationIcon from "../assets/icons/location.png";
 import emailIcon from "../assets/icons/email.png";
 import fastResponseIcon from "../assets/icons/fast-response.png";
+import messageSentIcon from "../assets/icons/mail-sent.png";
 
 
 // ─── Contact Page ─────────────────────────────────────────────────────────────
@@ -57,14 +58,6 @@ export const ContactPage = () => {
       phone: "+250 788 608 794",
       email: "intermut.rwanda@gmail.com",
     },
-    // {
-    //   flag: "🇺🇬",
-    //   city: "Kampala",
-    //   country: "Uganda",
-    //   address: "Plot 14, Nakasero Hill Road, Kampala",
-    //   phone: "+256 700 987 654",
-    //   email: "uganda@imuttours.com",
-    // },
   ];
 
   return (
@@ -149,7 +142,9 @@ export const ContactPage = () => {
                 textAlign: "center",
               }}
             >
-              <div style={{ fontSize: 56, marginBottom: 16 }}>✅</div>
+              <div style={{ marginBottom: 16 }}>
+                <img src={messageSentIcon} alt="Message Sent" width={64} height={64} />
+              </div>
               <h3
                 style={{
                   fontSize: 22,
@@ -163,7 +158,7 @@ export const ContactPage = () => {
               </h3>
               <p style={{ color: colors.textMuted, fontSize: 15, lineHeight: 1.7 }}>
                 Thank you {form.name}! Our team will get back to you within 24
-                hours to start planning your East African adventure.
+                hours.
               </p>
             </div>
           ) : (
@@ -211,117 +206,6 @@ export const ContactPage = () => {
                   />
                 </div>
               ))}
-
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}
-              >
-                <div>
-                  <label
-                    htmlFor="destination"
-                    style={{
-                      display: "block",
-                      fontSize: 13,
-                      fontWeight: 600,
-                      color: colors.brand,
-                      marginBottom: 6,
-                    }}
-                  >
-                    Destination
-                  </label>
-                  <select
-                    id="destination"
-                    value={form.country}
-                    onChange={(e) => handleChange("country", e.target.value)}
-                    style={{ ...inputStyle, cursor: "pointer" }}
-                  >
-                    <option value="">Any</option>
-                    <option>Rwanda</option>
-                    <option>Uganda</option>
-                    <option>Both</option>
-                  </select>
-                </div>
-                <div>
-                  <label
-                    htmlFor="tripType"
-                    style={{
-                      display: "block",
-                      fontSize: 13,
-                      fontWeight: 600,
-                      color: colors.brand,
-                      marginBottom: 6,
-                    }}
-                  >
-                    Trip Type
-                  </label>
-                  <select
-                    id="tripType"
-                    value={form.tripType}
-                    onChange={(e) => handleChange("tripType", e.target.value)}
-                    style={{ ...inputStyle, cursor: "pointer" }}
-                  >
-                    <option value="">Any</option>
-                    <option>Gorilla Trekking</option>
-                    <option>Big Five Safari</option>
-                    <option>Chimpanzee Tracking</option>
-                    <option>Multi-Country</option>
-                    <option>Custom Itinerary</option>
-                  </select>
-                </div>
-              </div>
-
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}
-              >
-                <div>
-                  <label
-                    htmlFor="dates"
-                    style={{
-                      display: "block",
-                      fontSize: 13,
-                      fontWeight: 600,
-                      color: colors.brand,
-                      marginBottom: 6,
-                    }}
-                  >
-                    Travel Dates
-                  </label>
-                  <input
-                    id="dates"
-                    type="text"
-                    placeholder="e.g. Aug 2025"
-                    value={form.dates}
-                    onChange={(e) => handleChange("dates", e.target.value)}
-                    style={inputStyle}
-                    onFocus={(e) => (e.target.style.borderColor = colors.gold)}
-                    onBlur={(e) => (e.target.style.borderColor = colors.sand)}
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="groupSize"
-                    style={{
-                      display: "block",
-                      fontSize: 13,
-                      fontWeight: 600,
-                      color: colors.brand,
-                      marginBottom: 6,
-                    }}
-                  >
-                    Group Size
-                  </label>
-                  <input
-                    id="groupSize"
-                    type="number"
-                    placeholder="e.g. 4"
-                    min="1"
-                    value={form.groupSize}
-                    onChange={(e) => handleChange("groupSize", e.target.value)}
-                    style={inputStyle}
-                    onFocus={(e) => (e.target.style.borderColor = colors.gold)}
-                    onBlur={(e) => (e.target.style.borderColor = colors.sand)}
-                  />
-                </div>
-              </div>
 
               <div>
                 <label
