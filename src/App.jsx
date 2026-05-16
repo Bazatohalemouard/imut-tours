@@ -13,11 +13,11 @@ export default function App() {
   const [activePage, setActivePage] = useState("home");
   const [selectedTrip, setSelectedTrip] = useState(null);
 
-const setPage = (page, trip = null) => {
-  if (trip) setSelectedTrip(trip);
-  setActivePage(page);
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
+  const setPage = (page, trip = null) => {
+    if (trip) setSelectedTrip(trip);
+    setActivePage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const renderPage = () => {
     switch (activePage) {
@@ -41,7 +41,7 @@ const setPage = (page, trip = null) => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;1,700&display=swap');
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FAF7F2; }
@@ -55,6 +55,7 @@ const setPage = (page, trip = null) => {
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .mobile-menu-btn { display: flex !important; }
+          .hide-on-small { display: none !important; }
         }
         @media (min-width: 769px) {
           .mobile-menu-btn { display: none !important; }
