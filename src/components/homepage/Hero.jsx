@@ -251,17 +251,25 @@ export const Hero = ({ countries, countriesLoading, setPage, fetchCountryFlag })
 
                         {/* Description */}
                         <p
+                            onMouseEnter={e => {
+                                e.currentTarget.style.color = "rgba(255,255,255,0.95)";
+                                e.currentTarget.style.transition = "color 0.3s ease";
+                            }}
+                            onMouseLeave={e => {
+                                e.currentTarget.style.color = "rgba(255,255,255,0.62)";
+                            }}
                             style={{
                                 fontSize: 14,
                                 color: "rgba(255,255,255,0.62)",
                                 lineHeight: 1.7,
                                 margin: "0 0 20px",
                                 fontWeight: 300,
+                                cursor: "default",
+                                transition: "color 0.3s ease",
                             }}
                         >
                             {country?.desc}
                         </p>
-
                         {/* Stats */}
                         <div
                             style={{
@@ -325,8 +333,22 @@ export const Hero = ({ countries, countriesLoading, setPage, fetchCountryFlag })
                             </p>
                             <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
                                 {country?.experiences.map((exp) => (
-                                    <span
+                                    <button
                                         key={exp}
+                                        onMouseEnter={e => Object.assign(e.currentTarget.style, {
+                                            background: "rgba(200,146,42,0.18)",
+                                            border: "1px solid rgba(200,146,42,0.6)",
+                                            color: "#E8B84B",
+                                            transform: "translateY(-2px)",
+                                            boxShadow: "0 4px 12px rgba(200,146,42,0.15)",
+                                        })}
+                                        onMouseLeave={e => Object.assign(e.currentTarget.style, {
+                                            background: "rgba(255,255,255,0.06)",
+                                            border: "1px solid rgba(255,255,255,0.1)",
+                                            color: "rgba(255,255,255,0.7)",
+                                            transform: "translateY(0)",
+                                            boxShadow: "none",
+                                        })}
                                         style={{
                                             display: "inline-flex",
                                             alignItems: "center",
@@ -337,10 +359,12 @@ export const Hero = ({ countries, countriesLoading, setPage, fetchCountryFlag })
                                             padding: "5px 11px",
                                             fontSize: 12,
                                             color: "rgba(255,255,255,0.7)",
+                                            cursor: "pointer",
+                                            transition: "all 0.25s ease",
                                         }}
                                     >
                                         {exp}
-                                    </span>
+                                    </button>
                                 ))}
                             </div>
                         </div>
