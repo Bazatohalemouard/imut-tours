@@ -412,6 +412,7 @@ export const fetchCountries = () => new Promise((resolve) => setTimeout(() => {
     { id: 3, name: "Tanzania", slug: "tanzania" },
     { id: 4, name: "Kenya", slug: "kenya" },
     { id: 5, name: "Burundi", slug: "burundi" },
+    { id: 6, name: "South Sudan", slug: "south-sudan" },
   ]);
 }, 800));
 

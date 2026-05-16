@@ -14,6 +14,7 @@ import ugandaFlag from "../assets/flags/uganda.png";
 import tanzaniaFlag from "../assets/flags/tanzania.png";
 import kenyaFlag from "../assets/flags/kenya.png";
 import burundiFlag from "../assets/flags/burundi.png";
+import southSudanFlag from "../assets/flags/south-sudan.png";
 import { Categories } from "../components/homepage/Categories";
 import { FeaturedTrips } from "../components/homepage/FeaturedTrips";
 import { OurDestinations } from "../components/homepage/OurDestinations";
@@ -34,6 +35,7 @@ export const HomePage = ({ setPage }) => {
     if (country === "Tanzania") return tanzaniaFlag;
     if (country === "Burundi") return burundiFlag;
     if (country === "Kenya") return kenyaFlag;
+    if (country === "South Sudan") return southSudanFlag;
     return "";
   }
 
@@ -89,9 +91,9 @@ export const HomePage = ({ setPage }) => {
 
   return (
     <div>
-      <Hero />
+      <Hero setPage={setPage} fetchCountryFlag={fetchCountryFlag} />
       <Stats countries={countryList} />
-      <Categories categories={categories} setPage={setPage} />
+      {/* <Categories categories={categories} setPage={setPage} /> */}
       <FeaturedTrips trips={trips} tripsLoading={tripsLoading} setPage={setPage} />
       <OurDestinations countries={countries} countriesLoading={countriesLoading} fetchCountryFlag={fetchCountryFlag} />
       <Testimonials testimonials={testimonials} />
