@@ -3,21 +3,13 @@ import PropTypes from "prop-types";
 import { fetchTrips, fetchCountries } from "../api/APIHandler";
 import { Hero } from "../components/homepage/hero";
 import { Stats } from "../components/homepage/Stats";
-import gorillaIcon from "../assets/icons/gorilla.png";
-import elephantIcon from "../assets/icons/elephant.png";
-import monkeyIcon from "../assets/icons/monkey.png";
-import kayakIcon from "../assets/icons/kayaking.png";
-import hikingIcon from "../assets/icons/hiking.png";
-import birdWatchingIcon from "../assets/icons/birds.png";
 import rwandaFlag from "../assets/flags/rwanda.png";
 import ugandaFlag from "../assets/flags/uganda.png";
 import tanzaniaFlag from "../assets/flags/tanzania.png";
 import kenyaFlag from "../assets/flags/kenya.png";
 import burundiFlag from "../assets/flags/burundi.png";
 import southSudanFlag from "../assets/flags/south-sudan.png";
-import { Categories } from "../components/homepage/Categories";
 import { FeaturedTrips } from "../components/homepage/FeaturedTrips";
-import { OurDestinations } from "../components/homepage/OurDestinations";
 import { Testimonials } from "../components/homepage/Testimonials";
 import { CallToAction } from "../components/homepage/CallToAction";
 
@@ -54,17 +46,6 @@ export const HomePage = ({ setPage }) => {
     });
   }, []);
 
-  const countryList = countries.map((c) => c.name);
-
-  const categories = [
-    { icon: gorillaIcon, label: "Gorilla Trekking", count: "4 experiences" },
-    { icon: elephantIcon, label: "Big Five Safari", count: "6 experiences" },
-    { icon: monkeyIcon, label: "Chimp Tracking", count: "3 experiences" },
-    { icon: kayakIcon, label: "Kayaking", count: "2 experiences" },
-    { icon: hikingIcon, label: "Hiking", count: "5 experiences" },
-    { icon: birdWatchingIcon, label: "Bird Watching", count: "3 experiences" },
-  ];
-
   const testimonials = [
     {
       name: "Sarah M.",
@@ -91,13 +72,11 @@ export const HomePage = ({ setPage }) => {
 
   return (
     <div>
-      <Hero setPage={setPage} fetchCountryFlag={fetchCountryFlag} />
-      <Stats countries={countryList} />
-      {/* <Categories categories={categories} setPage={setPage} /> */}
+      <Hero countries={countries} countriesLoading={countriesLoading} setPage={setPage} fetchCountryFlag={fetchCountryFlag} />
+      <Stats countries={countries} />
       <FeaturedTrips trips={trips} tripsLoading={tripsLoading} setPage={setPage} />
-      <OurDestinations countries={countries} countriesLoading={countriesLoading} fetchCountryFlag={fetchCountryFlag} />
-      <Testimonials testimonials={testimonials} />
       <CallToAction setPage={setPage} />
+      <Testimonials testimonials={testimonials} />
     </div>
   );
 };
