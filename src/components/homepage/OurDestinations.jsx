@@ -120,25 +120,6 @@ export const OurDestinations = ({ countries, countriesLoading, fetchCountryFlag 
                             >
                                 {c.name}
                             </div>
-                            <div
-                                style={{
-                                    fontSize: 13,
-                                    color: "rgba(255,255,255,0.6)",
-                                    marginBottom: 16,
-                                }}
-                            >
-                                {c.desc}
-                            </div>
-                            <div
-                                style={{
-                                    fontSize: 12,
-                                    fontWeight: 700,
-                                    color: colors.goldLight,
-                                    letterSpacing: "0.06em",
-                                }}
-                            >
-                                {c.experiences} EXPERIENCES
-                            </div>
                         </div>
                     ))}
                 </div>
