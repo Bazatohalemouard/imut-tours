@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { colors } from "../theme/colors";
 import { StarRating } from "../components/StarRating";
@@ -69,10 +70,13 @@ const SectionTitle = ({ children }) => (
 SectionTitle.propTypes = { children: PropTypes.node.isRequired };
 
 // ─── Trip Detail Page ─────────────────────────────────────────────────────────
-export const TripDetailsPage = ({ trip, setPage }) => {
+export const TripDetailsPage = ({ setPage }) => {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [activeDay, setActiveDay] = useState(0);
   const [bookingOpen, setBookingOpen] = useState(false);
+
+  const { state } = useLocation();
+  const trip = state?.trip;
 
   if (!trip) {
     return (
@@ -488,29 +492,29 @@ export const TripDetailsPage = ({ trip, setPage }) => {
 };
 
 TripDetailsPage.propTypes = {
-  trip: PropTypes.shape({
-    image: PropTypes.string,
-    title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string,
-    badge: PropTypes.string,
-    country: PropTypes.string.isRequired,
-    category: PropTypes.string,
-    duration: PropTypes.string,
-    groupSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    difficulty: PropTypes.string,
-    price: PropTypes.number.isRequired,
-    currency: PropTypes.string,
-    rating: PropTypes.number,
-    reviews: PropTypes.number,
-    highlights: PropTypes.arrayOf(PropTypes.string),
-    itinerary: PropTypes.arrayOf(
-      PropTypes.shape({
-        day: PropTypes.number,
-        title: PropTypes.string,
-        desc: PropTypes.string,
-      })
-    ),
-  }).isRequired,
+  // trip: PropTypes.shape({
+  //   image: PropTypes.string,
+  //   title: PropTypes.string.isRequired,
+  //   subtitle: PropTypes.string,
+  //   badge: PropTypes.string,
+  //   country: PropTypes.string.isRequired,
+  //   category: PropTypes.string,
+  //   duration: PropTypes.string,
+  //   groupSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  //   difficulty: PropTypes.string,
+  //   price: PropTypes.number.isRequired,
+  //   currency: PropTypes.string,
+  //   rating: PropTypes.number,
+  //   reviews: PropTypes.number,
+  //   highlights: PropTypes.arrayOf(PropTypes.string),
+  //   itinerary: PropTypes.arrayOf(
+  //     PropTypes.shape({
+  //       day: PropTypes.number,
+  //       title: PropTypes.string,
+  //       desc: PropTypes.string,
+  //     })
+  //   ),
+  // }).isRequired,
   setPage: PropTypes.func.isRequired,
 };
 
