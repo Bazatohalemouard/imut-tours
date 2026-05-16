@@ -108,7 +108,7 @@ export const AboutPage = ({ setPage }) => {
           style={{
             fontSize: "clamp(32px, 5vw, 60px)",
             color: "#fff",
-            fontFamily: "'Playfair Display', serif",
+            fontFamily: "'Montserrat', sans-serif",
             fontWeight: 700,
             margin: "0 0 20px",
           }}
@@ -147,7 +147,7 @@ export const AboutPage = ({ setPage }) => {
               style={{
                 fontSize: "clamp(26px, 3.5vw, 40px)",
                 color: colors.brand,
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 700,
                 margin: "0 0 20px",
               }}
@@ -224,7 +224,7 @@ export const AboutPage = ({ setPage }) => {
                     fontSize: "clamp(28px, 4vw, 40px)",
                     fontWeight: 700,
                     color: colors.brand,
-                    fontFamily: "'Playfair Display', serif",
+                    fontFamily: "'Montserrat', sans-serif",
                   }}
                 >
                   {s.val}
@@ -264,7 +264,7 @@ export const AboutPage = ({ setPage }) => {
               style={{
                 fontSize: "clamp(26px, 4vw, 40px)",
                 color: colors.brand,
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 700,
                 margin: 0,
               }}
@@ -296,7 +296,7 @@ export const AboutPage = ({ setPage }) => {
                     fontWeight: 700,
                     color: colors.brand,
                     margin: "0 0 10px",
-                    fontFamily: "'Playfair Display', serif",
+                    fontFamily: "'Montserrat', sans-serif",
                   }}
                 >
                   {v.title}
@@ -337,7 +337,7 @@ export const AboutPage = ({ setPage }) => {
               style={{
                 fontSize: "clamp(26px, 4vw, 40px)",
                 color: colors.brand,
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'Montserrat', sans-serif",
                 fontWeight: 700,
                 margin: 0,
               }}
@@ -383,7 +383,7 @@ export const AboutPage = ({ setPage }) => {
                     fontSize: 17,
                     fontWeight: 700,
                     color: colors.brand,
-                    fontFamily: "'Playfair Display', serif",
+                    fontFamily: "'Montserrat', sans-serif",
                     margin: "0 0 4px",
                   }}
                 >

@@ -343,7 +343,7 @@ export const BookingModal = ({ trip, isOpen, onClose }) => {
               style={{
                 fontSize: "clamp(17px, 3vw, 20px)",
                 fontWeight: 700,
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'Montserrat', sans-serif",
                 color: colors.brand,
                 margin: 0,
               }}
@@ -406,7 +406,7 @@ export const BookingModal = ({ trip, isOpen, onClose }) => {
                   fontWeight: 700,
                   color: "#fff",
                   margin: 0,
-                  fontFamily: "'Playfair Display', serif",
+                  fontFamily: "'Montserrat', sans-serif",
                 }}
               >
                 {trip.title}
@@ -428,7 +428,7 @@ export const BookingModal = ({ trip, isOpen, onClose }) => {
                   fontWeight: 800,
                   color: colors.goldLight,
                   margin: 0,
-                  fontFamily: "'Playfair Display', serif",
+                  fontFamily: "'Montserrat', sans-serif",
                 }}
               >
                 {trip.duration}
@@ -668,7 +668,7 @@ export const BookingModal = ({ trip, isOpen, onClose }) => {
                     fontSize: 16,
                     fontWeight: 700,
                     color: colors.brand,
-                    fontFamily: "'Playfair Display', serif",
+                    fontFamily: "'Montserrat', sans-serif",
                     margin: "0 0 4px",
                   }}
                 >
@@ -770,7 +770,7 @@ export const BookingModal = ({ trip, isOpen, onClose }) => {
                       fontSize: 22,
                       fontWeight: 800,
                       color: colors.goldLight,
-                      fontFamily: "'Playfair Display', serif",
+                      fontFamily: "'Montserrat', sans-serif",
                       margin: 0,
                     }}
                   >
@@ -822,7 +822,7 @@ export const BookingModal = ({ trip, isOpen, onClose }) => {
                     fontSize: 22,
                     fontWeight: 700,
                     color: colors.brand,
-                    fontFamily: "'Playfair Display', serif",
+                    fontFamily: "'Montserrat', sans-serif",
                     margin: "0 0 8px",
                   }}
                 >

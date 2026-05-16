@@ -148,7 +148,7 @@ export const TripCard = ({ trip, setPage, setSelectedTrip }) => {
             fontSize: 18,
             fontWeight: 700,
             color: colors.brand,
-            fontFamily: "'Playfair Display', serif",
+            fontFamily: "'Montserrat', sans-serif",
             margin: "0 0 4px",
           }}
         >

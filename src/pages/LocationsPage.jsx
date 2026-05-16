@@ -74,7 +74,7 @@ export const LocationsPage = ({ setPage }) => {
           style={{
             fontSize: "clamp(32px, 5vw, 56px)",
             color: "#fff",
-            fontFamily: "'Playfair Display', serif",
+            fontFamily: "'Montserrat', sans-serif",
             fontWeight: 700,
             margin: "0 0 16px",
           }}

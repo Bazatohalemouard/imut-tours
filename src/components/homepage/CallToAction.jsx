@@ -15,7 +15,7 @@ export const CallToAction = ({ setPage }) => {
             style={{
               fontSize: "clamp(28px, 4vw, 48px)",
               color: "#fff",
-              fontFamily: "'Playfair Display', serif",
+              fontFamily: "'Montserrat', sans-serif",
               fontWeight: 700,
               margin: "0 0 16px",
             }}

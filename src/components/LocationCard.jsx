@@ -140,7 +140,7 @@ export const LocationCard = ({ loc }) => {
                 color: "#fff",
                 fontSize: 20,
                 fontWeight: 700,
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'Montserrat', sans-serif",
                 margin: 0,
                 textShadow: "0 1px 6px rgba(0,0,0,0.4)",
               }}

@@ -24,7 +24,7 @@ export const Categories = ({categories = [], setPage}) => {
                         style={{
                             fontSize: "clamp(28px, 4vw, 44px)",
                             color: colors.brand,
-                            fontFamily: "'Playfair Display', serif",
+                            fontFamily: "'Montserrat', sans-serif",
                             fontWeight: 700,
                             margin: 0,
                             letterSpacing: "-0.02em",

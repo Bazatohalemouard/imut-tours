@@ -21,7 +21,7 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Playfair Display"', 'Georgia', 'serif'],
+        display: ['"Montserrat"', 'sans-serif'],
         body: ['"DM Sans"', 'sans-serif'],
         mono: ['"DM Mono"', 'monospace'],
       },
