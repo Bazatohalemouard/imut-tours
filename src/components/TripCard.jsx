@@ -194,12 +194,12 @@ export const TripCard = ({ trip, setPage, setSelectedTrip }) => {
             alignItems: "center",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          {/* <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
             <StarRating value={trip.rating} size={13} />
             <span style={{ fontSize: 12, color: colors.textMuted }}>
               {trip.rating} ({trip.reviews})
             </span>
-          </div>
+          </div> */}
           <span
             style={{
               fontSize: 12,
