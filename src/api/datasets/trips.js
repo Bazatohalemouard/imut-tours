@@ -922,7 +922,7 @@ const trips = [
         currency: "USD",
         country: "Tanzania",
         category: ["Parks & Wildlife", "Historical", "Cultural & Heritage"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1777734238/ngorongoro_crater_wfbhro.jpg",
         highlights: [
             "Full-day game drive inside Ngorongoro Crater",
             "Olduvai Gorge archaeological site and museum",
@@ -949,8 +949,8 @@ const trips = [
         price: 1700,
         currency: "USD",
         country: "Tanzania",
-        category: ["Parks & Wildlife", "Eco-Parks"],
-        image: "/images/img_placeholder.png",
+        category: ["Parks & Wildlife", "Eco-Parks", "Adventure"],
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779036693/mount-meru-trekking-4_u0gxhb.jpg",
         highlights: [
             "Summit Socialist Peak (4,566m) via ash-cone route",
             "Wildlife encounters in montane forest — buffalo, giraffe",
@@ -979,7 +979,7 @@ const trips = [
         currency: "USD",
         country: "Tanzania",
         category: ["Parks & Wildlife", "Eco-Parks"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779036817/Lake-Manyara-National-Park_du4cea.jpg",
         highlights: [
             "Tarangire — largest elephant concentration in Tanzania",
             "Ancient 1,000-year-old baobab trees in the park",
@@ -1007,7 +1007,7 @@ const trips = [
         currency: "USD",
         country: "Tanzania",
         category: ["Eco-Parks", "Parks & Wildlife", "Relax"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779036920/mahale-chimpanzee_faatom.jpg",
         highlights: [
             "Chimpanzee trekking with longest-studied wild community",
             "Swimming in Lake Tanganyika — world's second deepest lake",
@@ -1028,7 +1028,7 @@ const trips = [
     },
     {
         id: 505,
-        title: "Pemba Island Eco Escape",
+        title: "Explore Pemba Island",
         subtitle: "The 'Green Island' is Zanzibar's unspoilt twin — ancient clove plantations, pristine coral walls for world-class diving, Swahili ruins and a way of life unchanged for centuries.",
         duration: "5 Days",
         groupSize: "2–8",
@@ -1037,7 +1037,7 @@ const trips = [
         currency: "USD",
         country: "Tanzania",
         category: ["Leisure", "Eco-Parks", "Historical", "Relax"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779037006/pemba-island_f5but0.jpg",
         highlights: [
             "World-class wall diving on Pemba's coral drop-offs",
             "Msuka Ruins — 15th-century Shirazi Swahili settlement",
@@ -1066,7 +1066,7 @@ const trips = [
         currency: "USD",
         country: "Tanzania",
         category: ["Historical", "Cultural & Heritage", "City Tour"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779037262/stone-town-slavery-trail_gtqbgh.jpg",
         highlights: [
             "Old Slave Market and Anglican Cathedral built on the site",
             "Palace Museum (Beit al-Sahel) — sultan's royal chambers",
@@ -1084,7 +1084,7 @@ const trips = [
     },
     {
         id: 507,
-        title: "Kilimanjaro & Zanzibar Combo",
+        title: "Kilimanjaro Hiking & Zanzibar Relaxation",
         subtitle: "The classic East Africa high-low — summit Africa's highest peak, then reward sore muscles with turquoise water, white sand and cold cocktails on Zanzibar's northern beaches.",
         duration: "14 Days",
         groupSize: "2–8",
@@ -1093,7 +1093,7 @@ const trips = [
         currency: "USD",
         country: "Tanzania",
         category: ["Parks & Wildlife", "Leisure", "Relax"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1777734478/kilimanjaro_hy0bg3.jpg",
         highlights: [
             "Lemosho route summit of Kilimanjaro (5,895m)",
             "5 nights on Zanzibar post-trek recovery",
@@ -1131,7 +1131,7 @@ const trips = [
         currency: "USD",
         country: "Tanzania",
         category: ["Parks & Wildlife", "Eco-Parks"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779037537/Ruaha-National-Park_zdpuis.jpg",
         highlights: [
             "African wild dog pack encounters — one of Tanzania's best",
             "Great Ruaha River walking safaris at dawn",
@@ -1160,7 +1160,7 @@ const trips = [
         currency: "USD",
         country: "Tanzania",
         category: ["City Tour", "Historical", "Cultural & Heritage"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779037919/dar-es-salaam_sghrgx.jpg",
         highlights: [
             "National Museum — home of Zinj skull (1.75m years old)",
             "Kariakoo Market — East Africa's most chaotic and colourful",
@@ -1187,7 +1187,7 @@ const trips = [
         currency: "USD",
         country: "Tanzania",
         category: ["Parks & Wildlife", "Eco-Parks"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779038096/selous-game-reserve_we1xut.jpg",
         highlights: [
             "Rufiji River boat safari among massive hippo pods",
             "Walking safari with armed scout — the most visceral Africa offers",
@@ -1216,7 +1216,7 @@ const trips = [
         currency: "USD",
         country: "Tanzania",
         category: ["Cultural & Heritage", "Historical"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779038302/maasai-tribe_eqif0q.jpg",
         highlights: [
             "Sleep in a traditional Maasai boma (enkang)",
             "Join a cattle drive across the plains at dawn",
@@ -1244,7 +1244,7 @@ const trips = [
         currency: "USD",
         country: "Tanzania",
         category: ["Eco-Parks", "Parks & Wildlife", "Historical"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779038554/gombe-stream-chimpanze_oxaxhj.webp",
         highlights: [
             "Chimpanzee tracking in Jane Goodall's original research site",
             "Jane Goodall Institute interpretation centre at Gombe",
