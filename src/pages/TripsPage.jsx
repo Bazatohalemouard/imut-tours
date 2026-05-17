@@ -21,30 +21,32 @@ export const TripsPage = ({ setPage }) => {
     });
   }, []);
 
-useEffect(() => {
-  fetchCountries().then((data) => {
-    const countriesWithAll = [
-      { id: "all", name: "All" },
-      ...data
-    ];
-    setCountries(countriesWithAll);
-    setCountriesLoading(false);
-  });
-}, []);
+  useEffect(() => {
+    fetchCountries().then((data) => {
+      const countriesWithAll = [
+        { id: "all", name: "All" },
+        ...data
+      ];
+      setCountries(countriesWithAll);
+      setCountriesLoading(false);
+    });
+  }, []);
 
   const categories = [
     "All",
-    "Gorilla Trekking",
-    "Chimpanzee",
-    "Safari",
-    "Multi-Country",
+    "Parks & Wildlife",
+    "Eco-Parks",
+    "Cultural & Heritage",
+    "Historical",
+    "City Tour",
     "Leisure",
+    "Relax",
   ];
 
   const filtered = trips.filter(
     (t) =>
       (country === "All" || t.country === country) &&
-      (category === "All" || t.category === category)
+      (category === "All" || (Array.isArray(t.category) ? t.category.includes(category) : t.category === category))
   );
 
   return (
