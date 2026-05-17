@@ -9,6 +9,7 @@ import ugandaFlag from "../assets/flags/uganda.png";
 import tanzaniaFlag from "../assets/flags/tanzania.png";
 import burundiFlag from "../assets/flags/burundi.png";
 import kenyaFlag from "../assets/flags/kenya.png";
+import southSudanFlag from "../assets/flags/south-sudan.png";
 import clockIcon from "../assets/icons/clock.png";
 import groupIcon from "../assets/icons/group-users.png";
 import difficultyIcon from "../assets/icons/challenge.png";
@@ -23,6 +24,7 @@ export const TripCard = ({ trip, setPage, setSelectedTrip }) => {
     if (country === "Tanzania") return tanzaniaFlag;
     if (country === "Burundi") return burundiFlag;
     if (country === "Kenya") return kenyaFlag;
+    if (country === "South Sudan") return southSudanFlag;
     return "";
   }
 
@@ -141,7 +143,9 @@ export const TripCard = ({ trip, setPage, setSelectedTrip }) => {
             marginBottom: 6,
           }}
         >
-          {trip.category}
+          {Array.isArray(trip.category)
+            ? trip.category.join(", ")
+            : trip.category}
         </div>
         <h3
           style={{
@@ -220,7 +224,7 @@ TripCard.propTypes = {
     badge: PropTypes.string,
     country: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    category: PropTypes.string,
+    category: PropTypes.arrayOf(PropTypes.string).isRequired,
     subtitle: PropTypes.string,
     duration: PropTypes.string,
     groupSize: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
