@@ -1093,7 +1093,7 @@ const trips = [
         currency: "USD",
         country: "Tanzania",
         category: ["Parks & Wildlife", "Leisure", "Relax"],
-        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1777734478/kilimanjaro_hy0bg3.jpg",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779134470/kilimandjaro_hike_and_zanzibar_relax_l1bhmi.png",
         highlights: [
             "Lemosho route summit of Kilimanjaro (5,895m)",
             "5 nights on Zanzibar post-trek recovery",
@@ -1367,7 +1367,7 @@ const trips = [
         currency: "USD",
         country: "Kenya",
         category: ["City Tour", "Parks & Wildlife", "Cultural & Heritage"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779134765/nairobi-city-wildlife_pfuxmj.webp",
         highlights: [
             "Nairobi National Park — rhinos and lions against a city skyline",
             "David Sheldrick Elephant Orphanage feeding session",
@@ -1394,7 +1394,7 @@ const trips = [
         currency: "USD",
         country: "Kenya",
         category: ["Parks & Wildlife", "Eco-Parks", "Cultural & Heritage"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779134904/laikipa-plateau_gme3hx.jpg",
         highlights: [
             "Samburu Special Five: gerenuk, reticulated giraffe & more",
             "Camel trek across the Ewaso Ng'iro riverbed",
@@ -1424,7 +1424,7 @@ const trips = [
         currency: "USD",
         country: "Kenya",
         category: ["Parks & Wildlife", "Eco-Parks"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779135033/mount-kenya-sirimon-route_uo5zg0.jpg",
         highlights: [
             "Summit Point Lenana (4,985m) at sunrise",
             "Trek through five distinct ecological zones",
@@ -1455,7 +1455,7 @@ const trips = [
         currency: "USD",
         country: "Kenya",
         category: ["Leisure", "Relax", "Eco-Parks"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779135146/diani-beach_pnbgyt.jpg",
         highlights: [
             "Kisite-Mpunguti marine park snorkel trip — spinner dolphins",
             "Shimba Hills — sable antelope and elephant in coastal forest",
@@ -1484,7 +1484,7 @@ const trips = [
         currency: "USD",
         country: "Kenya",
         category: ["Parks & Wildlife", "Eco-Parks", "Leisure"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779135316/hells-gate_q3z6f5.jpg",
         highlights: [
             "Flamingo spectacle on the alkaline shores of Lake Nakuru",
             "White and black rhino sanctuary — Kenya's most reliable sighting",
@@ -1512,7 +1512,7 @@ const trips = [
         currency: "USD",
         country: "Kenya",
         category: ["Historical", "Cultural & Heritage", "City Tour"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779135432/mombasa-old-town_tw3wc0.webp",
         highlights: [
             "Fort Jesus — UNESCO World Heritage Site, Portuguese 1593",
             "Old Town carved Swahili door walking trail",
@@ -1539,7 +1539,7 @@ const trips = [
         currency: "USD",
         country: "Kenya",
         category: ["Historical", "Parks & Wildlife", "Cultural & Heritage"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779135508/great-lift-valley_nsanoz.jpg",
         highlights: [
             "Lake Bogoria hot springs and geysers amid flamingos",
             "Hyrax Hill prehistoric site — 3,000-year-old settlement",
@@ -1568,7 +1568,7 @@ const trips = [
         currency: "USD",
         country: "Kenya",
         category: ["Historical", "Cultural & Heritage", "City Tour"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779135585/Karen-Blixen-Museum_vd9dnh.jpg",
         highlights: [
             "Karen Blixen Museum — original Danish farmhouse from 1917",
             "Nairobi Railway Museum — early East African history",
@@ -1594,7 +1594,7 @@ const trips = [
         currency: "USD",
         country: "Kenya",
         category: ["Parks & Wildlife", "Eco-Parks", "Historical"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779135658/tsavo-reserve_aoa9yx.jpg",
         highlights: [
             "Lugard Falls — extraordinary geological lava rock formations",
             "Tsavo West Mzima Springs underwater hippo observatory",
@@ -1623,7 +1623,7 @@ const trips = [
         currency: "USD",
         country: "Kenya",
         category: ["Cultural & Heritage", "Leisure", "City Tour"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779135731/tea-farm-kenya_ssak0i.jpg",
         highlights: [
             "Kiambu coffee estate tour and cupping master class",
             "Kericho tea garden walk and plucking experience",
@@ -1651,7 +1651,7 @@ const trips = [
         currency: "USD",
         country: "Kenya",
         category: ["Parks & Wildlife", "Eco-Parks"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779135868/masai-mara-amboseli_zcwfvq.jpg",
         highlights: [
             "All three of Kenya's most iconic wildlife destinations",
             "Hot air balloon over Maasai Mara at sunrise",
@@ -1685,7 +1685,7 @@ const trips = [
         currency: "USD",
         country: "Kenya",
         category: ["Eco-Parks", "Parks & Wildlife", "Leisure"],
-        image: "/images/img_placeholder.png",
+        image: "https://res.cloudinary.com/dht699doy/image/upload/q_auto/f_auto/v1779135962/watamu-marine_vd1d02.jpg",
         highlights: [
             "Watamu Marine Park — world-class snorkelling and diving",
             "Local Ocean Trust sea turtle conservation visit",
