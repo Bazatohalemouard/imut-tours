@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { fetchTrips, fetchCountries } from "../api/APIHandler";
-import { Hero } from "../components/homepage/hero";
+import { Hero } from "../components/homepage/Hero";
 import { Stats } from "../components/homepage/Stats";
 import rwandaFlag from "../assets/flags/rwanda.png";
 import ugandaFlag from "../assets/flags/uganda.png";
