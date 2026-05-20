@@ -4,34 +4,24 @@ import conservationIcon from "../assets/icons/forest-conservation.png";
 import communityIcon from "../assets/icons/teamwork.png";
 import authenticIcon from "../assets/icons/authenticity.png";
 import excellenceIcon from "../assets/icons/excellence.png";
+import ceoIcon from "../assets/icons/man.png";
+import guideIcon from "../assets/icons/tour-guide.png";
 
 // ─── About Page ───────────────────────────────────────────────────────────────
 export const AboutPage = ({ setPage }) => {
   const team = [
-    // {
-    //   name: "Claude Ndayisaba",
-    //   role: "Founder & CEO",
-    //   bio: "Born and raised in Kigali, Claude has 15+ years guiding gorilla treks and building sustainable safari experiences.",
-    //   emoji: "👨🏾‍💼",
-    // },
-    // {
-    //   name: "Amara Tugume",
-    //   role: "Head of Uganda Operations",
-    //   bio: "Kampala native and wildlife biologist, Amara manages all Uganda safaris with unmatched ecological expertise.",
-    //   emoji: "👩🏾‍🔬",
-    // },
-    // {
-    //   name: "Patrick Nkurunziza",
-    //   role: "Chief Experience Officer",
-    //   bio: "Patrick designs every itinerary to balance adventure with comfort and authentic local culture.",
-    //   emoji: "🧭",
-    // },
-    // {
-    //   name: "Diane Uwimana",
-    //   role: "Conservation Coordinator",
-    //   bio: "Diane liaises with national park authorities to ensure every trip supports local conservation efforts.",
-    //   emoji: "🌿",
-    // },
+    {
+      name: "Jean Bosco Nshimiyimana",
+      role: "Managing Director",
+      bio: "Email: nshimiyebosco7@gmail.com, Phone: (+250) 788 608 794",
+      emoji: ceoIcon,
+    },
+    {
+      name: "Mathieu Uwashema",
+      role: "Head of tour guide.",
+      bio: "Email: uwashemathieu2@gmail.com, Phone: (+250) 780 375 925",
+      emoji: guideIcon,
+    }
   ];
 
   const values = [
@@ -289,7 +279,7 @@ export const AboutPage = ({ setPage }) => {
                   border: `1px solid ${colors.sand}`,
                 }}
               >
-                <img alt={v.title} src={v.icon} style={{width: 48, height: 48, marginBottom: 14 }} />
+                <img alt={v.title} src={v.icon} style={{ width: 48, height: 48, marginBottom: 14 }} />
                 <h3
                   style={{
                     fontSize: 17,
@@ -320,38 +310,37 @@ export const AboutPage = ({ setPage }) => {
       {/* Team */}
       <section style={{ background: colors.cream, padding: "80px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+
+          {/* Header */}
           <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <p
-              style={{
-                color: colors.gold,
-                fontSize: 13,
-                fontWeight: 700,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                marginBottom: 12,
-              }}
-            >
+            <p style={{
+              color: colors.gold,
+              fontSize: 13,
+              fontWeight: 700,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              marginBottom: 12,
+            }}>
               The People Behind IMUT
             </p>
-            <h2
-              style={{
-                fontSize: "clamp(26px, 4vw, 40px)",
-                color: colors.brand,
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 700,
-                margin: 0,
-              }}
-            >
+            <h2 style={{
+              fontSize: "clamp(26px, 4vw, 40px)",
+              color: colors.brand,
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 700,
+              margin: 0,
+            }}>
               Meet Our Team
             </h2>
           </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-              gap: 24,
-            }}
-          >
+
+          {/* Cards grid — always centered regardless of count */}
+          <div style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: 24,
+          }}>
             {team.map((member) => (
               <div
                 key={member.name}
@@ -361,59 +350,62 @@ export const AboutPage = ({ setPage }) => {
                   padding: "32px 24px",
                   textAlign: "center",
                   border: `1px solid ${colors.sand}`,
+                  flex: "1 1 240px",
+                  maxWidth: 300,
                 }}
               >
-                <div
-                  style={{
-                    width: 72,
-                    height: 72,
-                    background: colors.brand,
-                    borderRadius: "50%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: 32,
-                    margin: "0 auto 16px",
-                  }}
-                >
-                  {member.emoji}
+                <div style={{
+                  width: 72,
+                  height: 72,
+                  background: colors.brand,
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 32,
+                  margin: "0 auto 16px",
+                }}>
+                   <img
+                    src={member.emoji}
+                    alt={member.name}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
                 </div>
-                <h3
-                  style={{
-                    fontSize: 17,
-                    fontWeight: 700,
-                    color: colors.brand,
-                    fontFamily: "'Montserrat', sans-serif",
-                    margin: "0 0 4px",
-                  }}
-                >
+                <h3 style={{
+                  fontSize: 17,
+                  fontWeight: 700,
+                  color: colors.brand,
+                  fontFamily: "'Montserrat', sans-serif",
+                  margin: "0 0 4px",
+                }}>
                   {member.name}
                 </h3>
-                <p
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 700,
-                    color: colors.gold,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    margin: "0 0 12px",
-                  }}
-                >
+                <p style={{
+                  fontSize: 12,
+                  fontWeight: 700,
+                  color: colors.gold,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  margin: "0 0 12px",
+                }}>
                   {member.role}
                 </p>
-                <p
-                  style={{
-                    fontSize: 13.5,
-                    color: colors.textMuted,
-                    lineHeight: 1.7,
-                    margin: 0,
-                  }}
-                >
+                <p style={{
+                  fontSize: 13.5,
+                  color: colors.textMuted,
+                  lineHeight: 1.7,
+                  margin: 0,
+                }}>
                   {member.bio}
                 </p>
               </div>
             ))}
           </div>
+
         </div>
       </section>
     </div>
