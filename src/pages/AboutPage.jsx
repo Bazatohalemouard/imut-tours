@@ -6,6 +6,9 @@ import authenticIcon from "../assets/icons/authenticity.png";
 import excellenceIcon from "../assets/icons/excellence.png";
 import ceoIcon from "../assets/icons/man.png";
 import guideIcon from "../assets/icons/tour-guide.png";
+import customerSupportIcon from "../assets/icons/customer-service.png";
+import emailIcon from "../assets/icons/email.png";
+import phoneIcon from "../assets/icons/phone.png";
 
 // ─── About Page ───────────────────────────────────────────────────────────────
 export const AboutPage = ({ setPage }) => {
@@ -13,15 +16,24 @@ export const AboutPage = ({ setPage }) => {
     {
       name: "Jean Bosco Nshimiyimana",
       role: "Managing Director",
-      bio: "Email: nshimiyebosco7@gmail.com, Phone: (+250) 788 608 794",
+      email: 'nshimiyebosco7@gmail.com',
+      phone: '(+250) 788 608 794',
       emoji: ceoIcon,
     },
     {
       name: "Mathieu Uwashema",
       role: "Head of tour guide.",
-      bio: "Email: uwashemathieu2@gmail.com, Phone: (+250) 780 375 925",
+      email: 'uwashemathieu2@gmail.com',
+      phone: '(+250) 780 375 925',
       emoji: guideIcon,
-    }
+    },
+    {
+      name: "Customer Support",
+      role: "Reach us for any inquiries",
+      email: 'customersupport@imuttours.com',
+      phone: '(+250) 789 925 766',
+      emoji: customerSupportIcon,
+    },
   ];
 
   const values = [
@@ -321,7 +333,7 @@ export const AboutPage = ({ setPage }) => {
               textTransform: "uppercase",
               marginBottom: 12,
             }}>
-              The People Behind IMUT
+              The Leadership Behind IMUT
             </p>
             <h2 style={{
               fontSize: "clamp(26px, 4vw, 40px)",
@@ -365,12 +377,12 @@ export const AboutPage = ({ setPage }) => {
                   fontSize: 32,
                   margin: "0 auto 16px",
                 }}>
-                   <img
+                  <img
                     src={member.emoji}
                     alt={member.name}
                     style={{
-                      width: "100%",
-                      height: "100%",
+                      width: "70%",
+                      height: "70%",
                       objectFit: "cover",
                     }}
                   />
@@ -394,14 +406,47 @@ export const AboutPage = ({ setPage }) => {
                 }}>
                   {member.role}
                 </p>
-                <p style={{
-                  fontSize: 13.5,
-                  color: colors.textMuted,
-                  lineHeight: 1.7,
-                  margin: 0,
-                }}>
-                  {member.bio}
-                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+
+                  <a href={`mailto:${member.email}`}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 6,
+                      fontSize: 13,
+                      color: colors.brand,
+                      textDecoration: "none",
+                    }}
+                  >
+                    <img
+                      src={emailIcon}
+                      alt="Email"
+                      style={{ width: 16, height: 16, flexShrink: 0 }}
+                    />
+                    {member.email}
+                  </a>
+
+
+                  <a href={`tel:${member.phone}`}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 6,
+                      fontSize: 13,
+                      color: colors.brand,
+                      textDecoration: "none",
+                    }}
+                  >
+                    <img
+                      src={phoneIcon}
+                      alt="Phone"
+                      style={{ width: 16, height: 16, flexShrink: 0 }}
+                    />
+                    {member.phone}
+                  </a>
+                </div>
               </div>
             ))}
           </div>
