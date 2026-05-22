@@ -12,6 +12,7 @@ import southSudanFlag from "../assets/flags/south-sudan.png";
 import { FeaturedTrips } from "../components/homepage/FeaturedTrips";
 import { Testimonials } from "../components/homepage/Testimonials";
 import { CallToAction } from "../components/homepage/CallToAction";
+import HeroServices from "../components/homepage/HeroServices";
 
 
 // ─── Home Page ────────────────────────────────────────────────────────────────
@@ -72,7 +73,8 @@ export const HomePage = ({ setPage }) => {
 
   return (
     <div>
-      <Hero countries={countries} countriesLoading={countriesLoading} setPage={setPage} fetchCountryFlag={fetchCountryFlag} />
+      {/* <Hero countries={countries} countriesLoading={countriesLoading} setPage={setPage} fetchCountryFlag={fetchCountryFlag} /> */}
+      <HeroServices countries={countries} countriesLoading={countriesLoading} setPage={setPage} fetchCountryFlag={fetchCountryFlag} />
       <Stats countries={countries} />
       <FeaturedTrips trips={trips} tripsLoading={tripsLoading} setPage={setPage} />
       <CallToAction setPage={setPage} />

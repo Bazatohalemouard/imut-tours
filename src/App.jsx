@@ -7,6 +7,7 @@ import { TripsPage } from "./pages/TripsPage";
 import { AboutPage } from "./pages/AboutPage";
 import { ContactPage } from "./pages/ContactPage";
 import { TripDetailsPage } from "./pages/TripDetailsPage";
+import ServicesPage from "./pages/ServicesPage";
 
 export default function App() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function App() {
       trips: "/trips",
       about: "/about",
       contact: "/contact",
+      services: "/services",
       "trip-detail": trip ? `/trips/${trip.id}` : "/trips",
     };
 
@@ -69,6 +71,7 @@ export default function App() {
           <Route path="/trips/:id" element={<TripDetailsPage setPage={setPage} />} />
           <Route path="/about" element={<AboutPage setPage={setPage} />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/services" element={<ServicesPage setPage={setPage} />} />
           <Route path="*" element={<HomePage setPage={setPage} />} />
         </Routes>
       </main>
