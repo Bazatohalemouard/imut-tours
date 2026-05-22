@@ -308,7 +308,7 @@ const CountryCard = ({ country, animKey, fetchCountryFlag, setPage }) => (
     </div>
 
     {/* Experiences */}
-    <p style={{
+    <p className="hide-on-small" style={{
       fontSize: 10,
       textTransform: "uppercase",
       letterSpacing: "0.1em",
@@ -318,7 +318,7 @@ const CountryCard = ({ country, animKey, fetchCountryFlag, setPage }) => (
     }}>
       Experiences await
     </p>
-    <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+    <div className="hide-on-small" style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
       {country.experiences.map(exp => (
         <button
           key={exp}
@@ -478,26 +478,6 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
           width: "100%",
         }}>
 
-          {/* ── Badge ─────────────────────────────────────────────────────── */}
-          <div style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 6,
-            background: "rgba(200,146,42,0.15)",
-            border: "1px solid rgba(200,146,42,0.4)",
-            borderRadius: 99,
-            padding: "5px 14px",
-            fontSize: 12,
-            color: "#E8B84B",
-            fontWeight: 500,
-            letterSpacing: "0.06em",
-            textTransform: "uppercase",
-            marginBottom: 20,
-          }}>
-            <i className="ti ti-map-pin" aria-hidden="true" style={{ fontSize: 13 }} />
-            {HERO_COPY.badge}
-          </div>
-
           {/* ── Headline ──────────────────────────────────────────────────── */}
           <h1 style={{
             fontFamily: "'Montserrat', sans-serif",
@@ -506,7 +486,7 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
             lineHeight: 1.05,
             letterSpacing: "-0.02em",
             color: "#fff",
-            margin: "0 0 16px",
+            margin: "20px 0 16px",
           }}>
             {HERO_COPY.headline}
             <br />

@@ -7,6 +7,7 @@ import { colors } from "../theme/colors";
 const navItems = [
   { id: "home", label: "Home" },
   { id: "trips", label: "Trips" },
+  { id: "services", label: "Services" },
   { id: "about", label: "About Us" },
 ];
 

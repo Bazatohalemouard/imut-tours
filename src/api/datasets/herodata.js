@@ -18,7 +18,7 @@ export const SERVICES = [
     name: "Tour Guiding",
     tagline: "Expert-led safari & cultural tours",
     icon: MapIcon,
-    isPrimary: true,
+    isPrimary: false,
     page: "tours",
   },
   {

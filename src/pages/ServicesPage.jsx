@@ -1,6 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import { SERVICES_LIST, SERVICES_COPY, TRUST_STATS } from "../api/datasets/servicesdata";
+import {
+  EnvelopeIcon,
+  PhoneIcon,
+  ClipboardIcon,
+} from "@heroicons/react/24/outline";
+import { SERVICES_LIST, SERVICES_COPY, PROMISE_CARDS } from "../api/datasets/servicesdata";
 
 // ─── Keyframe injection ───────────────────────────────────────────────────────
 const STYLES = `
@@ -281,113 +286,108 @@ const PrimaryBadge = () => (
 );
 
 /** Individual service card */
-const ServiceCard = ({ service, index, onContact }) => (
-  <div
-    className="svc-card-wrap"
-    style={{ animationDelay: `${index * 0.08}s` }}
-  >
-    <div className={`svc-card-inner${service.isPrimary ? " primary" : ""}`}>
-      {service.isPrimary && <PrimaryBadge />}
+const ServiceCard = ({ service, index, onContact }) => {
+  const Icon = service.icon;
 
-      {/* Icon */}
-      <div style={{
-        width: 52,
-        height: 52,
-        borderRadius: 14,
-        background: service.isPrimary
-          ? "rgba(200,146,42,0.2)"
-          : "rgba(200,146,42,0.1)",
-        border: `1px solid ${service.isPrimary ? "rgba(200,146,42,0.55)" : "rgba(200,146,42,0.25)"}`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        marginBottom: 18,
-        flexShrink: 0,
-      }}>
-        <i
-          className={`ti ${service.icon}`}
-          aria-hidden="true"
-          style={{ fontSize: 24, color: "#E8B84B" }}
-        />
-      </div>
+  return (
+    <div
+      className="svc-card-wrap"
+      style={{ animationDelay: `${index * 0.08}s` }}
+    >
+      <div className={`svc-card-inner${service.isPrimary ? " primary" : ""}`}>
+        {service.isPrimary && <PrimaryBadge />}
 
-      {/* Name & tagline */}
-      <div style={{
-        fontFamily: "'Montserrat', sans-serif",
-        fontSize: 18,
-        fontWeight: 700,
-        color: "#fff",
-        lineHeight: 1.2,
-        marginBottom: 5,
-      }}>
-        {service.name}
-      </div>
-      <div style={{
-        fontSize: 12,
-        color: "#E8B84B",
-        fontStyle: "italic",
-        fontFamily: "'Dancing Script', cursive",
-        fontWeight: 700,
-        marginBottom: 14,
-        letterSpacing: "0.01em",
-      }}>
-        {service.tagline}
-      </div>
-
-      {/* Description */}
-      <p style={{
-        fontSize: 14,
-        color: "rgba(255,255,255,0.58)",
-        lineHeight: 1.75,
-        fontWeight: 300,
-        margin: "0 0 20px",
-      }}>
-        {service.description}
-      </p>
-
-      {/* Highlights */}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 22 }}>
-        {service.highlights.map(h => (
-          <span key={h} className="highlight-chip">
-            <i className="ti ti-check" aria-hidden="true" style={{ fontSize: 10, color: "#E8B84B" }} />
-            {h}
-          </span>
-        ))}
-      </div>
-
-      {/* CTA */}
-      <button
-        onClick={() => onContact(service.name)}
-        style={{
-          display: "inline-flex",
+        {/* Icon */}
+        <div style={{
+          width: 52,
+          height: 52,
+          borderRadius: 14,
+          background: service.isPrimary
+            ? "rgba(200,146,42,0.2)"
+            : "rgba(200,146,42,0.1)",
+          border: `1px solid ${service.isPrimary ? "rgba(200,146,42,0.55)" : "rgba(200,146,42,0.25)"}`,
+          display: "flex",
           alignItems: "center",
-          gap: 7,
-          background: service.isPrimary ? "#C8921A" : "rgba(200,146,42,0.12)",
-          border: service.isPrimary ? "none" : "1px solid rgba(200,146,42,0.38)",
-          color: service.isPrimary ? "#fff" : "#E8B84B",
-          borderRadius: 9,
-          padding: "9px 16px",
-          fontSize: 13,
-          fontWeight: 600,
-          cursor: "pointer",
-          fontFamily: "inherit",
-          transition: "background 0.2s, transform 0.15s",
-        }}
-        onMouseEnter={e => {
-          e.currentTarget.style.background = service.isPrimary ? "#d9a020" : "rgba(200,146,42,0.22)";
-          e.currentTarget.style.transform = "translateY(-1px)";
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.background = service.isPrimary ? "#C8921A" : "rgba(200,146,42,0.12)";
-          e.currentTarget.style.transform = "translateY(0)";
-        }}
-      >
-        <i className="ti ti-send" aria-hidden="true" style={{ fontSize: 13 }} />
-        {service.isPrimary ? "Book a Tour" : "Enquire Now"}
-      </button>
+          justifyContent: "center",
+          marginBottom: 18,
+          flexShrink: 0,
+        }}>
+          <Icon
+            aria-hidden="true"
+            className="h-6 w-6 text-[#E8B84B]"
+          />
+        </div>
+
+        {/* Name & tagline */}
+        <div style={{
+          fontFamily: "'Montserrat', sans-serif",
+          fontSize: 18,
+          fontWeight: 700,
+          color: "#fff",
+          lineHeight: 1.2,
+          marginBottom: 5,
+        }}>
+          {service.name}
+        </div>
+        <div style={{
+          fontSize: 12,
+          color: "#E8B84B",
+          fontStyle: "italic",
+          fontFamily: "'Dancing Script', cursive",
+          fontWeight: 700,
+          marginBottom: 14,
+          letterSpacing: "0.01em",
+        }}>
+          {service.tagline}
+        </div>
+
+        {/* Description */}
+        <p style={{
+          fontSize: 14,
+          color: "rgba(255,255,255,0.58)",
+          lineHeight: 1.75,
+          fontWeight: 300,
+          margin: "0 0 20px",
+        }}>
+          {service.description}
+        </p>
+
+        {/* Highlights */}
+
+        {/* CTA */}
+        <button
+          onClick={() => onContact(service.name)}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 7,
+            background: service.isPrimary ? "#C8921A" : "rgba(200,146,42,0.12)",
+            border: service.isPrimary ? "none" : "1px solid rgba(200,146,42,0.38)",
+            color: service.isPrimary ? "#fff" : "#E8B84B",
+            borderRadius: 9,
+            padding: "9px 16px",
+            fontSize: 13,
+            fontWeight: 600,
+            cursor: "pointer",
+            fontFamily: "inherit",
+            transition: "background 0.2s, transform 0.15s",
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.background = service.isPrimary ? "#d9a020" : "rgba(200,146,42,0.22)";
+            e.currentTarget.style.transform = "translateY(-1px)";
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.background = service.isPrimary ? "#C8921A" : "rgba(200,146,42,0.12)";
+            e.currentTarget.style.transform = "translateY(0)";
+          }}
+        >
+          <i className="ti ti-send" aria-hidden="true" style={{ fontSize: 13 }} />
+          {service.isPrimary ? "Book a Tour" : "Enquire Now"}
+        </button>
+      </div>
     </div>
-  </div>
-);
+  )
+};
 
 ServiceCard.propTypes = {
   service: PropTypes.object.isRequired,
@@ -516,16 +516,19 @@ const ContactSection = ({ copy, prefillService }) => {
         background: "linear-gradient(to right, #C8921A, transparent)",
       }} />
 
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: "clamp(32px, 6vw, 80px)",
-        alignItems: "start",
-      }}>
-
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr",
+          gap: 32,
+          alignItems: "start",
+        }}
+        className="lg:grid-cols-[1fr_1fr]"
+      >
         {/* Left — copy */}
-        <div>
+        <div style={{ minWidth: 0 }}>
           <SectionLabel>{copy.contactLabel}</SectionLabel>
+
           <h2
             id="contact-heading"
             style={{
@@ -539,113 +542,180 @@ const ContactSection = ({ copy, prefillService }) => {
             }}
           >
             {copy.contactHeadline.split(" ").slice(0, -2).join(" ")}{" "}
-            <em style={{
-              color: "#E8B84B",
-              fontStyle: "italic",
-              fontFamily: "'Dancing Script', cursive",
-            }}>
+            <em
+              style={{
+                color: "#E8B84B",
+                fontStyle: "italic",
+                fontFamily: "'Dancing Script', cursive",
+              }}
+            >
               {copy.contactHeadline.split(" ").slice(-2).join(" ")}
             </em>
           </h2>
-          <p style={{
-            fontSize: 15,
-            color: "rgba(255,255,255,0.55)",
-            lineHeight: 1.75,
-            fontWeight: 300,
-            margin: "0 0 32px",
-            maxWidth: 420,
-          }}>
+
+          <p
+            style={{
+              fontSize: 15,
+              color: "rgba(255,255,255,0.55)",
+              lineHeight: 1.75,
+              fontWeight: 300,
+              margin: "0 0 32px",
+              maxWidth: 420,
+            }}
+          >
             {copy.contactBody}
           </p>
 
           {/* CTA buttons */}
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 24 }}>
+          <div
+            style={{
+              display: "flex",
+              gap: 12,
+              flexDirection: "column",
+              marginBottom: 24,
+              width: "100%",
+            }}
+            className="sm:flex-row"
+          >
             <a
-              href={`mailto:${copy.email}?subject=Trip Enquiry${prefillService ? ` – ${prefillService}` : ""}`}
+              href={`mailto:${copy.email}?subject=Trip Enquiry${prefillService ? ` – ${prefillService}` : ""
+                }`}
               className="contact-btn-primary"
-              style={{ textDecoration: "none" }}
+              style={{
+                textDecoration: "none",
+                width: "100%",
+                justifyContent: "center",
+              }}
             >
-              <i className="ti ti-mail" aria-hidden="true" style={{ fontSize: 17 }} />
+              <EnvelopeIcon
+                aria-hidden="true"
+                className="h-[18px] w-[18px]"
+              />
               {copy.contactCta}
             </a>
+
             <a
               href={copy.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="whatsapp-btn"
+              style={{
+                width: "100%",
+                justifyContent: "center",
+              }}
             >
-              <i className="ti ti-brand-whatsapp" aria-hidden="true" style={{ fontSize: 16 }} />
+              <PhoneIcon
+                aria-hidden="true"
+                className="h-[17px] w-[17px]"
+              />
               WhatsApp Us
             </a>
           </div>
 
           {/* Meta links */}
-          <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
-            <button className="contact-meta-link" onClick={copyEmail}>
-              <i className="ti ti-copy" aria-hidden="true" style={{ fontSize: 14 }} />
+          <div
+            style={{
+              display: "flex",
+              gap: 14,
+              flexWrap: "wrap",
+            }}
+          >
+            <button
+              className="contact-meta-link"
+              onClick={copyEmail}
+            >
+              <ClipboardIcon
+                aria-hidden="true"
+                className="h-[14px] w-[14px]"
+              />
               {copied ? "Copied!" : copy.email}
             </button>
-            <a href={`tel:${copy.phone}`} className="contact-meta-link" style={{ textDecoration: "none" }}>
-              <i className="ti ti-phone" aria-hidden="true" style={{ fontSize: 14 }} />
+
+            <a
+              href={`tel:${copy.phone}`}
+              className="contact-meta-link"
+              style={{ textDecoration: "none" }}
+            >
+              <PhoneIcon
+                aria-hidden="true"
+                className="h-[14px] w-[14px]"
+              />
               {copy.phone}
             </a>
           </div>
         </div>
 
         {/* Right — promise cards */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          {[
-            { icon: "ti-clock-hour-4", title: "24-hour response", body: "Every enquiry gets a personal reply within one business day — no bots, no templates." },
-            { icon: "ti-receipt-off", title: "Free custom quote", body: "We scope your trip and send a detailed, no-obligation itinerary and price breakdown." },
-            { icon: "ti-shield-check", title: "Fully insured & licensed", body: "All vehicles, guides, and operations are covered under East African tourism regulations." },
-            { icon: "ti-heart-handshake", title: "Local knowledge, personal care", body: "Our team lives and works in the countries we take you to — no outsourced call centres." },
-          ].map((card, i) => (
-            <div
-              key={card.title}
-              style={{
-                display: "flex",
-                gap: 16,
-                background: "rgba(26,12,6,0.6)",
-                border: "1px solid rgba(200,146,42,0.18)",
-                borderRadius: 12,
-                padding: "16px 18px",
-                animation: `fadeUp 0.4s ease ${0.1 + i * 0.07}s both`,
-              }}
-            >
-              <div style={{
-                width: 38,
-                height: 38,
-                borderRadius: 10,
-                background: "rgba(200,146,42,0.12)",
-                border: "1px solid rgba(200,146,42,0.28)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexShrink: 0,
-              }}>
-                <i className={`ti ${card.icon}`} aria-hidden="true" style={{ fontSize: 18, color: "#E8B84B" }} />
-              </div>
-              <div>
-                <div style={{
-                  fontSize: 13,
-                  fontWeight: 600,
-                  color: "#fff",
-                  marginBottom: 4,
-                  fontFamily: "'DM Sans', sans-serif",
-                }}>
-                  {card.title}
+        <div
+          style={{
+            display: "none",
+            flexDirection: "column",
+            gap: 12,
+          }}
+          className="lg:flex"
+        >
+          {PROMISE_CARDS.map((card, i) => {
+            const Icon = card.icon;
+
+            return (
+              <div
+                key={card.title}
+                style={{
+                  display: "flex",
+                  gap: 16,
+                  background: "rgba(26,12,6,0.6)",
+                  border: "1px solid rgba(200,146,42,0.18)",
+                  borderRadius: 12,
+                  padding: "16px 18px",
+                  animation: `fadeUp 0.4s ease ${0.1 + i * 0.07}s both`,
+                }}
+              >
+                <div
+                  style={{
+                    width: 38,
+                    height: 38,
+                    borderRadius: 10,
+                    background: "rgba(200,146,42,0.12)",
+                    border: "1px solid rgba(200,146,42,0.28)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                  }}
+                >
+                  <Icon
+                    aria-hidden="true"
+                    className="h-[18px] w-[18px] text-[#E8B84B]"
+                  />
                 </div>
-                <div style={{
-                  fontSize: 12,
-                  color: "rgba(255,255,255,0.45)",
-                  lineHeight: 1.6,
-                  fontWeight: 300,
-                }}>
-                  {card.body}
+
+                <div>
+                  <div
+                    style={{
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: "#fff",
+                      marginBottom: 4,
+                      fontFamily: "'DM Sans', sans-serif",
+                    }}
+                  >
+                    {card.title}
+                  </div>
+
+                  <div
+                    style={{
+                      fontSize: 12,
+                      color: "rgba(255,255,255,0.45)",
+                      lineHeight: 1.6,
+                      fontWeight: 300,
+                    }}
+                  >
+                    {card.body}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -731,25 +801,6 @@ export const ServicesPage = ({ setPage }) => {
         {/* ── Page header ───────────────────────────────────────────────────── */}
         <div style={{ marginBottom: 56, animation: "fadeUp 0.45s ease both" }}>
 
-          <div style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 7,
-            background: "rgba(200,146,42,0.12)",
-            border: "1px solid rgba(200,146,42,0.38)",
-            borderRadius: 99,
-            padding: "5px 15px",
-            fontSize: 12,
-            color: "#E8B84B",
-            fontWeight: 500,
-            letterSpacing: "0.07em",
-            textTransform: "uppercase",
-            marginBottom: 22,
-          }}>
-            <i className="ti ti-sparkles" aria-hidden="true" style={{ fontSize: 12 }} />
-            {SERVICES_COPY.badge}
-          </div>
-
           <h1 style={{
             fontFamily: "'Montserrat', sans-serif",
             fontSize: "clamp(36px, 6.5vw, 64px)",
@@ -757,7 +808,7 @@ export const ServicesPage = ({ setPage }) => {
             lineHeight: 1.04,
             letterSpacing: "-0.025em",
             color: "#fff",
-            margin: "0 0 18px",
+            margin: "26px 0 18px",
           }}>
             {SERVICES_COPY.headline}
             <br />
