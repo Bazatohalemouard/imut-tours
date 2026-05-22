@@ -4,12 +4,20 @@
  * No JSX, no component logic — pure data only.
  */
 
+import {
+  MapIcon,
+  TruckIcon,
+  PaperAirplaneIcon,
+  TruckIcon as TaxiIcon,
+  BuildingOffice2Icon,
+} from "@heroicons/react/24/outline";
+
 export const SERVICES = [
   {
     id: "tours",
     name: "Tour Guiding",
     tagline: "Expert-led safari & cultural tours",
-    icon: "ti-binoculars",
+    icon: MapIcon,
     isPrimary: true,
     page: "tours",
   },
@@ -17,7 +25,7 @@ export const SERVICES = [
     id: "car-rentals",
     name: "Car Rentals",
     tagline: "Self-drive or chauffeured",
-    icon: "ti-car",
+    icon: TruckIcon,
     isPrimary: false,
     page: "car-rentals",
   },
@@ -25,7 +33,7 @@ export const SERVICES = [
     id: "airport-transfers",
     name: "Airport Transfers",
     tagline: "Meet & greet included",
-    icon: "ti-plane-arrival",
+    icon: PaperAirplaneIcon,
     isPrimary: false,
     page: "airport-transfers",
   },
@@ -33,7 +41,7 @@ export const SERVICES = [
     id: "taxi",
     name: "Taxi & Cab Service",
     tagline: "City & inter-city rides",
-    icon: "ti-taxi",
+    icon: TaxiIcon,
     isPrimary: false,
     page: "taxi",
   },
@@ -41,7 +49,7 @@ export const SERVICES = [
     id: "hotels",
     name: "Hotel Booking",
     tagline: "Budget to luxury stays",
-    icon: "ti-building",
+    icon: BuildingOffice2Icon,
     isPrimary: false,
     page: "hotels",
   },

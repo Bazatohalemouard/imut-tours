@@ -89,6 +89,7 @@ const ServiceCard = ({ service, onClick }) => {
       ? { borderColor: "#C8921A", background: "rgba(200,146,42,0.1)" }
       : {}),
   };
+  const Icon = service.icon;
 
   return (
     <button
@@ -98,9 +99,11 @@ const ServiceCard = ({ service, onClick }) => {
       onMouseLeave={() => setHovered(false)}
       aria-label={`Go to ${service.name}`}
     >
-      <i
-        className={`ti ${service.icon}`}
+      
+
+      <Icon
         aria-hidden="true"
+        className="mb-2 block h-6 w-6 text-[#E8B84B]"
         style={{ fontSize: 22, color: "#E8B84B", display: "block", marginBottom: 9 }}
       />
       <div style={{ fontSize: 13, fontWeight: 600, color: "#fff", lineHeight: 1.2, marginBottom: 4 }}>
