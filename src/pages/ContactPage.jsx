@@ -91,7 +91,7 @@ export const ContactPage = () => {
             margin: "0 0 14px",
           }}
         >
-          Contact IMUT Tours
+          Contact Us
         </h1>
         <p
           style={{
