@@ -5,19 +5,18 @@
  */
 
 import {
-  MapIcon,
-  TruckIcon,
-  PaperAirplaneIcon,
-  TruckIcon as TaxiIcon,
-  BuildingOffice2Icon,
-} from "@heroicons/react/24/outline";
+  IconMap,
+  IconCar,
+  IconPlaneArrival,
+  IconBuildingEstate,
+} from "@tabler/icons-react";
 
 export const SERVICES = [
   {
     id: "tours",
     name: "Tour Guiding",
     tagline: "Expert-led safari & cultural tours",
-    icon: MapIcon,
+    icon: IconMap,
     isPrimary: false,
     page: "tours",
   },
@@ -25,7 +24,7 @@ export const SERVICES = [
     id: "car-rentals",
     name: "Car Rentals",
     tagline: "Self-drive or chauffeured",
-    icon: TruckIcon,
+    icon: IconCar,
     isPrimary: false,
     page: "car-rentals",
   },
@@ -33,7 +32,7 @@ export const SERVICES = [
     id: "airport-transfers",
     name: "Airport Transfers",
     tagline: "Meet & greet included",
-    icon: PaperAirplaneIcon,
+    icon: IconPlaneArrival,
     isPrimary: false,
     page: "airport-transfers",
   },
@@ -41,7 +40,7 @@ export const SERVICES = [
     id: "taxi",
     name: "Taxi & Cab Service",
     tagline: "City & inter-city rides",
-    icon: TaxiIcon,
+    icon: IconCar,
     isPrimary: false,
     page: "taxi",
   },
@@ -49,7 +48,7 @@ export const SERVICES = [
     id: "hotels",
     name: "Hotel Booking",
     tagline: "Budget to luxury stays",
-    icon: BuildingOffice2Icon,
+    icon: IconBuildingEstate,
     isPrimary: false,
     page: "hotels",
   },

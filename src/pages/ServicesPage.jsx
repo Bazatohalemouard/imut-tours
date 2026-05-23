@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import {
-  EnvelopeIcon,
-  PhoneIcon,
-  ClipboardIcon,
-} from "@heroicons/react/24/outline";
+  IconMail,
+  IconPhone,
+  IconCopy,
+  IconCheck
+} from "@tabler/icons-react";
 import { SERVICES_LIST, SERVICES_COPY, PROMISE_CARDS } from "../api/datasets/servicesdata";
 
 // ─── Keyframe injection ───────────────────────────────────────────────────────
@@ -207,6 +208,21 @@ const STYLES = `
     background: rgba(37,211,102,0.2);
     border-color: rgba(37,211,102,0.55);
   }
+  .highlight-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.58);
+    transition: background 0.2s, color 0.2s;
+    cursor: default;
+  }
+  .highlight-chip:hover {
+    background: rgba(200,146,42,0.08);
+    color: rgba(255,255,255,0.9);
+  }
 `;
 
 if (typeof document !== "undefined" && !document.getElementById("services-styles")) {
@@ -353,7 +369,18 @@ const ServiceCard = ({ service, index, onContact }) => {
         </p>
 
         {/* Highlights */}
-
+        <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 22 }}>
+          {service.highlights.map(h => (
+            <span
+              key={h}
+              className="highlight-chip"
+              style={{ display: "flex", alignItems: "center", gap: 9, padding: "5px 8px" }}
+            >
+              <IconCheck aria-hidden="true" style={{ width: 11, height: 11, color: "#E8B84B", strokeWidth: 3, flexShrink: 0 }} />
+              {h}
+            </span>
+          ))}
+        </div>
         {/* CTA */}
         <button
           onClick={() => onContact(service.name)}
@@ -587,7 +614,7 @@ const ContactSection = ({ copy, prefillService }) => {
                 justifyContent: "center",
               }}
             >
-              <EnvelopeIcon
+              <IconMail
                 aria-hidden="true"
                 className="h-[18px] w-[18px]"
               />
@@ -604,7 +631,7 @@ const ContactSection = ({ copy, prefillService }) => {
                 justifyContent: "center",
               }}
             >
-              <PhoneIcon
+              <IconPhone
                 aria-hidden="true"
                 className="h-[17px] w-[17px]"
               />
@@ -624,7 +651,7 @@ const ContactSection = ({ copy, prefillService }) => {
               className="contact-meta-link"
               onClick={copyEmail}
             >
-              <ClipboardIcon
+              <IconCopy
                 aria-hidden="true"
                 className="h-[14px] w-[14px]"
               />
@@ -636,7 +663,7 @@ const ContactSection = ({ copy, prefillService }) => {
               className="contact-meta-link"
               style={{ textDecoration: "none" }}
             >
-              <PhoneIcon
+              <IconPhone
                 aria-hidden="true"
                 className="h-[14px] w-[14px]"
               />
@@ -736,13 +763,10 @@ ContactSection.propTypes = {
  *   setPage  – navigate to a named page (for back-nav or CTA links)
  */
 export const ServicesPage = ({ setPage }) => {
-  const [activeFilter, setActiveFilter] = useState("all");
   const [contactPrefill, setContactPrefill] = useState(null);
   const contactRef = useRef(null);
 
-  const visibleServices = activeFilter === "all"
-    ? SERVICES_LIST
-    : SERVICES_LIST.filter(s => s.id === activeFilter);
+  const visibleServices = SERVICES_LIST;
 
   const handleContact = (serviceName) => {
     setContactPrefill(serviceName);
@@ -750,11 +774,6 @@ export const ServicesPage = ({ setPage }) => {
       contactRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 50);
   };
-
-  // Reset prefill when filter changes
-  useEffect(() => {
-    setContactPrefill(null);
-  }, [activeFilter]);
 
   return (
     <main
@@ -768,7 +787,7 @@ export const ServicesPage = ({ setPage }) => {
     >
       {/* Background image layer */}
       <div style={{
-        position: "fixed",
+        position: "absolute",
         inset: 0,
         backgroundImage: "url('/images/img_placeholder.png')",
         backgroundSize: "cover",
@@ -781,7 +800,7 @@ export const ServicesPage = ({ setPage }) => {
 
       {/* Gradient overlay */}
       <div style={{
-        position: "fixed",
+        position: "absolute",
         inset: 0,
         background: "linear-gradient(160deg, #1a0c06 0%, #2e1510dd 50%, #3a200888 100%)",
         zIndex: 0,
@@ -840,9 +859,7 @@ export const ServicesPage = ({ setPage }) => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: activeFilter === "all"
-              ? "repeat(auto-fill, minmax(320px, 1fr))"
-              : "1fr",
+            gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
             gap: 20,
             marginBottom: 16,
           }}
