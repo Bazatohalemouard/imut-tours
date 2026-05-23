@@ -13,7 +13,7 @@ export default function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const setPage = (page, trip = null) => {
+  const setPage = (page, payload = null) => {
     const routes = {
       home: "/",
       locations: "/locations",
@@ -21,11 +21,11 @@ export default function App() {
       about: "/about",
       contact: "/contact",
       services: "/services",
-      "trip-detail": trip ? `/trips/${trip.id}` : "/trips",
+      "trip-detail": payload ? `/trips/${payload.id}` : "/trips",
     };
 
-    if (trip) {
-      navigate(routes[page], { state: { trip } });
+    if (payload) {
+      navigate(routes[page], { state: { payload } });
     } else {
       navigate(routes[page]);
     }

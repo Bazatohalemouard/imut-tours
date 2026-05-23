@@ -76,7 +76,7 @@ export const TripDetailsPage = ({ setPage }) => {
   const [bookingOpen, setBookingOpen] = useState(false);
 
   const { state } = useLocation();
-  const trip = state?.trip;
+  const trip = state?.payload;
 
   if (!trip) {
     return (

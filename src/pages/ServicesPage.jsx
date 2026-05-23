@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   IconMail,
@@ -275,11 +276,16 @@ const AmbientOrbs = () => (
 );
 
 /** Individual service card */
-const ServiceCard = ({ service, index, onContact }) => {
+const ServiceCard = ({ service, index, onContact, highlighted }) => {
   const Icon = service.icon;
   return (
     <div className="svc-card-wrap" style={{ animationDelay: `${index * 0.08}s` }}>
-      <div className={`svc-card-inner${service.isPrimary ? " primary" : ""}`}>
+      <div className={`svc-card-inner${service.isPrimary ? " primary" : ""}`}
+        style={highlighted ? {
+          borderColor: "#C8921A",
+          boxShadow: "0 0 0 3px rgba(200,146,42,0.25), 0 0 24px rgba(200,146,42,0.15)",
+        } : undefined}
+      >
         {/* Icon */}
         <div style={{
           width: 52, height: 52, borderRadius: 14, marginBottom: 18, flexShrink: 0,
@@ -359,6 +365,7 @@ ServiceCard.propTypes = {
   service: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   onContact: PropTypes.func.isRequired,
+  highlighted: PropTypes.string,
 };
 
 /** Trust stats row */
@@ -702,6 +709,10 @@ ContactSection.propTypes = {
  *   setPage  – navigate to a named page (for back-nav or CTA links)
  */
 export const ServicesPage = ({ setPage }) => {
+  const { state } = useLocation();
+  const initialServiceId = state?.id ?? null;
+
+  const [highlightedId, setHighlightedId] = useState(initialServiceId);
   const [contactPrefill, setContactPrefill] = useState(null);
   const contactRef = useRef(null);
 
@@ -713,6 +724,14 @@ export const ServicesPage = ({ setPage }) => {
       contactRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 50);
   };
+
+  useEffect(() => {
+    if (!initialServiceId) return;
+    const el = cardRefs.current[initialServiceId];
+    if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "center" }), 300);
+    const timer = setTimeout(() => setHighlightedId(null), 2200);
+    return () => clearTimeout(timer);
+  }, [initialServiceId]);
 
   return (
     <main
@@ -811,6 +830,7 @@ export const ServicesPage = ({ setPage }) => {
               service={service}
               index={i}
               onContact={handleContact}
+              highlighted={highlightedId === service.id}
             />
           ))}
         </div>

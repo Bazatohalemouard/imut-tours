@@ -94,7 +94,7 @@ const ServiceCard = ({ service, setPage }) => {
   return (
     <button
       style={base}
-      onClick={() => setPage("services")}
+      onClick={() => setPage("services", { id: service.id })}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       aria-label={`Go to ${service.name}`}
