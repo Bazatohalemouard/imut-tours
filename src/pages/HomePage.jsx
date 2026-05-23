@@ -73,7 +73,6 @@ export const HomePage = ({ setPage }) => {
 
   return (
     <div>
-      {/* <Hero countries={countries} countriesLoading={countriesLoading} setPage={setPage} fetchCountryFlag={fetchCountryFlag} /> */}
       <HeroServices countries={countries} countriesLoading={countriesLoading} setPage={setPage} fetchCountryFlag={fetchCountryFlag} />
       <Stats countries={countries} />
       <FeaturedTrips trips={trips} tripsLoading={tripsLoading} setPage={setPage} />

@@ -46,7 +46,7 @@ export const SERVICES = [
   },
   {
     id: "hotels",
-    name: "Hotel Booking",
+    name: "Accomodation",
     tagline: "Budget to luxury stays",
     icon: IconBuildingEstate,
     isPrimary: false,

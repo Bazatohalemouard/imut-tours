@@ -69,7 +69,7 @@ const SectionLabel = ({ children }) => (
 );
 
 /** Single service card */
-const ServiceCard = ({ service, onClick }) => {
+const ServiceCard = ({ service, setPage }) => {
   const [hovered, setHovered] = useState(false);
 
   const base = {
@@ -94,13 +94,11 @@ const ServiceCard = ({ service, onClick }) => {
   return (
     <button
       style={base}
-      onClick={() => onClick(service.page)}
+      onClick={() => setPage("services")}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       aria-label={`Go to ${service.name}`}
     >
-      
-
       <Icon
         aria-hidden="true"
         className="mb-2 block h-6 w-6 text-[#E8B84B]"
@@ -130,7 +128,7 @@ ServiceCard.propTypes = {
     isPrimary: PropTypes.bool.isRequired,
     page: PropTypes.string.isRequired,
   }).isRequired,
-  onClick: PropTypes.func.isRequired,
+  setPage: PropTypes.func.isRequired,
 };
 
 /** Destination pill button */
@@ -524,7 +522,7 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
               <ServiceCard
                 key={service.id}
                 service={service}
-                onClick={handleServiceClick}
+                setPage={setPage}
               />
             ))}
           </div>
@@ -560,36 +558,6 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
             >
               <i className="ti ti-calendar-event" aria-hidden="true" style={{ fontSize: 16 }} />
               {HERO_COPY.ctaPrimary}
-            </button>
-
-            <button
-              onClick={() => setPage?.("services")}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "rgba(255,255,255,0.07)",
-                color: "rgba(255,255,255,0.72)",
-                border: "1px solid rgba(255,255,255,0.14)",
-                padding: "14px 22px",
-                borderRadius: 10,
-                fontSize: 14,
-                fontWeight: 500,
-                cursor: "pointer",
-                fontFamily: "inherit",
-                transition: "background 0.2s, color 0.2s",
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.13)";
-                e.currentTarget.style.color = "#fff";
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.07)";
-                e.currentTarget.style.color = "rgba(255,255,255,0.72)";
-              }}
-            >
-              <i className="ti ti-layout-grid" aria-hidden="true" style={{ fontSize: 16 }} />
-              {HERO_COPY.ctaSecondary}
             </button>
           </div>
 

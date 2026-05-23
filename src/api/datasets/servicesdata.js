@@ -48,7 +48,7 @@ export const SERVICES_LIST = [
     description:
       "Our seasoned guides:naturalists, historians, and cultural storytellers; design each journey around your pace, your interests, and your sense of adventure. Whether you're tracking rare wildlife at dawn, sitting with a community elder at dusk, or simply absorbing a landscape that feels like the beginning of time, we make sure every moment is intentional. Choose from private, small-group, or family-oriented formats, all led by guides who treat knowledge-sharing as a craft.",
     icon: IconWorld,
-    isPrimary: false,
+    isPrimary: true,
     highlights: [
       "Private, small-group & family tours",
       "Day trips & multi-week expeditions",
@@ -109,7 +109,7 @@ export const SERVICES_LIST = [
   },
   {
     id: "hotels",
-    name: "Hotel & Lodge Booking",
+    name: "Accomodation",
     tagline: "Rest as well as you explored",
     description:
       "Where you sleep shapes how you travel. We source and book accommodation across the full spectrum. From intimate wilderness lodges and design-forward boutique hotels to reliable mid-range properties and budget guesthouses that punch well above their price. As established partners with properties across the region, we regularly access rates, room categories, and availability that aren't listed publicly. Tell us your style and your ceiling, and we'll find the right fit. No decision fatigue, no booking surprises.",

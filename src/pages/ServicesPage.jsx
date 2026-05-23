@@ -4,7 +4,8 @@ import {
   IconMail,
   IconPhone,
   IconCopy,
-  IconCheck
+  IconCheck,
+  IconHandClick
 } from "@tabler/icons-react";
 import { SERVICES_LIST, SERVICES_COPY, PROMISE_CARDS } from "../api/datasets/servicesdata";
 
@@ -65,21 +66,15 @@ const STYLES = `
   }
 
   .highlight-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 6px;
-    padding: 4px 10px;
-    font-size: 11px;
-    color: rgba(255,255,255,0.58);
-    transition: all 0.2s;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.78); /* was 0.58 — lifted to pass AA */
+    transition: background 0.2s, color 0.2s;
+    cursor: default;
   }
   .highlight-chip:hover {
-    background: rgba(200,146,42,0.12);
-    border-color: rgba(200,146,42,0.45);
-    color: #E8B84B;
+    background: rgba(200, 146, 42, 0.1);
+    color: #ffffff;
   }
 
   .stat-card {
@@ -279,91 +274,43 @@ const AmbientOrbs = () => (
   </div>
 );
 
-/** Primary badge pill */
-const PrimaryBadge = () => (
-  <span style={{
-    display: "inline-flex",
-    alignItems: "center",
-    gap: 5,
-    background: "rgba(200,146,42,0.2)",
-    border: "1px solid rgba(200,146,42,0.55)",
-    borderRadius: 99,
-    padding: "3px 10px",
-    fontSize: 10,
-    color: "#E8B84B",
-    fontWeight: 600,
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-    marginBottom: 14,
-  }}>
-    <i className="ti ti-star-filled" aria-hidden="true" style={{ fontSize: 9 }} />
-    Signature service
-  </span>
-);
-
 /** Individual service card */
 const ServiceCard = ({ service, index, onContact }) => {
   const Icon = service.icon;
-
   return (
-    <div
-      className="svc-card-wrap"
-      style={{ animationDelay: `${index * 0.08}s` }}
-    >
+    <div className="svc-card-wrap" style={{ animationDelay: `${index * 0.08}s` }}>
       <div className={`svc-card-inner${service.isPrimary ? " primary" : ""}`}>
-        {service.isPrimary && <PrimaryBadge />}
-
         {/* Icon */}
         <div style={{
-          width: 52,
-          height: 52,
-          borderRadius: 14,
-          background: service.isPrimary
-            ? "rgba(200,146,42,0.2)"
-            : "rgba(200,146,42,0.1)",
-          border: `1px solid ${service.isPrimary ? "rgba(200,146,42,0.55)" : "rgba(200,146,42,0.25)"}`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginBottom: 18,
-          flexShrink: 0,
+          width: 52, height: 52, borderRadius: 14, marginBottom: 18, flexShrink: 0,
+          background: service.isPrimary ? "rgba(200,146,42,0.22)" : "rgba(200,146,42,0.12)",
+          border: `1.5px solid ${service.isPrimary ? "rgba(200,146,42,0.7)" : "rgba(200,146,42,0.35)"}`,
+          display: "flex", alignItems: "center", justifyContent: "center",
         }}>
-          <Icon
-            aria-hidden="true"
-            className="h-6 w-6 text-[#E8B84B]"
-          />
+          <Icon aria-hidden="true" style={{ width: 24, height: 24, color: "#F0C060" }} />
         </div>
 
-        {/* Name & tagline */}
+        {/* Name */}
         <div style={{
-          fontFamily: "'Montserrat', sans-serif",
-          fontSize: 18,
-          fontWeight: 700,
-          color: "#fff",
-          lineHeight: 1.2,
-          marginBottom: 5,
+          fontFamily: "'Montserrat', sans-serif", fontSize: 18, fontWeight: 700,
+          color: "#FFFFFF", lineHeight: 1.25, marginBottom: 4,
         }}>
           {service.name}
         </div>
+
+        {/* Tagline — bumped size, weight and contrast */}
         <div style={{
-          fontSize: 12,
-          color: "#E8B84B",
-          fontStyle: "italic",
+          fontSize: 13, fontWeight: 600, letterSpacing: "0.02em",
           fontFamily: "'Dancing Script', cursive",
-          fontWeight: 700,
-          marginBottom: 14,
-          letterSpacing: "0.01em",
+          color: "#F0C060", marginBottom: 14,
         }}>
           {service.tagline}
         </div>
 
-        {/* Description */}
+        {/* Description — weight 400 + contrast lifted to ~7:1 */}
         <p style={{
-          fontSize: 14,
-          color: "rgba(255,255,255,0.58)",
-          lineHeight: 1.75,
-          fontWeight: 300,
-          margin: "0 0 20px",
+          fontSize: 14, color: "rgba(255,255,255,0.82)", lineHeight: 1.75,
+          fontWeight: 400, margin: "0 0 20px",
         }}>
           {service.description}
         </p>
@@ -371,49 +318,41 @@ const ServiceCard = ({ service, index, onContact }) => {
         {/* Highlights */}
         <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 22 }}>
           {service.highlights.map(h => (
-            <span
-              key={h}
-              className="highlight-chip"
-              style={{ display: "flex", alignItems: "center", gap: 9, padding: "5px 8px" }}
-            >
-              <IconCheck aria-hidden="true" style={{ width: 11, height: 11, color: "#E8B84B", strokeWidth: 3, flexShrink: 0 }} />
+            <span key={h} className="highlight-chip"
+              style={{ display: "flex", alignItems: "center", gap: 9, padding: "5px 8px" }}>
+              <IconCheck aria-hidden="true"
+                style={{ width: 13, height: 13, color: "#F0C060", strokeWidth: 2.5, flexShrink: 0 }} />
               {h}
             </span>
           ))}
         </div>
+
         {/* CTA */}
         <button
           onClick={() => onContact(service.name)}
           style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 7,
-            background: service.isPrimary ? "#C8921A" : "rgba(200,146,42,0.12)",
-            border: service.isPrimary ? "none" : "1px solid rgba(200,146,42,0.38)",
-            color: service.isPrimary ? "#fff" : "#E8B84B",
-            borderRadius: 9,
-            padding: "9px 16px",
-            fontSize: 13,
-            fontWeight: 600,
-            cursor: "pointer",
-            fontFamily: "inherit",
-            transition: "background 0.2s, transform 0.15s",
+            display: "inline-flex", alignItems: "center", gap: 7, cursor: "pointer",
+            background: service.isPrimary ? "#C8921A" : "rgba(200,146,42,0.15)",
+            border: service.isPrimary ? "none" : "1.5px solid rgba(200,146,42,0.55)",
+            color: service.isPrimary ? "#FFFFFF" : "#F5C842",
+            borderRadius: 9, padding: "10px 18px", fontSize: 13,
+            fontWeight: 700, fontFamily: "inherit", transition: "background 0.2s, transform 0.15s",
           }}
           onMouseEnter={e => {
-            e.currentTarget.style.background = service.isPrimary ? "#d9a020" : "rgba(200,146,42,0.22)";
+            e.currentTarget.style.background = service.isPrimary ? "#d9a020" : "rgba(200,146,42,0.28)";
             e.currentTarget.style.transform = "translateY(-1px)";
           }}
           onMouseLeave={e => {
-            e.currentTarget.style.background = service.isPrimary ? "#C8921A" : "rgba(200,146,42,0.12)";
+            e.currentTarget.style.background = service.isPrimary ? "#C8921A" : "rgba(200,146,42,0.15)";
             e.currentTarget.style.transform = "translateY(0)";
           }}
         >
-          <i className="ti ti-send" aria-hidden="true" style={{ fontSize: 13 }} />
+          <IconHandClick aria-hidden="true" style={{ width: 14, height: 14 }} />
           {service.isPrimary ? "Book a Tour" : "Enquire Now"}
         </button>
       </div>
     </div>
-  )
+  );
 };
 
 ServiceCard.propTypes = {
