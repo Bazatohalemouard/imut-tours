@@ -41,6 +41,11 @@ export const Footer = ({ setPage }) => (
             links: ["Home", "Trips", "About Us", "Contact"],
             pages: ["home", "trips", "about", "contact"],
           },
+          {
+            title: "Services",
+            links: ["Tours", "Car Rentals", "Airport Transfers", "Taxi & Cab Service", "Accommodation"],
+            pages: ["services", "services", "services", "services", "services"],
+          },
           // {
           //   title: "Destinations",
           //   links: [

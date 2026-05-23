@@ -5,9 +5,10 @@
  */
 
 import {
-  IconMap,
+  IconTrekking,
+  IconCarSuv,
   IconCar,
-  IconPlaneArrival,
+  IconBuildingAirport,
   IconBuildingEstate,
 } from "@tabler/icons-react";
 
@@ -16,7 +17,7 @@ export const SERVICES = [
     id: "tours",
     name: "Tour Guiding",
     tagline: "Expert-led safari & cultural tours",
-    icon: IconMap,
+    icon: IconTrekking,
     isPrimary: false,
     page: "tours",
   },
@@ -24,7 +25,7 @@ export const SERVICES = [
     id: "car-rentals",
     name: "Car Rentals",
     tagline: "Self-drive or chauffeured",
-    icon: IconCar,
+    icon: IconCarSuv,
     isPrimary: false,
     page: "car-rentals",
   },
@@ -32,7 +33,7 @@ export const SERVICES = [
     id: "airport-transfers",
     name: "Airport Transfers",
     tagline: "Meet & greet included",
-    icon: IconPlaneArrival,
+    icon: IconBuildingAirport,
     isPrimary: false,
     page: "airport-transfers",
   },

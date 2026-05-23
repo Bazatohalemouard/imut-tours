@@ -1,8 +1,8 @@
 import {
-  IconWorld,
+  IconTrekking,
+  IconCarSuv,
   IconCar,
-  IconPlaneArrival,
-  IconMapPin,
+  IconBuildingAirport,
   IconBuildingEstate,
   IconIdBadge2,
   IconClockHour4,
@@ -46,8 +46,8 @@ export const SERVICES_LIST = [
     name: "Guided Safari & Cultural Tours",
     tagline: "Our signature experience",
     description:
-      "Our seasoned guides:naturalists, historians, and cultural storytellers; design each journey around your pace, your interests, and your sense of adventure. Whether you're tracking rare wildlife at dawn, sitting with a community elder at dusk, or simply absorbing a landscape that feels like the beginning of time, we make sure every moment is intentional. Choose from private, small-group, or family-oriented formats, all led by guides who treat knowledge-sharing as a craft.",
-    icon: IconWorld,
+      "We plan and lead tours that match what you actually want to do — not a fixed programme. Our guides are specialists in wildlife, local history, and culture, and they work around your pace and interests. Whether you're joining a small group or booking a private trip, every detail is arranged for you. All you need to do is show up.",
+    icon: IconTrekking,
     isPrimary: true,
     highlights: [
       "Private, small-group & family tours",
@@ -63,8 +63,8 @@ export const SERVICES_LIST = [
     name: "Car Rentals",
     tagline: "Go at your own pace",
     description:
-      "Freedom starts with the right vehicle. Our fleet is maintained to a standard that handles everything from smooth city boulevards to unpaved bush tracks without a second thought. Every car leaves clean, GPS-equipped, fully insured, and fuelled — ready the moment your journey begins. Prefer to drive yourself, or would rather sit back and let a professional handle the roads? Both options are available, and both come with the same commitment to reliability.",
-    icon: IconCar,
+      "Our vehicles are road-ready, fully insured, and suited to both urban driving and rough terrain. Choose to drive yourself on your own schedule, or travel with one of our drivers who knows the roads well. Cross-border permits are arranged on request.",
+    icon: IconCarSuv,
     isPrimary: false,
     highlights: [
       "Self-drive - full independence, your schedule",
@@ -80,8 +80,8 @@ export const SERVICES_LIST = [
     name: "Airport Transfers",
     tagline: "First impressions done right",
     description:
-      "The moment you land should feel like the beginning of something great, not a scramble for a cab. Our transfer team monitors your flight in real time, so whether you're early, delayed, or simply exhausted, someone is already waiting. You'll be greeted by name, assisted with luggage, and seated in a clean, air-conditioned vehicle within minutes of clearing arrivals. Drop-offs are scheduled with the same precision. We get you to the terminal with time to spare, never cutting it close.",
-    icon: IconPlaneArrival,
+      "We track your flight and have a driver at arrivals before you clear the gate — no waiting, no confusion. You'll be met by name, assisted with your bags, and on your way in a clean, air-conditioned vehicle within minutes. Departures are handled with the same reliability; we get you to the terminal on time, every time.",
+    icon: IconBuildingAirport,
     isPrimary: false,
     highlights: [
       "Named meet & greet at the arrivals gate",
@@ -96,8 +96,8 @@ export const SERVICES_LIST = [
     name: "Taxi & Cab Service",
     tagline: "Reliable rides, any time",
     description:
-      "Dependable ground transport shouldn't require guesswork. Our cab service runs on fixed, pre-agreed rates — no meters, no surge pricing, no awkward negotiation at the end of a long day. Whether you need a quick in-town ride, a scheduled early-morning pickup, or a point-to-point journey between destinations, the process is the same: tell us where and when, and we handle the rest. Book instantly via WhatsApp or through our team, and receive confirmation within minutes.",
-    icon: IconMapPin,
+      "Need a ride across town or a long-distance transfer between destinations? We operate on fixed, pre-agreed rates with no surge pricing or hidden charges. Book in advance or on short notice via WhatsApp or Email, and receive confirmation within minutes. Our drivers are punctual, professional, and familiar with the area.",
+    icon: IconCar,
     isPrimary: false,
     highlights: [
       "In-city rides — quick, on-demand pickups",
@@ -109,10 +109,10 @@ export const SERVICES_LIST = [
   },
   {
     id: "hotels",
-    name: "Accomodation",
+    name: "Accommodation",
     tagline: "Rest as well as you explored",
     description:
-      "Where you sleep shapes how you travel. We source and book accommodation across the full spectrum. From intimate wilderness lodges and design-forward boutique hotels to reliable mid-range properties and budget guesthouses that punch well above their price. As established partners with properties across the region, we regularly access rates, room categories, and availability that aren't listed publicly. Tell us your style and your ceiling, and we'll find the right fit. No decision fatigue, no booking surprises.",
+      "We source and book accommodation across all categories. From luxury lodges and boutique hotels to budget-friendly guesthouses. As established partners with properties across the region, we have access to rates and availability not always listed publicly. Tell us your preference and budget, and we'll handle the rest.",
     icon: IconBuildingEstate,
     isPrimary: false,
     highlights: [
@@ -130,7 +130,7 @@ export const SERVICES_LIST = [
     name: "Visa & Travel Advisory",
     tagline: "Paperwork handled, worries gone",
     description:
-      "Entry requirements change — sometimes with little notice. Our advisory team stays current so you don't have to second-guess a single form. From selecting the right visa category and walking you through the online application to flagging vaccination requirements and travel health considerations, we cover the administrative side of your trip thoroughly. If anything changes between booking and departure, we'll notify you and help you adapt. Travel light on worry; we carry that part.",
+      "Entry requirements vary by destination and change without much notice. Our team stays up to date so you don't have to. We guide you through the right visa category, the application process, and any health or documentation requirements before you travel. If anything changes closer to your departure date, we'll let you know and help you sort it.",
     icon: IconIdBadge2,
     isPrimary: false,
     highlights: [
@@ -143,7 +143,6 @@ export const SERVICES_LIST = [
     ],
   },
 ];
-
 // ─── Trust signals ────────────────────────────────────────────────────────────
 export const TRUST_STATS = [
   { num: "1,200+", label: "Trips completed", icon: "ti-route" },

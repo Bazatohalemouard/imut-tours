@@ -1,5 +1,8 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import {
+  IconTrekking,
+} from "@tabler/icons-react";
 import { Spinner } from "../Spinner";
 import { SERVICES, HERO_COPY } from "../../api/datasets/herodata";
 
@@ -556,7 +559,10 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
                 e.currentTarget.style.transform = "translateY(0)";
               }}
             >
-              <i className="ti ti-calendar-event" aria-hidden="true" style={{ fontSize: 16 }} />
+               <IconTrekking
+                aria-hidden="true"
+                className="h-[18px] w-[18px]"
+              />
               {HERO_COPY.ctaPrimary}
             </button>
           </div>

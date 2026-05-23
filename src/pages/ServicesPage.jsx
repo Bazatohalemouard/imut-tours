@@ -354,7 +354,7 @@ const ServiceCard = ({ service, index, onContact, highlighted }) => {
           }}
         >
           <IconHandClick aria-hidden="true" style={{ width: 14, height: 14 }} />
-          {service.isPrimary ? "Book a Tour" : "Enquire Now"}
+          {service.isPrimary ? "Book a Tour" : "Reach Out"}
         </button>
       </div>
     </div>
