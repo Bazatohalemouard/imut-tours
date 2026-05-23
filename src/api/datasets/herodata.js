@@ -63,6 +63,6 @@ export const HERO_COPY = {
     "From guided safaris to airport pickups — we handle every detail so you travel without a worry. Trusted across Rwanda, Kenya, Uganda & beyond.",
   servicesLabel: "Our services",
   destinationsLabel: "Where do you want to go?",
-  ctaPrimary: "Plan My Trip",
+  ctaPrimary: "View Trips",
   ctaSecondary: "View All Services",
 };
