@@ -2,6 +2,7 @@ import { useState } from "react";
 import { colors } from "../theme/colors";
 import whatsappIcon from "../assets/icons/whatsapp.png";
 import rwandaFlag from "../assets/flags/rwanda.png";
+import southSudanFlag from "../assets/flags/south-sudan.png";
 import phoneIcon from "../assets/icons/phone.png";
 import locationIcon from "../assets/icons/location.png";
 import emailIcon from "../assets/icons/email.png";
@@ -57,6 +58,14 @@ export const ContactPage = () => {
       address: "KK 35 Ave, Kigali",
       phone: "+250 788 608 794",
       email: "intermut.rwanda7@gmail.com",
+    },
+    {
+      flag: southSudanFlag,
+      city: "Juba",
+      country: "South Sudan",
+      address: "Juba Town",
+      phone: "+211 (0)917 876 617",
+      email: null,
     },
   ];
 
@@ -312,17 +321,19 @@ export const ContactPage = () => {
                     { icon: locationIcon, val: o.address },
                     { icon: phoneIcon, val: o.phone },
                     { icon: emailIcon, val: o.email },
-                  ].map((item, i) => (
-                    <div
-                      key={i}
-                      style={{ display: "flex", gap: 10, alignItems: "flex-start" }}
-                    >
-                      <img src={item.icon} alt="globe" width={18} height={14} />
-                      <span style={{ fontSize: 14, color: colors.textMuted }}>
-                        {item.val}
-                      </span>
-                    </div>
-                  ))}
+                  ].map((item, i) => {
+                    if (!item.val) return null;
+                    return (
+                      <div
+                        key={i}
+                        style={{ display: "flex", gap: 10, alignItems: "flex-start" }}
+                      >
+                        <img src={item.icon} alt="globe" width={18} height={14} />
+                        <span style={{ fontSize: 14, color: colors.textMuted }}>
+                          {item.val}
+                        </span>
+                      </div>)
+                  })}
                 </div>
               </div>
             ))}
