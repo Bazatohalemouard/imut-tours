@@ -110,7 +110,7 @@ export const Hero = ({ countries, countriesLoading, setPage, fetchCountryFlag })
                     {/* Headline */}
                     <h1
                         style={{
-                            fontFamily: "'Montserrat', sans-serif",
+                            fontFamily: "'Nunito', sans-serif",
                             fontSize: "clamp(36px, 7vw, 68px)",
                             fontWeight: 900,
                             lineHeight: 1.05,
@@ -124,7 +124,7 @@ export const Hero = ({ countries, countriesLoading, setPage, fetchCountryFlag })
                         <em style={{
                             color: "#E8B84B",
                             fontStyle: "italic",
-                            fontFamily: "'Dancing Script', cursive",
+                            fontFamily: "'Telma', cursive",
                             fontWeight: 700
                         }}>Unforgettable Experiences Await</em>
                         <br />
@@ -226,7 +226,7 @@ export const Hero = ({ countries, countriesLoading, setPage, fetchCountryFlag })
                                     )}
                                     <div
                                         style={{
-                                            fontFamily: "'Montserrat', sans-serif",
+                                            fontFamily: "'Nunito', sans-serif",
                                             fontSize: "clamp(22px, 4vw, 32px)",
                                             fontWeight: 700,
                                             color: "#fff",
@@ -292,7 +292,7 @@ export const Hero = ({ countries, countriesLoading, setPage, fetchCountryFlag })
                                 >
                                     <div
                                         style={{
-                                            fontFamily: "'Montserrat', sans-serif",
+                                            fontFamily: "'Nunito', sans-serif",
                                             fontSize: 20,
                                             fontWeight: 700,
                                             color: "#E8B84B",

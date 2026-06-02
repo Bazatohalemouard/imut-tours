@@ -56,7 +56,7 @@ export const OurDestinations = ({ countries, countriesLoading, fetchCountryFlag 
                         style={{
                             fontSize: "clamp(28px, 4vw, 44px)",
                             color: "#fff",
-                            fontFamily: "'Montserrat', sans-serif",
+                            fontFamily: "'Nunito', sans-serif",
                             fontWeight: 700,
                             lineHeight: 1.2,
                             margin: "0 0 20px",
@@ -114,7 +114,7 @@ export const OurDestinations = ({ countries, countriesLoading, fetchCountryFlag 
                                     fontSize: 18,
                                     fontWeight: 700,
                                     color: "#fff",
-                                    fontFamily: "'Montserrat', sans-serif",
+                                    fontFamily: "'Nunito', sans-serif",
                                     marginBottom: 4,
                                 }}
                             >

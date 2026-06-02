@@ -124,7 +124,7 @@ export const AboutPage = ({ setPage }) => {
           style={{
             fontSize: "clamp(32px, 5vw, 60px)",
             color: "#fff",
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: "'Nunito', sans-serif",
             fontWeight: 700,
             margin: "0 0 20px",
           }}
@@ -163,7 +163,7 @@ export const AboutPage = ({ setPage }) => {
               style={{
                 fontSize: "clamp(26px, 3.5vw, 40px)",
                 color: colors.brand,
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: "'Nunito', sans-serif",
                 fontWeight: 700,
                 margin: "0 0 20px",
               }}
@@ -240,7 +240,7 @@ export const AboutPage = ({ setPage }) => {
                     fontSize: "clamp(28px, 4vw, 40px)",
                     fontWeight: 700,
                     color: colors.brand,
-                    fontFamily: "'Montserrat', sans-serif",
+                    fontFamily: "'Nunito', sans-serif",
                   }}
                 >
                   {s.val}
@@ -280,7 +280,7 @@ export const AboutPage = ({ setPage }) => {
               style={{
                 fontSize: "clamp(26px, 4vw, 40px)",
                 color: colors.brand,
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: "'Nunito', sans-serif",
                 fontWeight: 700,
                 margin: 0,
               }}
@@ -312,7 +312,7 @@ export const AboutPage = ({ setPage }) => {
                     fontWeight: 700,
                     color: colors.brand,
                     margin: "0 0 10px",
-                    fontFamily: "'Montserrat', sans-serif",
+                    fontFamily: "'Nunito', sans-serif",
                   }}
                 >
                   {v.title}
@@ -352,7 +352,7 @@ export const AboutPage = ({ setPage }) => {
             <h2 style={{
               fontSize: "clamp(26px, 4vw, 40px)",
               color: colors.brand,
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'Nunito', sans-serif",
               fontWeight: 700,
               margin: 0,
             }}>
@@ -405,7 +405,7 @@ export const AboutPage = ({ setPage }) => {
                   fontSize: 17,
                   fontWeight: 700,
                   color: colors.brand,
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: "'Nunito', sans-serif",
                   margin: "0 0 4px",
                 }}>
                   {member.name}

@@ -83,7 +83,7 @@ export const TripsPage = ({ setPage }) => {
             style={{
               fontSize: "clamp(32px, 5vw, 56px)",
               color: "#fff",
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'Nunito', sans-serif",
               fontWeight: 700,
               margin: "0 0 28px",
             }}

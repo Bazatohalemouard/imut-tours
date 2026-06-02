@@ -104,7 +104,7 @@ export const ContactPage = () => {
           style={{
             fontSize: "clamp(30px, 5vw, 52px)",
             color: "#fff",
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: "'Nunito', sans-serif",
             fontWeight: 700,
             margin: "0 0 14px",
           }}
@@ -143,7 +143,7 @@ export const ContactPage = () => {
               fontSize: 24,
               fontWeight: 700,
               color: colors.brand,
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'Nunito', sans-serif",
               margin: "0 0 28px",
             }}
           >
@@ -168,7 +168,7 @@ export const ContactPage = () => {
                   fontSize: 22,
                   fontWeight: 700,
                   color: colors.brand,
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: "'Nunito', sans-serif",
                   margin: "0 0 10px",
                 }}
               >
@@ -284,7 +284,7 @@ export const ContactPage = () => {
               fontSize: 24,
               fontWeight: 700,
               color: colors.brand,
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'Nunito', sans-serif",
               margin: "0 0 28px",
             }}
           >
@@ -318,7 +318,7 @@ export const ContactPage = () => {
                         fontSize: 17,
                         fontWeight: 700,
                         color: colors.brand,
-                        fontFamily: "'Montserrat', sans-serif",
+                        fontFamily: "'Nunito', sans-serif",
                       }}
                     >
                       {o.city}, {o.country}

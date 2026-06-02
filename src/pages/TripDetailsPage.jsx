@@ -58,7 +58,7 @@ const SectionTitle = ({ children }) => (
       fontSize: "clamp(20px, 3vw, 26px)",
       fontWeight: 700,
       color: colors.brand,
-      fontFamily: "'Montserrat', sans-serif",
+      fontFamily: "'Nunito', sans-serif",
       margin: "0 0 20px",
       paddingBottom: 12,
       borderBottom: `2px solid ${colors.sand}`,
@@ -178,7 +178,7 @@ export const TripDetailsPage = ({ setPage }) => {
           <h1
             style={{
               fontSize: "clamp(26px, 5vw, 52px)",
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'Nunito', sans-serif",
               fontWeight: 700, color: "#fff",
               margin: "0 0 6px", lineHeight: 1.15,
               textShadow: "0 2px 12px rgba(0,0,0,0.3)",
@@ -230,7 +230,7 @@ export const TripDetailsPage = ({ setPage }) => {
             }}
           >
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
-              <span style={{ fontSize: "clamp(32px, 5vw, 44px)", fontWeight: 800, color: colors.brand, fontFamily: "'Montserrat', sans-serif", lineHeight: 1 }}>
+              <span style={{ fontSize: "clamp(32px, 5vw, 44px)", fontWeight: 800, color: colors.brand, fontFamily: "'Nunito', sans-serif", lineHeight: 1 }}>
                 {trip.rating}
               </span>
               <StarRating value={trip.rating} size={16} />
@@ -326,10 +326,10 @@ export const TripDetailsPage = ({ setPage }) => {
                     }}
                   >
                     <span style={{ fontSize: 11, fontWeight: 700, color: colors.goldLight, letterSpacing: "0.1em", textTransform: "uppercase" }}>Day</span>
-                    <span style={{ fontSize: 32, fontWeight: 800, color: "#fff", fontFamily: "'Montserrat', sans-serif", lineHeight: 1 }}>{item.day}</span>
+                    <span style={{ fontSize: 32, fontWeight: 800, color: "#fff", fontFamily: "'Nunito', sans-serif", lineHeight: 1 }}>{item.day}</span>
                   </div>
                   <div style={{ padding: "20px 22px" }}>
-                    <h3 style={{ fontSize: 17, fontWeight: 700, color: colors.brand, fontFamily: "'Montserrat', sans-serif", margin: "0 0 8px" }}>
+                    <h3 style={{ fontSize: 17, fontWeight: 700, color: colors.brand, fontFamily: "'Nunito', sans-serif", margin: "0 0 8px" }}>
                       {item.title}
                     </h3>
                     <p style={{ fontSize: 14.5, color: colors.textMuted, lineHeight: 1.7, margin: 0 }}>
@@ -392,7 +392,7 @@ export const TripDetailsPage = ({ setPage }) => {
                 Duration
               </p>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
-                <span style={{ fontSize: "clamp(30px, 5vw, 40px)", fontWeight: 800, color: "#fff", fontFamily: "'Montserrat', sans-serif", lineHeight: 1 }}>
+                <span style={{ fontSize: "clamp(30px, 5vw, 40px)", fontWeight: 800, color: "#fff", fontFamily: "'Nunito', sans-serif", lineHeight: 1 }}>
                   {trip.duration}
                 </span>
               </div>

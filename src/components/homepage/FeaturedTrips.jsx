@@ -34,7 +34,7 @@ export const FeaturedTrips = ({ trips, tripsLoading, setPage }) => {
                             style={{
                                 fontSize: "clamp(26px, 4vw, 40px)",
                                 color: colors.brand,
-                                fontFamily: "'Montserrat', sans-serif",
+                                fontFamily: "'Nunito', sans-serif",
                                 fontWeight: 700,
                                 margin: 0,
                             }}

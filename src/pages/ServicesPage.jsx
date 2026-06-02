@@ -13,7 +13,7 @@ import { SERVICES_LIST, SERVICES_COPY, PROMISE_CARDS } from "../api/datasets/ser
 
 // ─── Keyframe injection ───────────────────────────────────────────────────────
 const STYLES = `
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap');
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
@@ -299,7 +299,7 @@ const ServiceCard = ({ service, index, onContact, highlighted }) => {
 
         {/* Name */}
         <div style={{
-          fontFamily: "'Montserrat', sans-serif", fontSize: 18, fontWeight: 700,
+          fontFamily: "'Nunito', sans-serif", fontSize: 18, fontWeight: 700,
           color: "#FFFFFF", lineHeight: 1.25, marginBottom: 4,
         }}>
           {service.name}
@@ -308,7 +308,7 @@ const ServiceCard = ({ service, index, onContact, highlighted }) => {
         {/* Tagline — bumped size, weight and contrast */}
         <div style={{
           fontSize: 13, fontWeight: 600, letterSpacing: "0.02em",
-          fontFamily: "'Dancing Script', cursive",
+          fontFamily: "'Telma', cursive",
           color: "#F0C060", marginBottom: 14,
         }}>
           {service.tagline}
@@ -386,7 +386,7 @@ const TrustBar = ({ stats }) => (
           style={{ fontSize: 20, color: "#E8B84B", display: "block", marginBottom: 10 }}
         />
         <div style={{
-          fontFamily: "'Montserrat', sans-serif",
+          fontFamily: "'Nunito', sans-serif",
           fontSize: 26,
           fontWeight: 900,
           color: "#fff",
@@ -506,7 +506,7 @@ const ContactSection = ({ copy, prefillService }) => {
           <h2
             id="contact-heading"
             style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'Nunito', sans-serif",
               fontSize: "clamp(26px, 4vw, 42px)",
               fontWeight: 900,
               lineHeight: 1.08,
@@ -520,7 +520,7 @@ const ContactSection = ({ copy, prefillService }) => {
               style={{
                 color: "#E8B84B",
                 fontStyle: "italic",
-                fontFamily: "'Dancing Script', cursive",
+                fontFamily: "'Telma', cursive",
               }}
             >
               {copy.contactHeadline.split(" ").slice(-2).join(" ")}
@@ -789,7 +789,7 @@ export const ServicesPage = ({ setPage }) => {
         <div style={{ marginBottom: 56, animation: "fadeUp 0.45s ease both" }}>
 
           <h1 style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: "'Nunito', sans-serif",
             fontSize: "clamp(36px, 6.5vw, 64px)",
             fontWeight: 900,
             lineHeight: 1.04,
@@ -802,7 +802,7 @@ export const ServicesPage = ({ setPage }) => {
             <em style={{
               color: "#E8B84B",
               fontStyle: "italic",
-              fontFamily: "'Dancing Script', cursive",
+              fontFamily: "'Telma', cursive",
               fontWeight: 700,
             }}>
               {SERVICES_COPY.headlineEm}

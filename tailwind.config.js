@@ -21,7 +21,7 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Montserrat"', 'sans-serif'],
+        display: ['"Nunito"', 'sans-serif'],
         body: ['"DM Sans"', 'sans-serif'],
         mono: ['"DM Mono"', 'monospace'],
       },

@@ -28,7 +28,7 @@ export const Stats = ({countries = []}) => {
                                 fontSize: "clamp(24px, 4vw, 36px)",
                                 fontWeight: 700,
                                 color: colors.goldLight,
-                                fontFamily: "'Montserrat', sans-serif",
+                                fontFamily: "'Nunito', sans-serif",
                             }}
                         >
                             {s.value}

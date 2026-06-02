@@ -217,7 +217,7 @@ const CountryCard = ({ country, animKey, fetchCountryFlag, setPage }) => (
             style={{ flexShrink: 0, borderRadius: 3, objectFit: "cover" }}
           />
           <div style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: "'Nunito', sans-serif",
             fontSize: "clamp(20px,4vw,30px)",
             fontWeight: 700,
             color: "#fff",
@@ -286,7 +286,7 @@ const CountryCard = ({ country, animKey, fetchCountryFlag, setPage }) => (
           textAlign: "center",
         }}>
           <div style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: "'Nunito', sans-serif",
             fontSize: 20,
             fontWeight: 700,
             color: "#E8B84B",
@@ -481,7 +481,7 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
 
           {/* ── Headline ──────────────────────────────────────────────────── */}
           <h1 style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: "'Nunito', sans-serif",
             fontSize: "clamp(36px,7vw,68px)",
             fontWeight: 900,
             lineHeight: 1.05,
