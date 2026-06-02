@@ -1,0 +1,262 @@
+# ==============================================================
+# robots.txt — imut-tours.com
+# Generated: 2026-06-02
+# Purpose: Control crawler access, protect non-public paths,
+#          maximise crawl budget on revenue-generating pages
+# Docs: https://developers.google.com/search/docs/crawling-indexing/robots/intro
+# ==============================================================
+
+# --------------------------------------------------------------
+# GOOGLEBOT — Primary search crawler
+# Full access to all public content
+# --------------------------------------------------------------
+User-agent: Googlebot
+Allow: /
+Allow: /trips/
+Allow: /services/
+Allow: /about
+Allow: /contact
+
+# Block admin, staging, and internal utility paths
+Disallow: /admin/
+Disallow: /admin-panel/
+Disallow: /dashboard/
+Disallow: /login
+Disallow: /logout
+Disallow: /register
+Disallow: /user/
+Disallow: /account/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /order-confirmation/
+Disallow: /thank-you/
+Disallow: /.env
+Disallow: /config/
+Disallow: /includes/
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /logs/
+
+# Block URL parameters that create duplicate content
+Disallow: /*?session=
+Disallow: /*?ref=
+Disallow: /*?utm_
+Disallow: /*?fbclid=
+Disallow: /*?gclid=
+Disallow: /*?print=
+Disallow: /*?preview=
+
+# Block search result pages (avoid thin/duplicate content indexing)
+Disallow: /search
+Disallow: /search?
+Disallow: /*?s=
+Disallow: /*?q=
+
+# Block pagination that doesn't add SEO value
+# (Comment this out if your paginated blog/tour pages have unique content)
+# Disallow: /*?page=
+
+# --------------------------------------------------------------
+# GOOGLEBOTIMAGE — Allow image indexing (important for gallery & tours)
+# Images in search results drive travel-sector traffic
+# --------------------------------------------------------------
+User-agent: Googlebot-Image
+Allow: /trips/
+Allow: /services/
+Disallow: /admin/
+Disallow: /src/
+Disallow: /gallery/
+Disallow: /images/
+Disallow: /assets/images/
+
+# --------------------------------------------------------------
+# BINGBOT — Powers Bing, Yahoo, and Microsoft Copilot results
+# Identical rules to Googlebot for consistency
+# --------------------------------------------------------------
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /admin-panel/
+Disallow: /dashboard/
+Disallow: /login
+Disallow: /logout
+Disallow: /register
+Disallow: /user/
+Disallow: /account/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /order-confirmation/
+Disallow: /thank-you/
+Disallow: /.env
+Disallow: /config/
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /*?session=
+Disallow: /*?ref=
+Disallow: /*?utm_
+Disallow: /*?fbclid=
+Disallow: /*?print=
+Disallow: /search
+Disallow: /search?
+
+# --------------------------------------------------------------
+# YANDEX (Russia / Eastern Europe)
+# --------------------------------------------------------------
+User-agent: Yandex
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /login
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /src/
+Disallow: /node_modules/
+
+# --------------------------------------------------------------
+# AI CRAWLERS — Allow indexing for LLM / AI tool visibility
+# These feed ChatGPT Browse, Claude, Perplexity, Copilot, etc.
+# Allowing these increases your chance of appearing in AI answers
+# about East Africa tours
+# --------------------------------------------------------------
+
+# OpenAI (ChatGPT, Bing AI integration)
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /login
+Disallow: /src/
+
+# OpenAI Link Preview Bot
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin/
+Disallow: /cart/
+Disallow: /checkout/
+
+# Google AI (Gemini, AI Overviews)
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin/
+Disallow: /cart/
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+Disallow: /admin/
+
+# Apple (Siri, Apple Intelligence)
+User-agent: Applebot
+Allow: /
+
+# Common Crawl (used by many AI training datasets)
+User-agent: CCBot
+Allow: /
+Disallow: /admin/
+Disallow: /src/
+
+# --------------------------------------------------------------
+# SOCIAL MEDIA PREVIEW BOTS — Allow for rich link previews
+# When your tours are shared on WhatsApp, Twitter, Facebook etc.
+# --------------------------------------------------------------
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+# --------------------------------------------------------------
+# PRICE / CONTENT SCRAPERS — Block to protect content & bandwidth
+# These don't contribute to your SEO and consume crawl budget
+# --------------------------------------------------------------
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: serpstatbot
+Disallow: /
+
+# --------------------------------------------------------------
+# CATCH-ALL — Default rule for any unlisted crawler
+# Permissive by default to avoid blocking legitimate search bots
+# --------------------------------------------------------------
+User-agent: *
+Allow: /
+
+# Block universal sensitive paths for all crawlers
+Disallow: /admin/
+Disallow: /admin-panel/
+Disallow: /login
+Disallow: /register
+Disallow: /checkout/
+Disallow: /.env
+Disallow: /.git/
+Disallow: /.htaccess
+Disallow: /wp-config.php
+Disallow: /config/
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /logs/
+
+# ==============================================================
+# SITEMAP DECLARATION
+# Always declare your sitemap here — crawlers check this file
+# first and use it to discover all your URLs
+# ==============================================================
+Sitemap: https://imut-tours.com/sitemap.xml
+
+# ==============================================================
+# CRAWL DELAY (optional — remove if hosting is fast/scalable)
+# Uncomment the line below ONLY if your server is slow or shared
+# hosting that struggles under heavy crawler load.
+# 10 = wait 10 seconds between requests. Too high = slower indexing.
+# Most modern hosts don't need this.
+# ==============================================================
+# Crawl-delay: 10
+
+# ==============================================================
+# END OF FILE
+# Last updated: 2026-06-02
+# Re-submit sitemap in Google Search Console after any changes
+# ==============================================================

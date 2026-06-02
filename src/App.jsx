@@ -68,7 +68,7 @@ export default function App() {
           <Route path="/" element={<HomePage setPage={setPage} />} />
           <Route path="/locations" element={<LocationsPage setPage={setPage} />} />
           <Route path="/trips" element={<TripsPage setPage={setPage} />} />
-          <Route path="/trips/:id" element={<TripDetailsPage setPage={setPage} />} />
+          <Route path="/trips/:tripId" element={<TripDetailsPage setPage={setPage} />} />
           <Route path="/about" element={<AboutPage setPage={setPage} />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/services" element={<ServicesPage setPage={setPage} />} />

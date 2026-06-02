@@ -1,8 +1,8 @@
 // ─── Trip Card Component ──────────────────────────────────────────────────────
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { colors } from "../theme/colors";
-import { StarRating } from "./StarRating";
 import { Badge } from "./Badge";
 import rwandaFlag from "../assets/flags/rwanda.png";
 import ugandaFlag from "../assets/flags/uganda.png";
@@ -14,9 +14,10 @@ import clockIcon from "../assets/icons/clock.png";
 import groupIcon from "../assets/icons/group-users.png";
 import difficultyIcon from "../assets/icons/challenge.png";
 
-export const TripCard = ({ trip, setPage, setSelectedTrip }) => {
+export const TripCard = ({ trip }) => {
   const [hovered, setHovered] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const navigate = useNavigate();
 
   const fetchCountryFlag = (country) => {
     if (country === "Rwanda") return rwandaFlag;
@@ -43,8 +44,8 @@ export const TripCard = ({ trip, setPage, setSelectedTrip }) => {
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onClick={() => setPage("trip-detail", trip)}
-      onKeyDown={(e) => e.key === "Enter" && setPage("trips")}
+      onClick={() => navigate(`/trips/${trip.id}`)}
+      onKeyDown={(e) => e.key === "Enter" && navigate(`/trips/${trip.id}`)}
     >
       <div style={{ position: "relative", paddingBottom: "60%", overflow: "hidden" }}>
         <img
@@ -173,16 +174,17 @@ export const TripCard = ({ trip, setPage, setSelectedTrip }) => {
             { icon: clockIcon, val: trip.duration },
             { icon: groupIcon, val: `${trip.groupSize} pax` },
             { icon: difficultyIcon, val: trip.difficulty },
-          ].map((m, i) => (<>
-            <img
-              src={m.icon}
-              alt={m.val}
-              style={{ width: 16, height: 16, borderRadius: "50%", objectFit: "cover" }}
-            />
-            <span key={i} style={{ fontSize: 12, color: colors.textMuted }}>
-              {m.val}
-            </span>
-          </>
+          ].map((m, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <img
+                src={m.icon}
+                alt={m.val}
+                style={{ width: 16, height: 16, borderRadius: "50%", objectFit: "cover" }}
+              />
+              <span style={{ fontSize: 12, color: colors.textMuted }}>
+                {m.val}
+              </span>
+            </div>
           ))}
         </div>
         <div
@@ -232,6 +234,5 @@ TripCard.propTypes = {
     rating: PropTypes.number,
     reviews: PropTypes.number,
   }).isRequired,
-  setPage: PropTypes.func.isRequired,
 };
 
