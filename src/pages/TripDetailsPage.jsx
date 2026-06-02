@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useSEO, buildTripSchema } from "../utils/useSEO";
 import PropTypes from "prop-types";
 import { colors } from "../theme/colors";
 import { StarRating } from "../components/StarRating";
@@ -77,6 +78,17 @@ export const TripDetailsPage = ({ setPage }) => {
 
   const { state } = useLocation();
   const trip = state?.payload;
+
+  useSEO({
+    title: trip ? `${trip.title} | IMUT Tours & Travel` : "Trip Details | IMUT Tours & Travel",
+    description: trip?.description,
+    schemas: trip ? [buildTripSchema(trip)] : [],
+    breadcrumbs: trip ? [
+      { name: "Home", url: "/" },
+      { name: "Trips", url: "/trips" },
+      { name: trip.name, url: `/trips/${trip.id}` },
+    ] : [],
+  });
 
   if (!trip) {
     return (

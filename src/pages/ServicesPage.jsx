@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useSEO } from "../utils/useSEO";
 import {
   IconMail,
   IconPhone,
@@ -717,6 +718,15 @@ export const ServicesPage = ({ setPage }) => {
   const contactRef = useRef(null);
 
   const visibleServices = SERVICES_LIST;
+
+  useSEO({
+    title: "Our Services | Safaris, Transfers & More | IMUT Tours & Travel",
+    description: "Explore guided safaris, car hire, airport transfers, accommodation and visa support across East Africa.",
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+      { name: "Services", url: "/services" },
+    ],
+  });
 
   const handleContact = (serviceName) => {
     setContactPrefill(serviceName);

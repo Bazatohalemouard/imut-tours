@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { useSEO } from "../utils/useSEO";
 import { fetchTrips, fetchCountries } from "../api/APIHandler";
 import { colors } from "../theme/colors";
 import { Spinner } from "../components/Spinner";
@@ -13,6 +14,14 @@ export const TripsPage = ({ setPage }) => {
   const [category, setCategory] = useState("All");
   const [countries, setCountries] = useState([]);
   const [countriesLoading, setCountriesLoading] = useState(true);
+  useSEO({
+    title: "Trips | IMUT Tours & Travel",
+    description: "Explore our range of exciting trips and safaris across East Africa. Find the perfect adventure for you.",
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+      { name: "Trips", url: "/trips" },
+    ],
+  });
 
   useEffect(() => {
     fetchTrips().then((data) => {

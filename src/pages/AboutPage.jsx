@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { colors } from "../theme/colors";
+import { useSEO, buildOrganizationSchema, buildWebPageSchema } from "../utils/useSEO";
 import conservationIcon from "../assets/icons/forest-conservation.png";
 import communityIcon from "../assets/icons/teamwork.png";
 import authenticIcon from "../assets/icons/authenticity.png";
@@ -12,6 +13,19 @@ import phoneIcon from "../assets/icons/phone.png";
 
 // ─── About Page ───────────────────────────────────────────────────────────────
 export const AboutPage = ({ setPage }) => {
+  useSEO({
+    title: "About Us | IMUT Tours & Travel",
+    description: "Founded in Kigali in 2014, IMUT Tours leads authentic safaris across Rwanda and Uganda.",
+    schemas: [
+      buildOrganizationSchema(),
+      buildWebPageSchema({ name: "About Us", description: "Founded in Kigali in 2014, IMUT Tours leads authentic safaris across Rwanda and Uganda.", path: "/about" }),
+    ],
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+      { name: "About", url: "/about" },
+    ],
+  });
+
   const team = [
     {
       name: "Jean Bosco Nshimiyimana",

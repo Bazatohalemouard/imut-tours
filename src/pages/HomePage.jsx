@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useSEO } from "../utils/useSEO";
 import { fetchTrips, fetchCountries } from "../api/APIHandler";
 import { Stats } from "../components/homepage/Stats";
 import rwandaFlag from "../assets/flags/rwanda.png";
@@ -20,6 +21,13 @@ export const HomePage = ({ setPage }) => {
   const [tripsLoading, setTripsLoading] = useState(true);
   const [countries, setCountries] = useState([]);
   const [countriesLoading, setCountriesLoading] = useState(true);
+  useSEO({
+    title: "Home | IMUT Tours & Travel",
+    description: "Discover unforgettable East African adventures with IMUT Tours & Travel. From thrilling safaris to cultural immersions, we handle every detail for your perfect trip.",
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+    ],
+  });
 
   const fetchCountryFlag = (country) => {
     if (country === "Rwanda") return rwandaFlag;

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { colors } from "../theme/colors";
+import { useSEO } from "../utils/useSEO";
 import whatsappIcon from "../assets/icons/whatsapp.png";
 import rwandaFlag from "../assets/flags/rwanda.png";
 import southSudanFlag from "../assets/flags/south-sudan.png";
@@ -24,6 +25,14 @@ export const ContactPage = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  useSEO({
+    title: "Contact Us | IMUT Tours & Travel",
+    description: "Get in touch with our team in Kigali. We reply within 24 hours.",
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+      { name: "Contact", url: "/contact" },
+    ],
+  });
 
   const handleChange = (field, val) => setForm((f) => ({ ...f, [field]: val }));
 
