@@ -21,7 +21,6 @@ export default function App() {
       about: "/about",
       contact: "/contact",
       services: "/services",
-      "trip-detail": payload ? `/trips/${payload.id}` : "/trips",
     };
 
     if (payload) {
