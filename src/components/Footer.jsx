@@ -30,8 +30,7 @@ export const Footer = ({ setPage }) => (
               maxWidth: 260,
             }}
           >
-            Crafting unforgettable East African adventures since 2014. Gorilla
-            treks, safaris, and beyond.
+            Crafting unforgettable Rwandan adventures, from gorilla treks to immersive safaris and beyond across East Africa.
           </p>
         </div>
 

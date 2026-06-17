@@ -15,10 +15,10 @@ import phoneIcon from "../assets/icons/phone.png";
 export const AboutPage = ({ setPage }) => {
   useSEO({
     title: "About Us | IMUT Tours & Travel",
-    description: "Founded in Kigali in 2014, IMUT Tours leads authentic safaris across Rwanda and Uganda.",
+    description: "IMUT Tours leads authentic safaris across Rwanda, with expert-guided tours extending into Uganda, Kenya, Tanzania, Burundi, and South Sudan.",
     schemas: [
       buildOrganizationSchema(),
-      buildWebPageSchema({ name: "About Us", description: "Founded in Kigali in 2014, IMUT Tours leads authentic safaris across Rwanda and Uganda.", path: "/about" }),
+      buildWebPageSchema({ name: "About Us", description: "IMUT Tours leads authentic safaris across Rwanda, with expert-guided tours extending into Uganda, Kenya, Tanzania, Burundi, and South Sudan.", path: "/about" }),
     ],
     breadcrumbs: [
       { name: "Home", url: "/" },
@@ -117,7 +117,7 @@ export const AboutPage = ({ setPage }) => {
               textTransform: "uppercase",
             }}
           >
-            Est. 2014 · Kigali, Rwanda
+          Kigali, Rwanda
           </span>
         </div>
         <h1
@@ -141,7 +141,7 @@ export const AboutPage = ({ setPage }) => {
           }}
         >
           IMUT Tours was born from a simple belief: East Africa's wild places
-          deserve to be shared — responsibly, authentically, and with deep
+          deserve to be shared responsibly, authentically, and with deep
           respect for the communities and creatures that call them home.
         </p>
       </div>
@@ -178,10 +178,9 @@ export const AboutPage = ({ setPage }) => {
                 margin: "0 0 16px",
               }}
             >
-              IMUT — International Marathon United Technology — began as a
-              logistics company. But our hearts were always in the wild. In
-              2014, we launched IMUT Tours as a specialist division dedicated
-              solely to authentic East African adventures.
+              IMUT stands for International Marathon United Technology, a name rooted in our origins as a logistics company.
+              Our hearts, though, were always drawn to the wild. That passion led us to create IMUT Tours, a specialist division dedicated to authentic East African adventures.
+
             </p>
             <p
               style={{
@@ -191,10 +190,7 @@ export const AboutPage = ({ setPage }) => {
                 margin: "0 0 24px",
               }}
             >
-              Today, we're proud to operate across Rwanda and Uganda, partnering
-              with national parks, community lodges, and conservation
-              organizations to deliver experiences that are as meaningful as
-              they are unforgettable.
+              While Rwanda remains the heart of what we do, our guides also lead tours through Uganda, Kenya, Tanzania, Burundi, and South Sudan, bringing the same depth of local knowledge and care to every region we cover.
             </p>
             <button
               onClick={() => setPage("contact")}

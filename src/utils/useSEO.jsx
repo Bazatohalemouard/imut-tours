@@ -153,7 +153,6 @@ export function buildOrganizationSchema() {
     "url":        SITE.url,
     "telephone":  SITE.phone,
     "email":      SITE.email,
-    "foundingDate": "2014",
     "address": {
       "@type":           "PostalAddress",
       "addressCountry":  SITE.address.country,
