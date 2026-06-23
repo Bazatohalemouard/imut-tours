@@ -252,7 +252,7 @@ const trips = [
         ],
         rating: 4.9,
         reviews: 52,
-        badge: "New",
+        badge: null,
     },
     {
         id: 110,
@@ -392,7 +392,7 @@ const trips = [
         ],
         rating: 4.6,
         reviews: 18,
-        badge: "New",
+        badge: null,
     },
     {
         id: 115,
@@ -418,7 +418,7 @@ const trips = [
         ],
         rating: 4.5,
         reviews: 22,
-        badge: "New",
+        badge: null,
     },
     {
         id: 116,
@@ -445,7 +445,7 @@ const trips = [
         ],
         rating: 4.7,
         reviews: 19,
-        badge: "New",
+        badge: null,
     },
     {
         id: 117,
@@ -472,7 +472,7 @@ const trips = [
         ],
         rating: 4.6,
         reviews: 27,
-        badge: "New",
+        badge: null,
     },
     {
         id: 118,
@@ -526,7 +526,7 @@ const trips = [
         ],
         rating: 4.7,
         reviews: 21,
-        badge: "New",
+        badge: null,
     },
     {
         id: 120,
@@ -553,7 +553,7 @@ const trips = [
         ],
         rating: 4.6,
         reviews: 17,
-        badge: "New",
+        badge: null,
     },
     {
         id: 121,
@@ -588,7 +588,7 @@ const trips = [
         ],
         rating: 4.9,
         reviews: 14,
-        badge: "New",
+        badge: null,
     },
     {
         id: 122,
@@ -613,7 +613,7 @@ const trips = [
         ],
         rating: 4.6,
         reviews: 11,
-        badge: "New",
+        badge: null,
     },
     {
         id: 123,
@@ -638,7 +638,7 @@ const trips = [
         ],
         rating: 4.5,
         reviews: 9,
-        badge: "New",
+        badge: null,
     },
     {
         id: 124,
@@ -688,7 +688,7 @@ const trips = [
         ],
         rating: 4.7,
         reviews: 15,
-        badge: "New",
+        badge: null,
     },
     {
         id: 126,
@@ -713,7 +713,7 @@ const trips = [
         ],
         rating: 4.5,
         reviews: 13,
-        badge: "New",
+        badge: null,
     },
     {
         id: 127,
@@ -738,7 +738,7 @@ const trips = [
         ],
         rating: 4.6,
         reviews: 20,
-        badge: "New",
+        badge: null,
     },
     {
         id: 128,
@@ -764,7 +764,7 @@ const trips = [
         ],
         rating: 4.7,
         reviews: 16,
-        badge: "New",
+        badge: null,
     },
     // ============================================================
     // UGANDA  (15 trips)
@@ -1433,7 +1433,7 @@ const trips = [
         ],
         rating: 4.3,
         reviews: 19,
-        badge: "New",
+        badge: null,
     },
 ];
 
