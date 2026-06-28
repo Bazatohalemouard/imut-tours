@@ -64,6 +64,6 @@ export const HERO_COPY = {
     "From guided safaris to airport pickups, we handle every detail so you travel without a worry. Specialized in Rwanda adventures, communities and city tours; and East Africa destinations including Uganda, Kenya, Tanzania, Burundi, and South Sudan.",
   servicesLabel: "Our services",
   destinationsLabel: "Where do you want to go?",
-  ctaPrimary: "View Trips",
-  ctaSecondary: "View All Services",
+  ctaPrimary: "Book a Trip",
+  ctaSecondary: "Our Services",
 };

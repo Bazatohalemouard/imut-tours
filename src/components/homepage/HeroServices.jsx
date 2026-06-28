@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {
   IconTrekking,
 } from "@tabler/icons-react";
-import { Spinner } from "../Spinner";
 import { SERVICES, HERO_COPY } from "../../api/datasets/herodata";
 
 // ─── Keyframe injection (once, at module level) ───────────────────────────────
@@ -134,247 +133,6 @@ ServiceCard.propTypes = {
   setPage: PropTypes.func.isRequired,
 };
 
-/** Destination pill button */
-const DestinationPill = ({ country, isActive, onClick, fetchCountryFlag }) => {
-  const [hovered, setHovered] = useState(false);
-  const active = isActive || hovered;
-
-  return (
-    <button
-      role="tab"
-      aria-selected={isActive}
-      onClick={() => onClick(country.id)}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 7,
-        padding: "7px 15px",
-        borderRadius: 99,
-        border: active ? "1px solid #C8921A" : "1px solid rgba(200,146,42,0.28)",
-        background: active ? "#C8921A" : "rgba(200,146,42,0.06)",
-        color: active ? "#fff" : "rgba(255,255,255,0.6)",
-        fontSize: 13,
-        fontWeight: active ? 600 : 400,
-        cursor: "pointer",
-        whiteSpace: "nowrap",
-        transition: "all 0.18s ease",
-        fontFamily: "inherit",
-      }}
-    >
-      <img
-        src={fetchCountryFlag(country.name)}
-        alt={`${country.name} flag`}
-        width={18}
-        height={13}
-        style={{ borderRadius: 2, flexShrink: 0, objectFit: "cover" }}
-      />
-      {country.name}
-    </button>
-  );
-};
-
-DestinationPill.propTypes = {
-  country: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
-  isActive: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-  fetchCountryFlag: PropTypes.func.isRequired,
-};
-
-/** Country detail card shown below the destination pills */
-const CountryCard = ({ country, animKey, fetchCountryFlag, setPage }) => (
-  <div
-    key={animKey}
-    role="tabpanel"
-    style={{
-      background: "rgba(26,12,6,0.82)",
-      border: "1px solid rgba(200,146,42,0.55)",
-      borderRadius: 14,
-      padding: "clamp(18px,4vw,28px)",
-      animation: "fadeUp 0.28s ease",
-    }}
-  >
-    {/* Card header */}
-    <div style={{
-      display: "flex",
-      alignItems: "flex-start",
-      justifyContent: "space-between",
-      gap: 12,
-      marginBottom: 14,
-      flexWrap: "wrap",
-    }}>
-      <div>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <img
-            src={fetchCountryFlag(country.name)}
-            alt={`${country.name} flag`}
-            width={40}
-            height={28}
-            style={{ flexShrink: 0, borderRadius: 3, objectFit: "cover" }}
-          />
-          <div style={{
-            fontFamily: "'Nunito', sans-serif",
-            fontSize: "clamp(20px,4vw,30px)",
-            fontWeight: 700,
-            color: "#fff",
-            lineHeight: 1.1,
-          }}>
-            {country.name}
-          </div>
-        </div>
-        <div style={{ fontSize: 13, color: "#E8B84B", fontStyle: "italic", marginTop: 6 }}>
-          "{country.nickname}"
-        </div>
-      </div>
-
-      {/* Quick-book CTA inside card */}
-      <button
-        onClick={() => setPage("trips")}
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: 6,
-          background: "rgba(200,146,42,0.15)",
-          border: "1px solid rgba(200,146,42,0.45)",
-          borderRadius: 8,
-          padding: "8px 14px",
-          fontSize: 12,
-          fontWeight: 600,
-          color: "#E8B84B",
-          cursor: "pointer",
-          fontFamily: "inherit",
-          whiteSpace: "nowrap",
-          transition: "background 0.2s",
-          flexShrink: 0,
-        }}
-        onMouseEnter={e => e.currentTarget.style.background = "rgba(200,146,42,0.28)"}
-        onMouseLeave={e => e.currentTarget.style.background = "rgba(200,146,42,0.15)"}
-      >
-        <i className="ti ti-calendar-plus" aria-hidden="true" style={{ fontSize: 14 }} />
-        Book this destination
-      </button>
-    </div>
-
-    {/* Description */}
-    <p style={{
-      fontSize: 14,
-      color: "rgba(255,255,255,0.62)",
-      lineHeight: 1.7,
-      margin: "0 0 20px",
-      fontWeight: 300,
-    }}>
-      {country.desc}
-    </p>
-
-    {/* Stats */}
-    <div style={{
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fit, minmax(90px, 1fr))",
-      gap: 10,
-      marginBottom: 20,
-    }}>
-      {country.stats.map(s => (
-        <div key={s.label} style={{
-          background: "rgba(255,255,255,0.05)",
-          border: "1px solid rgba(255,255,255,0.07)",
-          borderRadius: 10,
-          padding: "12px 10px",
-          textAlign: "center",
-        }}>
-          <div style={{
-            fontFamily: "'Nunito', sans-serif",
-            fontSize: 20,
-            fontWeight: 700,
-            color: "#E8B84B",
-            lineHeight: 1,
-            marginBottom: 5,
-          }}>
-            {s.num}
-          </div>
-          <div style={{
-            fontSize: 10,
-            color: "rgba(255,255,255,0.42)",
-            textTransform: "uppercase",
-            letterSpacing: "0.07em",
-            lineHeight: 1.3,
-          }}>
-            {s.label}
-          </div>
-        </div>
-      ))}
-    </div>
-
-    {/* Experiences */}
-    <p className="hide-on-small" style={{
-      fontSize: 10,
-      textTransform: "uppercase",
-      letterSpacing: "0.1em",
-      color: "rgba(255,255,255,0.32)",
-      marginBottom: 10,
-      fontWeight: 500,
-    }}>
-      Experiences await
-    </p>
-    <div className="hide-on-small" style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
-      {country.experiences.map(exp => (
-        <button
-          key={exp}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 5,
-            background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.1)",
-            borderRadius: 8,
-            padding: "5px 11px",
-            fontSize: 12,
-            color: "rgba(255,255,255,0.7)",
-            cursor: "pointer",
-            fontFamily: "inherit",
-            transition: "all 0.25s ease",
-          }}
-          onMouseEnter={e => Object.assign(e.currentTarget.style, {
-            background: "rgba(200,146,42,0.18)",
-            borderColor: "rgba(200,146,42,0.6)",
-            color: "#E8B84B",
-            transform: "translateY(-2px)",
-          })}
-          onMouseLeave={e => Object.assign(e.currentTarget.style, {
-            background: "rgba(255,255,255,0.06)",
-            borderColor: "rgba(255,255,255,0.1)",
-            color: "rgba(255,255,255,0.7)",
-            transform: "translateY(0)",
-          })}
-          onClick={() => setPage("trips")}
-        >
-          <i className="ti ti-sparkles" aria-hidden="true" style={{ fontSize: 12 }} />
-          {exp}
-        </button>
-      ))}
-    </div>
-  </div>
-);
-
-CountryCard.propTypes = {
-  country: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    nickname: PropTypes.string.isRequired,
-    desc: PropTypes.string.isRequired,
-    stats: PropTypes.arrayOf(PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      num: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    })).isRequired,
-    experiences: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
-  animKey: PropTypes.number.isRequired,
-  fetchCountryFlag: PropTypes.func.isRequired,
-  setPage: PropTypes.func.isRequired,
-};
-
 /** Scroll indicator */
 const ScrollIndicator = () => (
   <div
@@ -419,23 +177,6 @@ const ScrollIndicator = () => (
  *   fetchCountryFlag – (countryName: string) => flagImageUrl: string
  */
 export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountryFlag }) => {
-  // Merge: prefer runtime prop (CMS / API data), fall back to static data file
-  const countryList = countries && countries.length > 0 ? countries : [];
-
-  const [activeId, setActiveId] = useState(countryList[0]?.id ?? "rwanda");
-  const [animKey, setAnimKey] = useState(0);
-
-  const activeCountry = countryList.find(c => c.id === activeId);
-
-  const handleDestinationSelect = (id) => {
-    setActiveId(id);
-    setAnimKey(k => k + 1);
-  };
-
-  const handleServiceClick = (page) => {
-    setPage?.(page);
-  };
-
   return (
     <section
       style={{
@@ -452,7 +193,7 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
       <div style={{
         position: "absolute",
         inset: 0,
-        backgroundImage: "url('/images/img_placeholder.png')",
+        backgroundImage: "url('https://res.cloudinary.com/dht699doy/image/upload/v1782245381/karongi-island_a7za0o.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -566,45 +307,6 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
               {HERO_COPY.ctaPrimary}
             </button>
           </div>
-
-          {/* ── Divider ───────────────────────────────────────────────────── */}
-          <div style={{
-            width: "100%",
-            height: 1,
-            background: "linear-gradient(to right, rgba(200,146,42,0.35), transparent)",
-            marginBottom: 28,
-          }} />
-
-          {/* ── Destination pills ─────────────────────────────────────────── */}
-          <SectionLabel>{HERO_COPY.destinationsLabel}</SectionLabel>
-
-          <div
-            role="tablist"
-            aria-label="Select a destination"
-            style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20 }}
-          >
-            {countriesLoading && <Spinner />}
-            {!countriesLoading && countryList.map(country => (
-              <DestinationPill
-                key={country.id}
-                country={country}
-                isActive={country.id === activeId}
-                onClick={handleDestinationSelect}
-                fetchCountryFlag={fetchCountryFlag}
-              />
-            ))}
-          </div>
-
-          {/* ── Country detail card ───────────────────────────────────────── */}
-          {activeCountry && (
-            <CountryCard
-              key={animKey}
-              country={activeCountry}
-              animKey={animKey}
-              fetchCountryFlag={fetchCountryFlag}
-              setPage={setPage}
-            />
-          )}
         </div>
 
         <ScrollIndicator />
