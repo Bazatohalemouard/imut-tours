@@ -47,6 +47,36 @@ export const TripCard = ({ trip }) => {
       onClick={() => navigate(`/trips/${trip.id}`)}
       onKeyDown={(e) => e.key === "Enter" && navigate(`/trips/${trip.id}`)}
     >
+      <div style={{ padding: "10px 20px 10px" }}>
+        <div
+          style={{
+            fontSize: 11,
+            fontWeight: 700,
+            fontFamily: "'Nunito', sans-serif",
+            color: colors.gold,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            marginBottom: 6,
+          }}
+        >
+          {Array.isArray(trip.category)
+            ? trip.category.join(", ")
+            : trip.category}
+        </div>
+        <h3
+          style={{
+            fontSize: 20,
+            fontWeight: 700,
+            color: colors.brand,
+            fontFamily: "'Nunito', sans-serif",
+            margin: "0 0 4px",
+          }}
+        >
+          {trip.title}
+        </h3>
+
+
+      </div>
       <div style={{ position: "relative", paddingBottom: "60%", overflow: "hidden" }}>
         <img
           src={`/images/img_placeholder.png`}
@@ -134,31 +164,6 @@ export const TripCard = ({ trip }) => {
         </div>
       </div>
       <div style={{ padding: "20px 20px 22px" }}>
-        <div
-          style={{
-            fontSize: 11,
-            fontWeight: 700,
-            color: colors.gold,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            marginBottom: 6,
-          }}
-        >
-          {Array.isArray(trip.category)
-            ? trip.category.join(", ")
-            : trip.category}
-        </div>
-        <h3
-          style={{
-            fontSize: 18,
-            fontWeight: 700,
-            color: colors.brand,
-            fontFamily: "'Nunito', sans-serif",
-            margin: "0 0 4px",
-          }}
-        >
-          {trip.title}
-        </h3>
         <p style={{ color: colors.textMuted, fontSize: 13, margin: "0 0 14px" }}>
           {trip.subtitle}
         </p>
@@ -211,7 +216,7 @@ export const TripCard = ({ trip }) => {
               textUnderlineOffset: 3,
             }}
           >
-            View Details
+            More Details
           </span>
         </div>
       </div>
