@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useSEO } from "../utils/useSEO";
 import { fetchTrips, fetchCountries } from "../api/APIHandler";
-import { Stats } from "../components/homepage/Stats";
 import rwandaFlag from "../assets/flags/rwanda.png";
 import ugandaFlag from "../assets/flags/uganda.png";
 import tanzaniaFlag from "../assets/flags/tanzania.png";
@@ -81,7 +80,6 @@ export const HomePage = ({ setPage }) => {
   return (
     <div>
       <HeroServices countries={countries} countriesLoading={countriesLoading} setPage={setPage} fetchCountryFlag={fetchCountryFlag} />
-      <Stats countries={countries} />
       <FeaturedTrips trips={trips} tripsLoading={tripsLoading} setPage={setPage} />
       <CallToAction setPage={setPage} />
       <Testimonials testimonials={testimonials} />
