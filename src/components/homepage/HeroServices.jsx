@@ -9,8 +9,8 @@ const STYLES = `
   :root {
     --htw-dusk: #2A130A;
     --htw-clay: #8C3F1F;
-    --htw-sunset: #E8792A;
-    --htw-sunset-hi: #F2954A;
+    --htw-sunset: #2D5A27;
+    --htw-sunset-hi: #4A8C41;
     --htw-gold: #F2B705;
     --htw-acacia: #4F6B4A;
     --htw-acacia-hi: #5C7D56;
