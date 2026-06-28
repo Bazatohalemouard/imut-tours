@@ -66,63 +66,6 @@ export const TripsPage = ({ setPage }) => {
     <div style={{ paddingTop: 68, minHeight: "100vh", background: "#fff" }}>
       <PageHeader title={'Tours & Safaris'} subtitle={''} />
 
-      <div
-        style={{
-          background: `linear-gradient(135deg, ${colors.jungle} 0%, ${colors.jungleLight} 100%)`,
-          padding: "60px 24px 48px",
-        }}
-      >
-
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <TripFilterBar
-            colors={{
-              jungle: colors.jungle,
-              jungleLight: colors.jungleLight,
-              sunset: colors.sunset,
-              paper: "rgba(255,255,255,0.15)",
-              hairline: "rgba(255,255,255,0.30)",
-              mist: "#fff",
-              mistFaint: "rgba(255,255,255,0.65)",
-            }}
-            searchValue={search}
-            onSearchChange={setSearch}
-            searchPlaceholder="Search destinations, tours..."
-            resultsLabel={`${filtered.length} ${filtered.length === 1 ? "trip" : "trips"
-              } found`}
-            defaultExpanded={false}
-            groups={[
-              {
-                key: "country",
-                label: "Country",
-                priority: "primary",
-                loading: countriesLoading,
-                options: countries.map((country) => ({
-                  value: country.name,
-                  label: country.name,
-                })),
-                value: country,
-                onChange: setCountry,
-                allLabel: "All",
-              },
-              {
-                key: "category",
-                label: "Category",
-                priority: "primary",
-                loading: false,
-                options: categories.map((category) => ({
-                  value: category,
-                  label: category,
-                })),
-                value: category,
-                onChange: setCategory,
-                allLabel: "All",
-              },
-            ]}
-          />
-
-
-        </div>
-      </div>
 
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px" }}>
         {loading && <Spinner />}
