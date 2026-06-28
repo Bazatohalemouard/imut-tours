@@ -3,7 +3,7 @@ import { IMUTLogo } from "../components/IMUTLogo";
 import { colors } from "../theme/colors";
 
 export const Footer = ({ setPage }) => (
-  <footer style={{ background: colors.brandDark, color: "#fff" }}>
+  <footer style={{ background: colors.jungle, color: "#fff" }}>
     <div
       style={{
         maxWidth: 1200,
