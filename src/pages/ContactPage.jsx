@@ -9,6 +9,7 @@ import locationIcon from "../assets/icons/location.png";
 import emailIcon from "../assets/icons/email.png";
 import fastResponseIcon from "../assets/icons/fast-response.png";
 import messageSentIcon from "../assets/icons/mail-sent.png";
+import PageHeader from "../components/PageHeader";
 
 
 // ─── Contact Page ─────────────────────────────────────────────────────────────
@@ -81,55 +82,12 @@ export const ContactPage = () => {
   return (
     <div style={{ paddingTop: 68, minHeight: "100vh", background: colors.cream }}>
       {/* Header */}
+      <PageHeader title={'Reach out to Us'}/>
       <div
         style={{
-          background: `linear-gradient(135deg, ${colors.brand} 0%, ${colors.brandLight} 100%)`,
-          padding: "60px 24px 48px",
-          textAlign: "center",
-        }}
-      >
-        <p
-          style={{
-            color: colors.goldLight,
-            fontSize: 13,
-            fontWeight: 700,
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            marginBottom: 12,
-          }}
-        >
-          Let's Plan Together
-        </p>
-        <h1
-          style={{
-            fontSize: "clamp(30px, 5vw, 52px)",
-            color: "#fff",
-            fontFamily: "'Nunito', sans-serif",
-            fontWeight: 700,
-            margin: "0 0 14px",
-          }}
-        >
-          Contact Us
-        </h1>
-        <p
-          style={{
-            color: "rgba(255,255,255,0.75)",
-            fontSize: 16,
-            maxWidth: 480,
-            margin: "0 auto",
-            lineHeight: 1.7,
-          }}
-        >
-          Ready to explore? Drop us a message and our team will reach back
-          within 24 hours.
-        </p>
-      </div>
-
-      <div
-        style={{
-          maxWidth: 1100,
+          maxWidth: 1200,
           margin: "0 auto",
-          padding: "60px 24px",
+          padding: "60px 0px",
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
           gap: 48,

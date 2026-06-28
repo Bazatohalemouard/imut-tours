@@ -10,6 +10,7 @@ import {
   IconHandClick
 } from "@tabler/icons-react";
 import { SERVICES_LIST, SERVICES_COPY, PROMISE_CARDS } from "../api/datasets/servicesdata";
+import PageHeader from "../components/PageHeader";
 
 // ─── Keyframe injection ───────────────────────────────────────────────────────
 const STYLES = `
@@ -744,117 +745,82 @@ export const ServicesPage = ({ setPage }) => {
   }, [initialServiceId]);
 
   return (
-    <main
-      style={{
-        position: "relative",
-        minHeight: "100vh",
-        background: "linear-gradient(160deg, #1a0c06 0%, #2e1510 50%, #3a2008 100%)",
-        fontFamily: "'DM Sans', 'Segoe UI', sans-serif",
-        overflowX: "hidden",
-      }}
-    >
-      {/* Background image layer */}
-      <div style={{
-        position: "absolute",
-        inset: 0,
-        backgroundImage: "url('/images/img_placeholder.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        opacity: 0.08,
-        zIndex: 0,
-        pointerEvents: "none",
-      }} />
+    <div style={{ paddingTop: 68, minHeight: "100vh", background: "#fff" }}>
+      <PageHeader title={'Our Services'} />
+      <main
+        style={{
+          position: "relative",
+          minHeight: "100vh",
+          // background: "linear-gradient(160deg, #1a0c06 0%, #2e1510 50%, #3a2008 100%)",
+          fontFamily: "'DM Sans', 'Segoe UI', sans-serif",
+          overflowX: "hidden",
+        }}
+      >
 
-      {/* Gradient overlay */}
-      <div style={{
-        position: "absolute",
-        inset: 0,
-        background: "linear-gradient(160deg, #1a0c06 0%, #2e1510dd 50%, #3a200888 100%)",
-        zIndex: 0,
-        pointerEvents: "none",
-      }} />
+        {/* Background image layer */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url('/images/img_placeholder.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.08,
+          zIndex: 0,
+          pointerEvents: "none",
+        }} />
 
-      <AmbientOrbs />
+        {/* Gradient overlay */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(160deg, #1a0c06 0%, #2e1510dd 50%, #3a200888 70%)",
+          zIndex: 0,
+          pointerEvents: "none",
+        }} />
 
-      <div style={{
-        position: "relative",
-        zIndex: 2,
-        maxWidth: 1120,
-        margin: "0 auto",
-        padding: "clamp(48px,8vw,80px) clamp(16px,5vw,40px) clamp(64px,8vw,100px)",
-      }}>
+        <AmbientOrbs />
 
-        {/* ── Page header ───────────────────────────────────────────────────── */}
-        <div style={{ marginBottom: 56, animation: "fadeUp 0.45s ease both" }}>
+        <div style={{
+          position: "relative",
+          zIndex: 2,
+          maxWidth: 1120,
+          margin: "0 auto",
+          padding: "clamp(48px,8vw,80px) clamp(16px,5vw,40px) clamp(64px,8vw,100px)",
+        }}>
+          {/* ── Services grid ─────────────────────────────────────────────────── */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+              gap: 20,
+              marginBottom: 16,
+            }}
+            role="tabpanel"
+            aria-label="Services list"
+          >
+            {visibleServices.map((service, i) => (
+              <ServiceCard
+                key={service.id}
+                service={service}
+                index={i}
+                onContact={handleContact}
+                highlighted={highlightedId === service.id}
+              />
+            ))}
+          </div>
 
-          <h1 style={{
-            fontFamily: "'Nunito', sans-serif",
-            fontSize: "clamp(36px, 6.5vw, 64px)",
-            fontWeight: 900,
-            lineHeight: 1.04,
-            letterSpacing: "-0.025em",
-            color: "#fff",
-            margin: "26px 0 18px",
-          }}>
-            {SERVICES_COPY.headline}
-            <br />
-            <em style={{
-              color: "#E8B84B",
-              fontStyle: "italic",
-              fontFamily: "'Telma', cursive",
-              fontWeight: 700,
-            }}>
-              {SERVICES_COPY.headlineEm}
-            </em>
-          </h1>
-
-          <p style={{
-            fontSize: 16,
-            color: "rgba(255,255,255,0.55)",
-            lineHeight: 1.75,
-            fontWeight: 300,
-            maxWidth: 600,
-            margin: "0 0 30px",
-          }}>
-            {SERVICES_COPY.subheadline}
-          </p>
-        </div>
-
-        <div className="divider-line" style={{ marginBottom: 48 }} />
-
-        {/* ── Services grid ─────────────────────────────────────────────────── */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-            gap: 20,
-            marginBottom: 16,
-          }}
-          role="tabpanel"
-          aria-label="Services list"
-        >
-          {visibleServices.map((service, i) => (
-            <ServiceCard
-              key={service.id}
-              service={service}
-              index={i}
-              onContact={handleContact}
-              highlighted={highlightedId === service.id}
+          {/* ── Contact section ───────────────────────────────────────────────── */}
+          <div ref={contactRef}>
+            <ContactSection
+              copy={SERVICES_COPY}
+              prefillService={contactPrefill}
             />
-          ))}
-        </div>
+          </div>
 
-        {/* ── Contact section ───────────────────────────────────────────────── */}
-        <div ref={contactRef}>
-          <ContactSection
-            copy={SERVICES_COPY}
-            prefillService={contactPrefill}
-          />
         </div>
-
-      </div>
-    </main>
+      </main>
+    </div>
   );
 };
 

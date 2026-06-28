@@ -96,7 +96,7 @@ export const Navbar = ({ activePage, setPage }) => {
             onClick={() => setPage("contact")}
             style={{
               marginLeft: 8,
-              background: colors.gold,
+              background: colors.jungle,
               color: "#fff",
               border: "none",
               cursor: "pointer",
@@ -187,7 +187,7 @@ export const Navbar = ({ activePage, setPage }) => {
             style={{
               marginTop: 16,
               width: "100%",
-              background: colors.gold,
+              background: colors.jungle,
               color: "#fff",
               border: "none",
               cursor: "pointer",

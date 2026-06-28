@@ -10,6 +10,7 @@ import guideIcon from "../assets/icons/tour-guide.png";
 import customerSupportIcon from "../assets/icons/customer-service.png";
 import emailIcon from "../assets/icons/email.png";
 import phoneIcon from "../assets/icons/phone.png";
+import PageHeader from "../components/PageHeader";
 
 // ─── About Page ───────────────────────────────────────────────────────────────
 export const AboutPage = ({ setPage }) => {
@@ -75,82 +76,13 @@ export const AboutPage = ({ setPage }) => {
 
   return (
     <div style={{ paddingTop: 68, minHeight: "100vh" }}>
-      {/* Hero */}
-      <div
-        style={{
-          background: `linear-gradient(135deg, ${colors.brand} 0%, ${colors.brandLight} 100%)`,
-          padding: "80px 24px 60px",
-          textAlign: "center",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-20%",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "80%",
-            paddingBottom: "40%",
-            borderRadius: "50%",
-            background: "rgba(255,255,255,0.04)",
-            pointerEvents: "none",
-          }}
-        />
-        <div
-          style={{
-            display: "inline-block",
-            background: "rgba(200,146,42,0.2)",
-            border: "1px solid rgba(200,146,42,0.4)",
-            borderRadius: 99,
-            padding: "6px 16px",
-            marginBottom: 20,
-          }}
-        >
-          <span
-            style={{
-              fontSize: 12,
-              color: colors.goldLight,
-              fontWeight: 700,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-            }}
-          >
-          Kigali, Rwanda
-          </span>
-        </div>
-        <h1
-          style={{
-            fontSize: "clamp(32px, 5vw, 60px)",
-            color: "#fff",
-            fontFamily: "'Nunito', sans-serif",
-            fontWeight: 700,
-            margin: "0 0 20px",
-          }}
-        >
-          Our Story
-        </h1>
-        <p
-          style={{
-            color: "rgba(255,255,255,0.78)",
-            fontSize: 17,
-            lineHeight: 1.8,
-            maxWidth: 620,
-            margin: "0 auto",
-          }}
-        >
-          IMUT Tours was born from a simple belief: East Africa's wild places
-          deserve to be shared responsibly, authentically, and with deep
-          respect for the communities and creatures that call them home.
-        </p>
-      </div>
+      <PageHeader title={'About Us'}/>
 
       {/* Story section */}
-      <section style={{ background: colors.cream, padding: "80px 24px" }}>
+      <section style={{ background: colors.cream, padding: "40px 24px" }}>
         <div
           style={{
-            maxWidth: 1100,
+            maxWidth: 1200,
             margin: "0 auto",
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
@@ -168,7 +100,7 @@ export const AboutPage = ({ setPage }) => {
                 margin: "0 0 20px",
               }}
             >
-              From the Mountains of Rwanda to the Plains of Uganda
+             Get to know who we are
             </h2>
             <p
               style={{
@@ -195,7 +127,7 @@ export const AboutPage = ({ setPage }) => {
             <button
               onClick={() => setPage("contact")}
               style={{
-                background: colors.gold,
+                background: colors.jungle,
                 color: "#fff",
                 border: "none",
                 cursor: "pointer",
@@ -207,51 +139,6 @@ export const AboutPage = ({ setPage }) => {
             >
               Get in Touch
             </button>
-          </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 16,
-            }}
-          >
-            {[
-              { val: "500+", label: "Safaris Led" },
-              { val: "98%", label: "Satisfaction Rate" },
-              { val: "12", label: "Expert Guides" },
-              { val: "6", label: "Core Destinations" },
-            ].map((s) => (
-              <div
-                key={s.label}
-                style={{
-                  background: "#fff",
-                  border: `1px solid ${colors.sand}`,
-                  borderRadius: 16,
-                  padding: "24px 20px",
-                  textAlign: "center",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "clamp(28px, 4vw, 40px)",
-                    fontWeight: 700,
-                    color: colors.brand,
-                    fontFamily: "'Nunito', sans-serif",
-                  }}
-                >
-                  {s.val}
-                </div>
-                <div
-                  style={{
-                    fontSize: 13,
-                    color: colors.textMuted,
-                    marginTop: 4,
-                  }}
-                >
-                  {s.label}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
