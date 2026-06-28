@@ -15,7 +15,7 @@ import {
 export const SERVICES = [
   {
     id: "tours",
-    name: "Tour Guiding",
+    name: "Tours & Safaris",
     tagline: "Expert-led safari & cultural tours",
     icon: IconTrekking,
     isPrimary: false,
@@ -39,7 +39,7 @@ export const SERVICES = [
   },
   {
     id: "taxi",
-    name: "Taxi & Cab Service",
+    name: "Transport Services",
     tagline: "City & inter-city rides",
     icon: IconCar,
     isPrimary: false,
@@ -47,7 +47,7 @@ export const SERVICES = [
   },
   {
     id: "hotels",
-    name: "Accomodation",
+    name: "Hotel Bookings",
     tagline: "Budget to luxury stays",
     icon: IconBuildingEstate,
     isPrimary: false,
@@ -61,9 +61,9 @@ export const HERO_COPY = {
   headline: "One Partner.",
   headlineEm: "Every Journey, Handled.",
   subheadline:
-    "From guided safaris to airport pickups, we handle every detail so you travel without a worry. Specialized in Rwanda adventures, communities and city tours; and East Africa destinations including Uganda, Kenya, Tanzania, Burundi, and South Sudan.",
+    "From guided safaris to airport pickups, we handle every detail so you travel without a worry. Specialized in Rwanda adventures, communities and city tours; and East Africa destinations; Our services include: Tours & Safaris, Car Rentals, Airport Transfers, Transport Services and Hotel Bookings.",
   servicesLabel: "Our services",
   destinationsLabel: "Where do you want to go?",
-  ctaPrimary: "Book a Trip",
+  ctaPrimary: "Available Trips",
   ctaSecondary: "Our Services",
 };
