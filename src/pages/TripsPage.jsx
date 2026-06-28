@@ -5,6 +5,8 @@ import { fetchTrips, fetchCountries } from "../api/APIHandler";
 import { colors } from "../theme/colors";
 import { Spinner } from "../components/Spinner";
 import { TripCard } from "../components/TripCard";
+import PageHeader from "../components/PageHeader";
+import TripFilterBar from "../components/TripFilterBar";
 
 // ─── Trips Page ───────────────────────────────────────────────────────────────
 export const TripsPage = ({ setPage }) => {
@@ -13,6 +15,8 @@ export const TripsPage = ({ setPage }) => {
   const [country, setCountry] = useState("All");
   const [category, setCategory] = useState("All");
   const [countries, setCountries] = useState([]);
+  const [search, setSearch] = useState("");
+
   const [countriesLoading, setCountriesLoading] = useState(true);
   useSEO({
     title: "Trips | IMUT Tours & Travel",
@@ -60,111 +64,63 @@ export const TripsPage = ({ setPage }) => {
 
   return (
     <div style={{ paddingTop: 68, minHeight: "100vh", background: "#fff" }}>
+      <PageHeader title={'Tours & Safaris'} subtitle={''} />
+
       <div
         style={{
           background: `linear-gradient(135deg, ${colors.jungle} 0%, ${colors.jungleLight} 100%)`,
           padding: "60px 24px 48px",
         }}
       >
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <p
-            style={{
-              color: "rgba(255,255,255,0.75)",
-              fontSize: 13,
-              fontWeight: 700,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              marginBottom: 12,
-            }}
-          >
-            Our Journeys
-          </p>
-          <h1
-            style={{
-              fontSize: "clamp(32px, 5vw, 56px)",
-              color: "#fff",
-              fontFamily: "'Nunito', sans-serif",
-              fontWeight: 700,
-              margin: "0 0 28px",
-            }}
-          >
-            All Trips & Safaris
-          </h1>
 
-          {/* Filters */}
-          <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <div>
-              <p
-                style={{
-                  fontSize: 11,
-                  color: "rgba(255,255,255,0.6)",
-                  fontWeight: 600,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  marginBottom: 8,
-                }}
-              >
-                Country
-              </p>
-              <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                {countriesLoading && <Spinner />}
-                {!countriesLoading && countries.map((c) => (
-                  <button
-                    key={c}
-                    onClick={() => setCountry(c.name)}
-                    style={{
-                      background:
-                        country === c.name ? "#fff" : "rgba(255,255,255,0.15)",
-                      color: country === c.name ? colors.jungle : "#fff",
-                      border: "1px solid rgba(255,255,255,0.3)",
-                      cursor: "pointer",
-                      padding: "6px 14px",
-                      borderRadius: 99,
-                      fontSize: 13,
-                      fontWeight: country === c ? 700 : 400,
-                    }}
-                  >
-                    {c.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div>
-              <p
-                style={{
-                  fontSize: 11,
-                  color: "rgba(255,255,255,0.6)",
-                  fontWeight: 600,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  marginBottom: 8,
-                }}
-              >
-                Category
-              </p>
-              <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                {!countriesLoading && categories.map((c) => (
-                  <button
-                    key={c}
-                    onClick={() => setCategory(c)}
-                    style={{
-                      background:
-                        category === c ? "#fff" : "rgba(255,255,255,0.15)",
-                      color: category === c ? colors.jungle : "#fff",
-                      border: "1px solid rgba(255,255,255,0.3)",
-                      cursor: "pointer",
-                      padding: "6px 14px",
-                      borderRadius: 99,
-                      fontSize: 13,
-                      fontWeight: category === c ? 700 : 400,
-                    }}
-                  >
-                    {c}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <TripFilterBar
+            colors={{
+              jungle: colors.jungle,
+              jungleLight: colors.jungleLight,
+              sunset: colors.sunset,
+              paper: "rgba(255,255,255,0.15)",
+              hairline: "rgba(255,255,255,0.30)",
+              mist: "#fff",
+              mistFaint: "rgba(255,255,255,0.65)",
+            }}
+            searchValue={search}
+            onSearchChange={setSearch}
+            searchPlaceholder="Search destinations, tours..."
+            resultsLabel={`${filtered.length} ${filtered.length === 1 ? "trip" : "trips"
+              } found`}
+            defaultExpanded={false}
+            groups={[
+              {
+                key: "country",
+                label: "Country",
+                priority: "primary",
+                loading: countriesLoading,
+                options: countries.map((country) => ({
+                  value: country.name,
+                  label: country.name,
+                })),
+                value: country,
+                onChange: setCountry,
+                allLabel: "All",
+              },
+              {
+                key: "category",
+                label: "Category",
+                priority: "primary",
+                loading: false,
+                options: categories.map((category) => ({
+                  value: category,
+                  label: category,
+                })),
+                value: category,
+                onChange: setCategory,
+                allLabel: "All",
+              },
+            ]}
+          />
+
+
         </div>
       </div>
 
