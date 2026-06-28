@@ -1,93 +1,21 @@
-// colors.jsx
-
 export const colors = {
-    /* -------------------------------------------------------
-       PRIMARY BRAND
-       Inspired by Rwanda volcanic earth
-    ------------------------------------------------------- */
-
-    brand: "#6B4A2B",
-    brandDark: "#513720",
-    brandLight: "#8A6441",
-
-    /* -------------------------------------------------------
-       GOLD
-       African sunrise
-    ------------------------------------------------------- */
-
-    gold: "#C79A3B",
-    goldLight: "#E4BF67",
-    goldPale: "#FBF3DE",
-
-    /* -------------------------------------------------------
-       GREENS
-       Nyungwe Forest
-    ------------------------------------------------------- */
-
-    jungle: "#3E6B46",
-    jungleLight: "#6F9771",
-    junglePale: "#EDF5EE",
-
-    /* -------------------------------------------------------
-       VOLCANIC STONE
-    ------------------------------------------------------- */
-
-    stone: "#6F6B64",
-    stoneLight: "#A5A098",
-
-    /* -------------------------------------------------------
-       SKY / MIST
-    ------------------------------------------------------- */
-
-    mist: "#B7CDD4",
-    mistLight: "#E8F2F5",
-
-    /* -------------------------------------------------------
-       BACKGROUNDS
-    ------------------------------------------------------- */
-
-    background: "#FCFAF6",
-    backgroundAlt: "#F5F1EA",
-    surface: "#FFFFFF",
-
-    /* -------------------------------------------------------
-       TEXT
-    ------------------------------------------------------- */
-
-    heading: "#2F241A",
-    body: "#5D554B",
-    muted: "#8B8378",
-
-    /* -------------------------------------------------------
-       BORDERS
-    ------------------------------------------------------- */
-
-    border: "#E6DDD2",
-    borderDark: "#D3C7B9",
-
-    /* -------------------------------------------------------
-       CTA
-    ------------------------------------------------------- */
-
-    primaryButton: "#C79A3B",
-    primaryButtonHover: "#B88A2F",
-
-    secondaryButton: "#3E6B46",
-    secondaryButtonHover: "#315638",
-
-    /* -------------------------------------------------------
-       SUCCESS
-    ------------------------------------------------------- */
-
-    success: "#4F8A5C",
-
-    /* -------------------------------------------------------
-       SHADOWS
-    ------------------------------------------------------- */
-
-    shadow:
-        "0 12px 40px rgba(80,58,32,.08)",
-
-    shadowHover:
-        "0 18px 55px rgba(80,58,32,.12)"
+    // Primary brand — drawn from the logo's deep brown/burgundy
+    brand: "#3D1F1F",
+    brandDark: "#2A1515",
+    brandLight: "#5C3030",
+    // Accent — warm gold evoking savanna sunsets
+    gold: "#C8922A",
+    goldLight: "#E8B84B",
+    goldPale: "#FDF3DC",
+    // East Africa greens
+    jungle: "#2D5A27",
+    jungleLight: "#4A8C41",
+    // Gorilla mist grey-blue
+    mist: "#7B9EA6",
+    mistLight: "#B8D4DB",
+    // Neutrals
+    cream: "#FAF7F2",
+    sand: "#EDE8DF",
+    charcoal: "#1A1A1A",
+    textMuted: "#6B6258",
 };
