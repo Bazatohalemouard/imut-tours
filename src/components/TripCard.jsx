@@ -48,6 +48,17 @@ export const TripCard = ({ trip }) => {
       onKeyDown={(e) => e.key === "Enter" && navigate(`/trips/${trip.id}`)}
     >
       <div style={{ padding: "10px 20px 10px" }}>
+        <h3
+          style={{
+            fontSize: 20,
+            fontWeight: 700,
+            color: colors.brand,
+            fontFamily: "'Nunito', sans-serif",
+            margin: "0 0 4px",
+          }}
+        >
+          {trip.title}
+        </h3>
         <div
           style={{
             fontSize: 11,
@@ -63,18 +74,6 @@ export const TripCard = ({ trip }) => {
             ? trip.category.join(", ")
             : trip.category}
         </div>
-        <h3
-          style={{
-            fontSize: 20,
-            fontWeight: 700,
-            color: colors.brand,
-            fontFamily: "'Nunito', sans-serif",
-            margin: "0 0 4px",
-          }}
-        >
-          {trip.title}
-        </h3>
-
 
       </div>
       <div style={{ position: "relative", paddingBottom: "60%", overflow: "hidden" }}>

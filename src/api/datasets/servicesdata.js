@@ -76,22 +76,6 @@ export const SERVICES_LIST = [
     ],
   },
   {
-    id: "airport-transfers",
-    name: "Airport Transfers",
-    tagline: "First impressions done right",
-    description:
-      "We track your flight and have a driver at arrivals before you clear the gate — no waiting, no confusion. You'll be met by name, assisted with your bags, and on your way in a clean, air-conditioned vehicle within minutes. Departures are handled with the same reliability; we get you to the terminal on time, every time.",
-    icon: IconBuildingAirport,
-    isPrimary: false,
-    highlights: [
-      "Named meet & greet at the arrivals gate",
-      "Real-time flight tracking — we adjust to delays",
-      "Private & shared transfer options",
-      "Executive, standard & group vehicles available",
-      "Available around the clock, every day of the year",
-    ],
-  },
-  {
     id: "taxi",
     name: "Transport Services",
     tagline: "Reliable rides, any time",
@@ -123,6 +107,22 @@ export const SERVICES_LIST = [
       "Budget accommodation & hostels",
       "Exclusive partner rates & room upgrades",
       "Bundled with full trip packages on request",
+    ],
+  },
+  {
+    id: "airport-transfers",
+    name: "Airport Transfers",
+    tagline: "First impressions done right",
+    description:
+      "We track your flight and have a driver at arrivals before you clear the gate — no waiting, no confusion. You'll be met by name, assisted with your bags, and on your way in a clean, air-conditioned vehicle within minutes. Departures are handled with the same reliability; we get you to the terminal on time, every time.",
+    icon: IconBuildingAirport,
+    isPrimary: false,
+    highlights: [
+      "Named meet & greet at the arrivals gate",
+      "Real-time flight tracking — we adjust to delays",
+      "Private & shared transfer options",
+      "Executive, standard & group vehicles available",
+      "Available around the clock, every day of the year",
     ],
   },
   {

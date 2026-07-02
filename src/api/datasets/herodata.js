@@ -61,7 +61,7 @@ export const HERO_COPY = {
   headline: "One Partner.",
   headlineEm: "Every Journey, Handled.",
   subheadline:
-    "From guided safaris to airport pickups, we handle every detail so you travel without a worry. Specialized in Rwanda adventures, communities and city tours; and East Africa destinations; Our services include: Tours & Safaris, Car Rentals, Airport Transfers, Transport Services and Hotel Bookings.",
+    "From guided tours & wildlife safaris to hotel bookings and airport pickups, we handle every detail so you travel without a worry. Specialized in Rwanda adventures, communities and city tours; and other East Africa destinations.",
   servicesLabel: "Our services",
   destinationsLabel: "Where do you want to go?",
   ctaPrimary: "Available Trips",
