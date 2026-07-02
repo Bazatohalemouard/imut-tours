@@ -43,7 +43,7 @@ export const SERVICES_COPY = {
 export const SERVICES_LIST = [
   {
     id: "tours",
-    name: "Guided Safari & Cultural Tours",
+    name: "Tours & Safaris",
     tagline: "Our signature experience",
     description:
       "We plan and lead tours that match what you actually want to do — not a fixed programme. Our guides are specialists in wildlife, local history, and culture, and they work around your pace and interests. Whether you're joining a small group or booking a private trip, every detail is arranged for you. All you need to do is show up.",
@@ -93,7 +93,7 @@ export const SERVICES_LIST = [
   },
   {
     id: "taxi",
-    name: "Taxi & Cab Service",
+    name: "Transport Services",
     tagline: "Reliable rides, any time",
     description:
       "Need a ride across town or a long-distance transfer between destinations? We operate on fixed, pre-agreed rates with no surge pricing or hidden charges. Book in advance or on short notice via WhatsApp or Email, and receive confirmation within minutes. Our drivers are punctual, professional, and familiar with the area.",
@@ -109,7 +109,7 @@ export const SERVICES_LIST = [
   },
   {
     id: "hotels",
-    name: "Accommodation",
+    name: "Hotel Bookings",
     tagline: "Rest as well as you explored",
     description:
       "We source and book accommodation across all categories. From luxury lodges and boutique hotels to budget-friendly guesthouses. As established partners with properties across the region, we have access to rates and availability not always listed publicly. Tell us your preference and budget, and we'll handle the rest.",
@@ -143,6 +143,7 @@ export const SERVICES_LIST = [
     ],
   },
 ];
+
 // ─── Trust signals ────────────────────────────────────────────────────────────
 export const TRUST_STATS = [
   { num: "1,200+", label: "Trips completed", icon: "ti-route" },
