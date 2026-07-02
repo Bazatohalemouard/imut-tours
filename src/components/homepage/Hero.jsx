@@ -1,485 +1,381 @@
 import { useState } from "react";
-import PropTypes from 'prop-types';
-import { Spinner } from "../Spinner";
+import PropTypes from "prop-types";
+import { IconTrekking, IconCompass, IconArrowUpRight } from "@tabler/icons-react";
+import { SERVICES, HERO_COPY } from "../../api/datasets/herodata";
 
-export const Hero = ({ countries, countriesLoading, setPage, fetchCountryFlag }) => {
-    const [activeId, setActiveId] = useState("rwanda");
-    const [animKey, setAnimKey] = useState(0);
+/**
+ * Design language: "Field Dossier" — a guide outfit's expedition manifest,
+ * not a postcard. Bold geometric display type, a mono "data" face for
+ * tags/labels, a single serif-italic accent for the one line that should
+ * feel handwritten. Layout is deliberately uneven: a stamp overlaps the
+ * headline, a framed field photo overlaps the services panel, and the
+ * panel itself sits lower than the copy beside it.
+ */
+const STYLES = `
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Newsreader:ital,wght@1,500;1,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
-    const country = countries?.find((c) => c.id === activeId);
+  :root {
+    --exp-ink: #14160F;
+    --exp-moss: #2E3A26;
+    --exp-clay: #8A5A3C;
+    --exp-ochre: #C99A3B;
+    --exp-rust: #A8512A;
+    --exp-sand: #ECE3CC;
+    --exp-stone: #9CA68C;
+  }
 
-    const handleSelect = (id) => {
-        setActiveId(id);
-        setAnimKey((k) => k + 1);
-    };
+  @keyframes exp-reveal {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes exp-rowIn {
+    from { opacity: 0; transform: translateX(14px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes exp-marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @keyframes exp-spin {
+    to { transform: rotate(360deg); }
+  }
 
-    return (
-        <section
-            style={{
-                position: "relative",
-                minHeight: "100vh",
-                display: "flex",
-                alignItems: "flex-start",
-                overflow: "hidden",
-                background: "linear-gradient(150deg, #1a0c06 0%, #2e1510 45%, #3a2008 100%)",
-                fontFamily: "'DM Sans', 'Segoe UI', sans-serif",
-            }}
-        >
-            <div
-                style={{
-                    position: "absolute",
-                    inset: 0,
-                    backgroundImage: "url('/images/img_placeholder.png')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    zIndex: 0,
-                }}
-            />
+  .exp-reveal-1 { opacity: 0; animation: exp-reveal 0.7s ease-out forwards; animation-delay: 0.05s; }
+  .exp-reveal-2 { opacity: 0; animation: exp-reveal 0.7s ease-out forwards; animation-delay: 0.16s; }
+  .exp-reveal-3 { opacity: 0; animation: exp-reveal 0.7s ease-out forwards; animation-delay: 0.28s; }
+  .exp-reveal-4 { opacity: 0; animation: exp-reveal 0.7s ease-out forwards; animation-delay: 0.4s; }
+  .exp-row { opacity: 0; animation: exp-rowIn 0.5s ease-out forwards; }
 
-            {/* Gradient overlay layer — preserves your original gradient */}
-            <div
-                style={{
-                    position: "absolute",
-                    inset: 0,
-                    background: "linear-gradient(150deg, #1a0c06 10%, #2e1510cc 45%, #3a200899 100%)",
-                    zIndex: 1,
-                }}
-            />
+  @media (prefers-reduced-motion: reduce) {
+    .exp-reveal-1, .exp-reveal-2, .exp-reveal-3, .exp-reveal-4, .exp-row {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .exp-marquee-dup { display: none !important; }
+    *[class*="animate-["] { animation: none !important; }
+  }
+`;
 
-            {/* Your content sits above both layers */}
-            <div style={{ position: "relative", zIndex: 2, width: "100%" }}>
-                {/* Ambient orbs */}
-                <div style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
-                    <div
-                        style={{
-                            position: "absolute",
-                            width: 520,
-                            height: 520,
-                            top: -120,
-                            right: -120,
-                            borderRadius: "50%",
-                            background: "radial-gradient(circle, rgba(200,146,42,0.13) 0%, transparent 70%)",
-                        }}
-                    />
-                    <div
-                        style={{
-                            position: "absolute",
-                            width: 320,
-                            height: 320,
-                            bottom: 60,
-                            left: -80,
-                            borderRadius: "50%",
-                            background: "radial-gradient(circle, rgba(200,146,42,0.08) 0%, transparent 70%)",
-                        }}
-                    />
-                    <div
-                        style={{
-                            position: "absolute",
-                            width: 280,
-                            height: 280,
-                            top: "12%",
-                            right: "6%",
-                            borderRadius: "50%",
-                            border: "1px solid rgba(200,146,42,0.18)",
-                        }}
-                    />
-                    <div
-                        style={{
-                            position: "absolute",
-                            width: 180,
-                            height: 180,
-                            top: "22%",
-                            right: "16%",
-                            borderRadius: "50%",
-                            border: "1px solid rgba(200,146,42,0.12)",
-                        }}
-                    />
-                </div>
+if (typeof document !== "undefined" && !document.getElementById("expedition-hero-styles")) {
+  const tag = document.createElement("style");
+  tag.id = "expedition-hero-styles";
+  tag.textContent = STYLES;
+  document.head.appendChild(tag);
+}
 
-                <div
-                    style={{
-                        position: "relative",
-                        maxWidth: 1120,
-                        margin: "0 auto",
-                        padding: "clamp(48px, 8vw, 80px) clamp(16px, 5vw, 32px) clamp(48px, 6vw, 64px)",
-                        width: "100%",
-                    }}
-                >
+// ─── Decorative geometry ───────────────────────────────────────────────────
 
-                    {/* Headline */}
-                    <h1
-                        style={{
-                            fontFamily: "'Nunito', sans-serif",
-                            fontSize: "clamp(36px, 7vw, 68px)",
-                            fontWeight: 900,
-                            lineHeight: 1.05,
-                            letterSpacing: "-0.02em",
-                            color: "#fff",
-                            margin: "20px 0 26px",
-                        }}
-                    >
-                        Beyond Wild Africa,
-                        <br />
-                        <em style={{
-                            color: "#E8B84B",
-                            fontStyle: "italic",
-                            fontFamily: "'Telma', cursive",
-                            fontWeight: 700
-                        }}>Unforgettable Experiences Await</em>
-                        <br />
+/** Angular, off-axis shapes standing in for the soft circular "orbs" of a
+ *  templated hero — bolder edges, asymmetric placement, earthy tints only. */
+const GeoShapes = () => (
+  <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+    <span className="absolute -right-16 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,var(--exp-ochre)_0%,transparent_70%)] opacity-20" />
+    <span className="absolute left-[-3.5rem] top-1/3 hidden h-56 w-56 rotate-45 border border-[var(--exp-sand)]/10 sm:block" />
+    <span className="absolute bottom-6 right-[10%] hidden h-36 w-36 rotate-12 border border-[var(--exp-ochre)]/25 [clip-path:polygon(50%_0%,0%_100%,100%_100%)] lg:block" />
+  </div>
+);
 
-                    </h1>
+// ─── Field stamp (signature element) ───────────────────────────────────────
 
-                    <div
-                        style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            gap: 8,
-                            marginBottom: 28,
-                        }}
-                        role="tablist"
-                        aria-label="Select a country"
-                    >
-                        {countriesLoading && <Spinner />}
-                        {!countriesLoading && countries?.map((c) => {
-                            const isActive = c.id === activeId;
-                            return (
-                                <button
-                                    key={c.id}
-                                    role="tab"
-                                    aria-selected={isActive}
-                                    onClick={() => handleSelect(c.id)}
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: 6,
-                                        padding: "8px 16px",
-                                        borderRadius: 99,
-                                        border: isActive
-                                            ? "1px solid #C8921A"
-                                            : "1px solid rgba(200,146,42,0.28)",
-                                        background: isActive ? "#C8921A" : "rgba(200,146,42,0.08)",
-                                        color: isActive ? "#fff" : "rgba(255,255,255,0.62)",
-                                        fontFamily: "inherit",
-                                        fontSize: 13,
-                                        fontWeight: isActive ? 600 : 400,
-                                        cursor: "pointer",
-                                        whiteSpace: "nowrap",
-                                        transition: "all 0.18s ease",
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        if (!isActive) {
-                                            e.currentTarget.style.background = "rgba(200,146,42,0.2)";
-                                            e.currentTarget.style.borderColor = "rgba(200,146,42,0.55)";
-                                            e.currentTarget.style.color = "#fff";
-                                        }
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        if (!isActive) {
-                                            e.currentTarget.style.background = "rgba(200,146,42,0.08)";
-                                            e.currentTarget.style.borderColor = "rgba(200,146,42,0.28)";
-                                            e.currentTarget.style.color = "rgba(255,255,255,0.62)";
-                                        }
-                                    }}
-                                >
-                                    {c.name}
-                                </button>
-                            );
-                        })}
-                    </div>
+/** A slowly spinning, dashed "verified route" stamp — the one piece of
+ *  flourish the rest of the page stays quiet around. */
+const FieldStamp = ({ className }) => (
+  <div className={`inline-flex flex-col items-center gap-2 ${className}`} aria-hidden="true">
+    <div className="relative flex h-20 w-20 items-center justify-center rounded-full">
+      <span className="absolute inset-0 animate-[exp-spin_22s_linear_infinite] rounded-full border-2 border-dashed border-[var(--exp-ochre)]/60" />
+      <span className="absolute inset-2 rounded-full border border-[var(--exp-sand)]/15" />
+      <IconCompass size={26} className="relative text-[var(--exp-ochre)]" />
+    </div>
+    <span className="font-['IBM_Plex_Mono'] text-[9px] uppercase tracking-[0.2em] text-[var(--exp-stone)]">
+      Field Verified
+    </span>
+  </div>
+);
 
-                    {/* Detail card */}
-                    <div
-                        key={animKey}
-                        role="tabpanel"
-                        style={{
-                            background: "rgba(26,12,6,0.82)",
-                            border: "1px solid rgba(200,146,42,0.55)",
-                            borderRadius: 14,
-                            padding: "clamp(18px, 4vw, 28px)",
-                            marginBottom: 32,
-                            animation: "fadeUp 0.28s ease",
-                        }}
-                    >
-                        {/* Card header */}
-                        <div
-                            style={{
-                                display: "flex",
-                                alignItems: "flex-start",
-                                justifyContent: "space-between",
-                                gap: 12,
-                                marginBottom: 14,
-                                flexWrap: "wrap",
-                            }}
-                        >
-                            <div>
-                                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                                    {country && (
-                                        <img
-                                            src={fetchCountryFlag(country.name)}
-                                            alt={`${country.name} flag`}
-                                            width={40}
-                                            height={34}
-                                            style={{ flexShrink: 0 }}
-                                        />
-                                    )}
-                                    <div
-                                        style={{
-                                            fontFamily: "'Nunito', sans-serif",
-                                            fontSize: "clamp(22px, 4vw, 32px)",
-                                            fontWeight: 700,
-                                            color: "#fff",
-                                            lineHeight: 1.1,
-                                        }}
-                                    >
-                                        {country?.name}
-                                    </div>
-                                </div>
-                                <div
-                                    style={{
-                                        fontSize: 13,
-                                        color: "#E8B84B",
-                                        fontStyle: "italic",
-                                        marginTop: 6,
-                                    }}
-                                >
-                                    "{country?.nickname}"
-                                </div>
-                            </div>
-                        </div>
+FieldStamp.propTypes = { className: PropTypes.string };
+FieldStamp.defaultProps = { className: "" };
 
-                        {/* Description */}
-                        <p
-                            onMouseEnter={e => {
-                                e.currentTarget.style.color = "rgba(255,255,255,0.95)";
-                                e.currentTarget.style.transition = "color 0.3s ease";
-                            }}
-                            onMouseLeave={e => {
-                                e.currentTarget.style.color = "rgba(255,255,255,0.62)";
-                            }}
-                            style={{
-                                fontSize: 14,
-                                color: "rgba(255,255,255,0.62)",
-                                lineHeight: 1.7,
-                                margin: "0 0 20px",
-                                fontWeight: 300,
-                                cursor: "default",
-                                transition: "color 0.3s ease",
-                            }}
-                        >
-                            {country?.desc}
-                        </p>
-                        {/* Stats */}
-                        <div
-                            style={{
-                                display: "grid",
-                                gridTemplateColumns: "repeat(auto-fit, minmax(90px, 1fr))",
-                                gap: 10,
-                                marginBottom: 20,
-                            }}
-                        >
-                            {country?.stats.map((s) => (
-                                <div
-                                    key={s.label}
-                                    style={{
-                                        background: "rgba(255,255,255,0.05)",
-                                        border: "1px solid rgba(255,255,255,0.07)",
-                                        borderRadius: 10,
-                                        padding: "12px 10px",
-                                        textAlign: "center",
-                                    }}
-                                >
-                                    <div
-                                        style={{
-                                            fontFamily: "'Nunito', sans-serif",
-                                            fontSize: 20,
-                                            fontWeight: 700,
-                                            color: "#E8B84B",
-                                            lineHeight: 1,
-                                            marginBottom: 5,
-                                        }}
-                                    >
-                                        {s.num}
-                                    </div>
-                                    <div
-                                        style={{
-                                            fontSize: 10,
-                                            color: "rgba(255,255,255,0.42)",
-                                            textTransform: "uppercase",
-                                            letterSpacing: "0.07em",
-                                            lineHeight: 1.3,
-                                        }}
-                                    >
-                                        {s.label}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+// ─── Destination ticker ────────────────────────────────────────────────────
 
-                        <div className="hide-on-small" style={{ display: "block" }}>
-                            {/* Experiences */}
-                            <p
-                                style={{
-                                    fontSize: 10,
-                                    textTransform: "uppercase",
-                                    letterSpacing: "0.1em",
-                                    color: "rgba(255,255,255,0.32)",
-                                    marginBottom: 10,
-                                    fontWeight: 500,
-                                }}
-                            >
-                                Experiences await
-                            </p>
-                            <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
-                                {country?.experiences.map((exp) => (
-                                    <button
-                                        key={exp}
-                                        onMouseEnter={e => Object.assign(e.currentTarget.style, {
-                                            background: "rgba(200,146,42,0.18)",
-                                            border: "1px solid rgba(200,146,42,0.6)",
-                                            color: "#E8B84B",
-                                            transform: "translateY(-2px)",
-                                            boxShadow: "0 4px 12px rgba(200,146,42,0.15)",
-                                        })}
-                                        onMouseLeave={e => Object.assign(e.currentTarget.style, {
-                                            background: "rgba(255,255,255,0.06)",
-                                            border: "1px solid rgba(255,255,255,0.1)",
-                                            color: "rgba(255,255,255,0.7)",
-                                            transform: "translateY(0)",
-                                            boxShadow: "none",
-                                        })}
-                                        style={{
-                                            display: "inline-flex",
-                                            alignItems: "center",
-                                            gap: 5,
-                                            background: "rgba(255,255,255,0.06)",
-                                            border: "1px solid rgba(255,255,255,0.1)",
-                                            borderRadius: 8,
-                                            padding: "5px 11px",
-                                            fontSize: 12,
-                                            color: "rgba(255,255,255,0.7)",
-                                            cursor: "pointer",
-                                            transition: "all 0.25s ease",
-                                        }}
-                                    >
-                                        {exp}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+/** Thin, full-width data strip above the fold — earns its motion by acting
+ *  like a live manifest readout rather than ambient decoration. */
+const DestinationTicker = ({ countries, countriesLoading, fetchCountryFlag }) => {
+  let content;
 
-                    {/* CTA buttons */}
-                    <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                        <button
-                            onClick={() => setPage?.("trips")}
-                            style={{
-                                background: "#C8921A",
-                                color: "#fff",
-                                border: "none",
-                                padding: "14px 28px",
-                                borderRadius: 10,
-                                fontSize: 14,
-                                fontWeight: 600,
-                                cursor: "pointer",
-                                fontFamily: "inherit",
-                                letterSpacing: "0.01em",
-                                transition: "background 0.2s, transform 0.15s",
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.background = "#d9a020";
-                                e.currentTarget.style.transform = "translateY(-1px)";
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.background = "#C8921A";
-                                e.currentTarget.style.transform = "translateY(0)";
-                            }}
-                        >
-                            Book a Trip to {country?.name} →
-                        </button>
-                        <button
-                            onClick={() => setPage?.("trips")}
-                            style={{
-                                background: "rgba(255,255,255,0.07)",
-                                color: "rgba(255,255,255,0.72)",
-                                border: "1px solid rgba(255,255,255,0.14)",
-                                padding: "14px 22px",
-                                borderRadius: 10,
-                                fontSize: 14,
-                                fontWeight: 500,
-                                cursor: "pointer",
-                                fontFamily: "inherit",
-                                transition: "background 0.2s, color 0.2s",
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.background = "rgba(255,255,255,0.13)";
-                                e.currentTarget.style.color = "#fff";
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.background = "rgba(255,255,255,0.07)";
-                                e.currentTarget.style.color = "rgba(255,255,255,0.72)";
-                            }}
-                        >
-                            Explore All Trips
-                        </button>
-                    </div>
-                </div>
+  if (countriesLoading) {
+    content = Array.from({ length: 5 }).map((_, i) => (
+      <span key={`load-${i}`} className="h-3 w-20 animate-pulse rounded-full bg-[var(--exp-sand)]/10" />
+    ));
+  } else if (countries && countries.length > 0) {
+    content = countries.map((c) => (
+      <span key={c.id} className="inline-flex items-center gap-2 whitespace-nowrap">
+        <img src={fetchCountryFlag(c.name)} alt="" className="h-3 w-5 rounded-[2px] object-cover" />
+        {c.name}
+      </span>
+    ));
+  } else {
+    content = ["Kenya", "Tanzania", "Uganda", "Rwanda", "Namibia"].map((name) => (
+      <span key={name} className="whitespace-nowrap">
+        {name}
+      </span>
+    ));
+  }
 
-                {/* Scroll indicator */}
-                <div
-                    aria-hidden="true"
-                    style={{
-                        position: "absolute",
-                        bottom: 28,
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        gap: 5,
-                        animation: "bounce 2.5s ease-in-out infinite",
-                    }}
-                >
-                    <span
-                        style={{
-                            fontSize: 9,
-                            letterSpacing: "0.15em",
-                            color: "rgba(255,255,255,0.28)",
-                            textTransform: "uppercase",
-                        }}
-                    >
-                        Scroll
-                    </span>
-                    <div
-                        style={{
-                            width: 1,
-                            height: 36,
-                            background: "linear-gradient(to bottom, rgba(255,255,255,0.28), transparent)",
-                        }}
-                    />
-                </div>
+  return (
+    <div className="relative z-10 flex items-center gap-4 overflow-hidden border-y border-[var(--exp-ochre)]/15 bg-[var(--exp-moss)] py-2 font-['IBM_Plex_Mono'] text-[10px] uppercase tracking-[0.18em] text-[var(--exp-stone)]">
+      <span className="hidden shrink-0 border-r border-[var(--exp-sand)]/10 pl-4 pr-4 sm:inline">Field Notes</span>
+      <div className="flex shrink-0 animate-[exp-marquee_26s_linear_infinite] items-center gap-10 pr-10">
+        {content}
+        <span aria-hidden="true" className="exp-marquee-dup contents">
+          {content}
+        </span>
+      </div>
+    </div>
+  );
+};
+
+DestinationTicker.propTypes = {
+  countries: PropTypes.arrayOf(
+    PropTypes.shape({ id: PropTypes.string, name: PropTypes.string.isRequired })
+  ),
+  countriesLoading: PropTypes.bool,
+  fetchCountryFlag: PropTypes.func.isRequired,
+};
+DestinationTicker.defaultProps = { countries: [], countriesLoading: false };
+
+// ─── Framed field photo ────────────────────────────────────────────────────
+
+/** A single contained, mat-framed photo instead of a full-bleed background
+ *  — it carries the warmth on its own and straightens up on hover. */
+const FramedPhoto = ({ className }) => {
+  const [tilted, setTilted] = useState(true);
+
+  return (
+    <div
+      className={`relative ${className}`}
+      onMouseEnter={() => setTilted(false)}
+      onMouseLeave={() => setTilted(true)}
+      onFocus={() => setTilted(false)}
+      onBlur={() => setTilted(true)}
+      style={{ transform: tilted ? "rotate(-4deg)" : "rotate(0deg)", transition: "transform 0.4s ease" }}
+    >
+      <div className="border-[6px] border-[var(--exp-sand)] bg-[var(--exp-sand)] p-1 shadow-[0_18px_40px_rgba(10,12,8,0.45)]">
+        <img
+          src="/images/giraffe-bg.jpg"
+          alt="Guides leading a trek across open savanna"
+          className="h-40 w-full object-cover sm:h-48 lg:h-56"
+        />
+      </div>
+      <span className="absolute -bottom-3 -right-3 rounded-full bg-[var(--exp-ochre)] px-3 py-1 font-['IBM_Plex_Mono'] text-[9px] uppercase tracking-[0.16em] text-[var(--exp-ink)] shadow-md">
+        On Route
+      </span>
+    </div>
+  );
+};
+
+FramedPhoto.propTypes = { className: PropTypes.string };
+FramedPhoto.defaultProps = { className: "" };
+
+// ─── Manifest row (service entry) ──────────────────────────────────────────
+
+const getCode = (name) =>
+  name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
+
+/** One catalog entry in the services manifest. The two-letter code is a
+ *  gear-tag reference, not a step number — these aren't sequential. */
+const ManifestRow = ({ service, setPage }) => {
+  const Icon = service.icon;
+  const code = getCode(service.name);
+
+  return (
+    <button
+      type="button"
+      onClick={() => setPage("services", { id: service.id })}
+      aria-label={`Go to ${service.name}`}
+      className={`group flex w-full items-center justify-between gap-4 border-l-2 py-4 pl-4 pr-3 text-left transition-colors hover:bg-[var(--exp-rust)]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--exp-ochre)] ${
+        service.isPrimary ? "border-[var(--exp-ochre)] bg-[var(--exp-ochre)]/5" : "border-transparent"
+      }`}
+    >
+      <span className="flex min-w-0 items-center gap-3">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-[var(--exp-sand)]/15 font-['IBM_Plex_Mono'] text-[10px] font-semibold text-[var(--exp-ochre)]">
+          {code}
+        </span>
+        <Icon size={18} className="shrink-0 text-[var(--exp-sand)]/70" aria-hidden="true" />
+        <span className="flex min-w-0 flex-col">
+          <span className="truncate font-['Inter'] text-sm font-semibold text-[var(--exp-sand)]">
+            {service.name}
+          </span>
+          <span className="truncate font-['Inter'] text-xs text-[var(--exp-stone)]">{service.tagline}</span>
+        </span>
+      </span>
+      <span className="flex shrink-0 items-center gap-2">
+        {service.isPrimary && (
+          <span className="hidden font-['IBM_Plex_Mono'] text-[9px] uppercase tracking-[0.16em] text-[var(--exp-ochre)] sm:inline">
+            Featured
+          </span>
+        )}
+        <IconArrowUpRight
+          size={16}
+          className="text-[var(--exp-stone)] transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[var(--exp-ochre)]"
+        />
+      </span>
+    </button>
+  );
+};
+
+ManifestRow.propTypes = {
+  service: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    tagline: PropTypes.string.isRequired,
+    icon: PropTypes.elementType.isRequired,
+    isPrimary: PropTypes.bool,
+  }).isRequired,
+  setPage: PropTypes.func.isRequired,
+};
+
+// ─── Hero ───────────────────────────────────────────────────────────────────
+
+/**
+ * Hero section.
+ *
+ * Props:
+ *   countries        – array of country objects (falls back to a static list)
+ *   countriesLoading – show a skeleton ticker while countries load
+ *   setPage          – navigate to a named page
+ *   fetchCountryFlag – (countryName: string) => flagImageUrl: string
+ */
+export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountryFlag }) => {
+  const destinationCount = (countries && countries.length) || 4;
+
+  return (
+    <section
+      className="relative w-full overflow-hidden font-['Inter']"
+      style={{
+        backgroundImage:
+          "radial-gradient(circle at 15% -10%, rgba(201,154,59,0.16), transparent 45%), radial-gradient(circle at 100% 115%, rgba(177,80,43,0.18), transparent 50%), linear-gradient(180deg, var(--exp-ink), #10140d)",
+      }}
+    >
+      <GeoShapes />
+
+      <DestinationTicker
+        countries={countries}
+        countriesLoading={countriesLoading}
+        fetchCountryFlag={fetchCountryFlag}
+      />
+
+      <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-10 sm:px-8 sm:pb-20 sm:pt-14 lg:px-10 lg:pb-28 lg:pt-16">
+        <div className="relative lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-10">
+          {/* ── Copy column ─────────────────────────────────────────────── */}
+          <div className="relative lg:col-span-7">
+            <FieldStamp className="exp-reveal-1 mb-6 lg:absolute lg:-top-2 lg:right-0 lg:mb-0 lg:translate-x-4" />
+
+            <p className="exp-reveal-1 max-w-sm font-['IBM_Plex_Mono'] text-[11px] uppercase tracking-[0.22em] text-[var(--exp-ochre)]">
+              Guided Expeditions · Field-Tested Routes
+            </p>
+
+            <h1 className="exp-reveal-2 mt-4 max-w-xl font-['Space_Grotesk'] text-[2.5rem] font-semibold leading-[1.05] tracking-tight text-[var(--exp-sand)] sm:text-5xl lg:text-[3.75rem]">
+              {HERO_COPY.headline}
+              <span className="mt-1 block font-['Newsreader'] text-[1.05em] font-medium italic text-[var(--exp-ochre)]">
+                {HERO_COPY.headlineEm}
+              </span>
+            </h1>
+
+            <p className="exp-reveal-3 mt-5 max-w-md font-['Inter'] text-[15px] leading-relaxed text-[var(--exp-stone)]">
+              {HERO_COPY.subheadline}
+            </p>
+
+            <div className="exp-reveal-3 mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <button
+                type="button"
+                onClick={() => setPage("trips")}
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-[var(--exp-ochre)] px-6 py-3.5 font-['Inter'] text-sm font-semibold text-[var(--exp-ink)] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-[var(--exp-rust)] hover:text-[var(--exp-sand)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--exp-sand)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--exp-ink)]"
+              >
+                <IconTrekking size={18} aria-hidden="true" />
+                {HERO_COPY.ctaPrimary}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setPage("services")}
+                className="group inline-flex items-center justify-center gap-1.5 rounded-sm px-1 font-['Inter'] text-sm font-semibold text-[var(--exp-sand)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--exp-ochre)]"
+              >
+                See all services
+                <IconArrowUpRight
+                  size={16}
+                  className="transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1"
+                />
+              </button>
             </div>
-        </section>
-    );
-};
-Hero.propTypes = {
-    countries: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        nickname: PropTypes.string.isRequired,
-        desc: PropTypes.string.isRequired,
-        highlight: PropTypes.string.isRequired,
-        stats: PropTypes.arrayOf(PropTypes.shape({
-            label: PropTypes.string.isRequired,
-            num: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-        })).isRequired,
-        experiences: PropTypes.arrayOf(PropTypes.string).isRequired,
-    })).isRequired,
-    countriesLoading: PropTypes.bool.isRequired,
-    setPage: PropTypes.func.isRequired,
-    fetchCountryFlag: PropTypes.func.isRequired
+
+            <div className="exp-reveal-4 mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 font-['IBM_Plex_Mono'] text-[10px] uppercase tracking-[0.16em] text-[var(--exp-stone)]">
+              <span>{SERVICES.length} Service Lines</span>
+              <span className="h-1 w-1 rounded-full bg-[var(--exp-stone)]/50" aria-hidden="true" />
+              <span>{destinationCount}+ Countries Mapped</span>
+            </div>
+          </div>
+
+          {/* ── Manifest column (offset lower for the asymmetric feel) ───── */}
+          <div className="relative mt-12 lg:col-span-5 lg:col-start-8 lg:mt-28">
+            <FramedPhoto className="mb-6 w-40 sm:w-48 lg:absolute lg:-left-14 lg:-top-16 lg:z-10 lg:mb-0 lg:w-44" />
+
+            <div className="relative rounded-2xl border border-[var(--exp-sand)]/10 bg-[var(--exp-moss)]/60 p-5 backdrop-blur-sm sm:p-6">
+              <div className="mb-2 flex items-center justify-between">
+                <h2 className="font-['IBM_Plex_Mono'] text-[11px] uppercase tracking-[0.2em] text-[var(--exp-stone)]">
+                  {HERO_COPY.servicesLabel}
+                </h2>
+                <span className="font-['IBM_Plex_Mono'] text-[10px] text-[var(--exp-stone)]/70">
+                  {SERVICES.length} Lines
+                </span>
+              </div>
+
+              <div className="divide-y divide-[var(--exp-sand)]/10">
+                {SERVICES.map((service, i) => (
+                  <div key={service.id} className="exp-row" style={{ animationDelay: `${0.35 + i * 0.08}s` }}>
+                    <ManifestRow service={service} setPage={setPage} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
+HeroServices.propTypes = {
+  /** Runtime country data from API/CMS. Falls back to a static list if omitted or empty. */
+  countries: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      nickname: PropTypes.string.isRequired,
+      desc: PropTypes.string.isRequired,
+      stats: PropTypes.arrayOf(
+        PropTypes.shape({
+          label: PropTypes.string.isRequired,
+          num: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        })
+      ).isRequired,
+      experiences: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  ),
+  countriesLoading: PropTypes.bool,
+  setPage: PropTypes.func.isRequired,
+  fetchCountryFlag: PropTypes.func.isRequired,
+};
 
-export default Hero;
+HeroServices.defaultProps = {
+  countries: [],
+  countriesLoading: false,
+};
+
+export default HeroServices;

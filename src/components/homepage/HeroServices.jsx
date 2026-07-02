@@ -117,23 +117,20 @@ const SectionLabel = ({ children }) => (
  *  unreadable before, so this card carries its own contrast instead of
  *  borrowing it from whatever's behind the hero. */
 const ServiceCard = ({ service, setPage }) => {
-  const [hovered, setHovered] = useState(false);
   const Icon = service.icon;
 
   const cardStyle = {
     background: service.isPrimary ? "#FFF8EC" : "var(--htw-sand)",
     border: service.isPrimary
       ? "1.5px solid var(--htw-sunset)"
-      : `1.5px solid ${hovered ? "var(--htw-sunset)" : "rgba(58,28,16,0.12)"}`,
+      : `1.5px solid ${"var(--htw-sunset)"}`,
     borderRadius: 14,
     padding: "16px 14px",
     cursor: "pointer",
     textAlign: "left",
     transition: "border-color 0.2s, box-shadow 0.2s, transform 0.15s",
-    transform: hovered ? "translateY(-3px)" : "translateY(0)",
-    boxShadow: hovered
-      ? "0 10px 22px rgba(20,8,4,0.28)"
-      : "0 4px 12px rgba(20,8,4,0.18)",
+    transform: "translateY(-3px)",
+    boxShadow: "0 10px 22px rgba(20,8,4,0.28)",
     width: "100%",
     height: "100%",
   };
@@ -142,12 +139,8 @@ const ServiceCard = ({ service, setPage }) => {
     <button
       type="button"
       style={cardStyle}
-      className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8792A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2A130A]"
+      className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#205428] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2A130A]"
       onClick={() => setPage("services", { id: service.id })}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onFocus={() => setHovered(true)}
-      onBlur={() => setHovered(false)}
       aria-label={`Go to ${service.name}`}
     >
       <span
