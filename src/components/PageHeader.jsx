@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 /**
  * PageHeader
@@ -75,21 +76,6 @@ function injectStyles() {
       to { opacity: 1; }
     }
 
-    .pgh-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .pgh-eyebrow::before {
-      content: "";
-      width: 18px;
-      height: 1px;
-      background: currentColor;
-      opacity: 0.7;
-      flex-shrink: 0;
-    }
-
     .pgh-title {
       background: linear-gradient(90deg, #ffffff 0%, #f4ead9 100%);
       -webkit-background-clip: text;
@@ -98,22 +84,61 @@ function injectStyles() {
       color: transparent;
     }
 
-    .pgh-breadcrumb a {
-      color: inherit;
-      text-decoration: none;
-      opacity: 0.7;
-      transition: opacity 150ms ease;
+    /* New abstract background elements */
+    .pgh-abstract-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
     }
 
-    .pgh-breadcrumb a:hover,
-    .pgh-breadcrumb a:focus-visible {
-      opacity: 1;
+    .pgh-abstract-bg::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(232, 150, 74, 0.08) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(232, 150, 74, 0.06) 0%, transparent 20%),
+        radial-gradient(circle at 50% 50%, rgba(47, 93, 69, 0.04) 0%, transparent 30%);
+      animation: pgh-float 25s ease-in-out infinite;
     }
 
-    .pgh-breadcrumb a:focus-visible {
-      outline: 2px solid rgba(255,255,255,0.85);
-      outline-offset: 3px;
-      border-radius: 3px;
+    .pgh-abstract-bg::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 10px,
+          rgba(232, 150, 74, 0.03) 10px,
+          rgba(232, 150, 74, 0.03) 20px
+        ),
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 10px,
+          rgba(232, 150, 74, 0.03) 10px,
+          rgba(232, 150, 74, 0.03) 20px
+        );
+      opacity: 0.6;
+    }
+
+    @keyframes pgh-float {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(-10px, -10px); }
+      50% { transform: translate(10px, 10px); }
+      75% { transform: translate(-10px, 10px); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -122,6 +147,10 @@ function injectStyles() {
         animation: none !important;
         stroke-dashoffset: 0;
         opacity: 1;
+      }
+      
+      .pgh-abstract-bg::before {
+        animation: none !important;
       }
     }
 
@@ -153,13 +182,16 @@ export default function PageHeader({
 
   return (
     <header
-      className={`pgh-root${className ? ` ${className}` : ""}`}
+      className={`pgh-root${className ? ` ${className}` : ''}`}
       style={{
         background: `linear-gradient(135deg, ${c.jungle} 0%, ${c.jungleLight} 100%)`,
         padding: "56px 24px 40px",
-        ...style,
+        ...style
       }}
     >
+      {/* Abstract background elements for safari theme */}
+      <div className="pgh-abstract-bg"></div>
+      
       {/* Signature: a hand-drawn route line plotting a "journey" across the hero */}
       <svg
         className="pgh-route"
@@ -279,3 +311,16 @@ export default function PageHeader({
     </header>
   );
 }
+
+PageHeader.propTypes = {
+  eyebrow: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  meta: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  breadcrumb: PropTypes.node,
+  colors: PropTypes.object,
+  align: PropTypes.oneOf(['left', 'center']),
+  children: PropTypes.node,
+  className: PropTypes.string,
+  style: PropTypes.object
+};

@@ -445,7 +445,7 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
           }}>
             {HERO_COPY.headline}{" "}
             <em style={{
-              fontStyle: "italic",
+              fontFamily: "'Dancing Script', cursive",
               fontWeight: 500,
               color: "var(--htw-gold)",
               fontSize: "clamp(24px, 5vw, 48px)", // Slightly smaller than main headline
@@ -473,7 +473,7 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
         </div>
 
         {/* CTA - compact */}
-        <div style={{ marginBottom: "clamp(28px, 5vh, 40px)" }}>
+        <div style={{ marginBottom: "clamp(28px, 5vh, 20px)" }}>
           <button
             type="button"
             onClick={() => setPage("trips")}
