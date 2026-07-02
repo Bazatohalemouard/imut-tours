@@ -2,17 +2,17 @@ import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useSEO } from "../utils/useSEO";
+import { colors } from "../theme/colors";
 import {
   IconMail,
   IconPhone,
   IconCopy,
-  IconCheck,
-  IconHandClick
 } from "@tabler/icons-react";
 import { SERVICES_LIST, SERVICES_COPY, PROMISE_CARDS } from "../api/datasets/servicesdata";
 import PageHeader from "../components/PageHeader";
 
 // ─── Keyframe injection ───────────────────────────────────────────────────────
+// Same light theme as AboutPage — cream / white sections, brand + gold accents.
 const STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap');
 
@@ -20,88 +20,55 @@ const STYLES = `
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  @keyframes shimmer {
-    0%   { background-position: -200% center; }
-    100% { background-position: 200% center; }
-  }
-  @keyframes pulse-ring {
-    0%   { transform: scale(1);   opacity: 0.6; }
-    100% { transform: scale(1.5); opacity: 0; }
-  }
 
   .svc-card-wrap {
     animation: fadeUp 0.5s ease both;
   }
   .svc-card-inner {
     position: relative;
-    background: rgba(26,12,6,0.82);
-    border: 1px solid rgba(200,146,42,0.28);
+    background: #ffffff;
+    border: 1px solid ${colors.sand};
     border-radius: 16px;
     padding: 32px 28px;
     height: 100%;
     cursor: default;
-    transition: border-color 0.25s, transform 0.22s, background 0.25s;
-    overflow: hidden;
+    transition: border-color 0.25s, transform 0.22s, box-shadow 0.25s;
   }
   .svc-card-inner:hover {
-    border-color: #C8921A;
-    background: rgba(36,18,6,0.92);
+    border-color: ${colors.gold};
     transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(31, 61, 43, 0.08);
   }
   .svc-card-inner.primary {
-    border-color: rgba(200,146,42,0.65);
-    background: rgba(200,146,42,0.07);
-  }
-  .svc-card-inner.primary:hover {
-    background: rgba(200,146,42,0.12);
-  }
-  .svc-card-inner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 16px;
-    background: linear-gradient(135deg, rgba(200,146,42,0.06) 0%, transparent 60%);
-    pointer-events: none;
+    border-color: ${colors.gold};
+    background: ${colors.cream};
   }
 
   .highlight-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
     border-radius: 6px;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.78); /* was 0.58 — lifted to pass AA */
+    padding: 5px 8px;
+    font-size: 13px;
+    color: ${colors.textMuted};
     transition: background 0.2s, color 0.2s;
     cursor: default;
   }
   .highlight-chip:hover {
-    background: rgba(200, 146, 42, 0.1);
-    color: #ffffff;
-  }
-
-  .stat-card {
-    background: rgba(26,12,6,0.7);
-    border: 1px solid rgba(200,146,42,0.22);
-    border-radius: 12px;
-    padding: 22px 18px;
-    text-align: center;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .stat-card:hover {
-    border-color: rgba(200,146,42,0.55);
-    transform: translateY(-2px);
+    background: ${colors.cream};
+    color: ${colors.brand};
   }
 
   .contact-btn-primary {
     display: inline-flex;
     align-items: center;
     gap: 9px;
-    background: #C8921A;
+    background: ${colors.jungle};
     color: #fff;
     border: none;
     padding: 15px 30px;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
@@ -110,35 +77,36 @@ const STYLES = `
     transition: background 0.2s, transform 0.15s;
   }
   .contact-btn-primary:hover {
-    background: #d9a020;
+    background: ${colors.brand};
     transform: translateY(-2px);
   }
 
-  .contact-btn-ghost {
+  .whatsapp-btn {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
-    background: rgba(255,255,255,0.07);
-    color: rgba(255,255,255,0.72);
-    border: 1px solid rgba(255,255,255,0.14);
-    padding: 15px 22px;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: 500;
+    gap: 8px;
+    background: rgba(37,211,102,0.1);
+    border: 1px solid rgba(37,211,102,0.4);
+    color: #1f9d55;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
     font-family: inherit;
-    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
   }
-  .contact-btn-ghost:hover {
-    background: rgba(255,255,255,0.13);
-    color: #fff;
+  .whatsapp-btn:hover {
+    background: rgba(37,211,102,0.18);
+    border-color: rgba(37,211,102,0.6);
   }
 
   .contact-meta-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: rgba(255,255,255,0.52);
+    color: ${colors.textMuted};
     font-size: 13px;
     text-decoration: none;
     transition: color 0.18s;
@@ -149,77 +117,20 @@ const STYLES = `
     padding: 0;
   }
   .contact-meta-link:hover {
-    color: #E8B84B;
+    color: ${colors.gold};
   }
 
-  .nav-tab {
+  .svc-cta-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border-radius: 99px;
-    border: 1px solid transparent;
-    background: transparent;
-    color: rgba(255,255,255,0.45);
-    font-size: 13px;
-    font-weight: 400;
+    gap: 7px;
     cursor: pointer;
-    font-family: inherit;
-    transition: all 0.18s;
-    white-space: nowrap;
-  }
-  .nav-tab:hover {
-    color: rgba(255,255,255,0.8);
-    background: rgba(200,146,42,0.08);
-    border-color: rgba(200,146,42,0.28);
-  }
-  .nav-tab.active {
-    background: rgba(200,146,42,0.15);
-    border-color: rgba(200,146,42,0.5);
-    color: #E8B84B;
-    font-weight: 600;
-  }
-
-  .divider-line {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(to right, rgba(200,146,42,0.35), rgba(200,146,42,0.05), transparent);
-  }
-
-  .whatsapp-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(37,211,102,0.12);
-    border: 1px solid rgba(37,211,102,0.35);
-    color: #4ade80;
-    padding: 12px 20px;
-    border-radius: 10px;
+    border-radius: 9px;
+    padding: 10px 18px;
     font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
+    font-weight: 700;
     font-family: inherit;
-    text-decoration: none;
-    transition: background 0.2s, border-color 0.2s;
-  }
-  .whatsapp-btn:hover {
-    background: rgba(37,211,102,0.2);
-    border-color: rgba(37,211,102,0.55);
-  }
-  .highlight-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    border-radius: 6px;
-    padding: 4px 10px;
-    font-size: 11px;
-    color: rgba(255,255,255,0.58);
-    transition: background 0.2s, color 0.2s;
-    cursor: default;
-  }
-  .highlight-chip:hover {
-    background: rgba(200,146,42,0.08);
-    color: rgba(255,255,255,0.9);
+    transition: background 0.2s, transform 0.15s;
   }
 `;
 
@@ -233,131 +144,269 @@ if (typeof document !== "undefined" && !document.getElementById("services-styles
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 const SectionLabel = ({ children }) => (
-  <p style={{
-    fontSize: 10,
-    textTransform: "uppercase",
-    letterSpacing: "0.14em",
-    color: "rgba(255,255,255,0.3)",
-    fontWeight: 500,
-    marginBottom: 12,
-    fontFamily: "'DM Sans', sans-serif",
-  }}>
+  <p
+    style={{
+      color: colors.gold,
+      fontSize: 13,
+      fontWeight: 700,
+      letterSpacing: "0.12em",
+      textTransform: "uppercase",
+      marginBottom: 12,
+    }}
+  >
     {children}
   </p>
 );
 
-const AmbientOrbs = () => (
-  <div style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden" }}>
-    <div style={{
-      position: "absolute", width: 600, height: 600,
-      top: -200, right: -150, borderRadius: "50%",
-      background: "radial-gradient(circle, rgba(200,146,42,0.1) 0%, transparent 65%)",
-    }} />
-    <div style={{
-      position: "absolute", width: 400, height: 400,
-      top: "35%", left: -150, borderRadius: "50%",
-      background: "radial-gradient(circle, rgba(200,146,42,0.07) 0%, transparent 70%)",
-    }} />
-    <div style={{
-      position: "absolute", width: 500, height: 500,
-      bottom: -100, right: "20%", borderRadius: "50%",
-      background: "radial-gradient(circle, rgba(200,146,42,0.06) 0%, transparent 70%)",
-    }} />
-    {/* Decorative rings */}
-    <div style={{
-      position: "absolute", width: 360, height: 360,
-      top: "8%", right: "4%", borderRadius: "50%",
-      border: "1px solid rgba(200,146,42,0.12)",
-    }} />
-    <div style={{
-      position: "absolute", width: 220, height: 220,
-      top: "18%", right: "14%", borderRadius: "50%",
-      border: "1px solid rgba(200,146,42,0.08)",
-    }} />
-  </div>
-);
+SectionLabel.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
-/** Individual service card */
-const ServiceCard = ({ service, index, onContact, highlighted }) => {
+/** Individual service card — same visual language as the About page's value cards */
+const ServiceCard = ({ service, index, onContact, highlighted, cardRef }) => {
   const Icon = service.icon;
+
+  // Color palette for each service
+  const colorPalette = {
+    tours: {
+      primary: "#2D5A27",
+      secondary: "#4CAF50",
+      accent: "#8BC34A",
+      background: "#F8FFF7",
+      border: "#E8F5E9"
+    },
+    "car-rentals": {
+      primary: "#1976D2",
+      secondary: "#2196F3",
+      accent: "#42A5F5",
+      background: "#F5FAFF",
+      border: "#E3F2FD"
+    },
+    "airport-transfers": {
+      primary: "#FF9800",
+      secondary: "#FFB74D",
+      accent: "#FFCC80",
+      background: "#FFF8F0",
+      border: "#FFF3E0"
+    },
+    taxi: {
+      primary: "#9C27B0",
+      secondary: "#BA68C8",
+      accent: "#CE93D8",
+      background: "#FAF5FF",
+      border: "#F3E5F5"
+    },
+    hotels: {
+      primary: "#3F51B5",
+      secondary: "#5C6BC0",
+      accent: "#7986CB",
+      background: "#F5F7FF",
+      border: "#E8EAF6"
+    },
+    visa: {
+      primary: "#795548",
+      secondary: "#8D6E63",
+      accent: "#A1887F",
+      background: "#FDF6F0",
+      border: "#EFEBE9"
+    }
+  };
+
+  const colors = colorPalette[service.id] || colorPalette.tours;
+
+  // Use media query to determine if we're on mobile
+  const isMobile = window.innerWidth < 768;
+  const [expanded, setExpanded] = useState(!isMobile);
+
+  const toggleExpanded = () => {
+    setExpanded(!expanded);
+  };
+
   return (
-    <div className="svc-card-wrap" style={{ animationDelay: `${index * 0.08}s` }}>
-      <div className={`svc-card-inner${service.isPrimary ? " primary" : ""}`}
-        style={highlighted ? {
-          borderColor: "#C8921A",
-          boxShadow: "0 0 0 3px rgba(200,146,42,0.25), 0 0 24px rgba(200,146,42,0.15)",
-        } : undefined}
+    <div className="svc-card-wrap" style={{ animationDelay: `${index * 0.06}s` }} ref={cardRef}>
+      <div
+        className={`svc-card-inner${service.isPrimary ? " primary" : ""}`}
+        style={
+          highlighted
+            ? {
+              borderColor: colors.accent,
+              boxShadow: "0 0 0 3px rgba(139, 195, 74, 0.22), 0 12px 28px rgba(31, 61, 43, 0.1)",
+            }
+            : {
+              borderColor: colors.border,
+              backgroundColor: colors.background,
+              minHeight: '400px',
+              display: 'flex',
+              flexDirection: 'column',
+            }
+        }
       >
-        {/* Icon */}
-        <div style={{
-          width: 52, height: 52, borderRadius: 14, marginBottom: 18, flexShrink: 0,
-          background: service.isPrimary ? "rgba(200,146,42,0.22)" : "rgba(200,146,42,0.12)",
-          border: `1.5px solid ${service.isPrimary ? "rgba(200,146,42,0.7)" : "rgba(200,146,42,0.35)"}`,
-          display: "flex", alignItems: "center", justifyContent: "center",
-        }}>
-          <Icon aria-hidden="true" style={{ width: 24, height: 24, color: "#F0C060" }} />
+        {/* Icon and Name */}
+        <div
+          style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 18, cursor: 'pointer' }}
+          onClick={toggleExpanded}
+        >
+          <div
+            style={{
+              width: 52,
+              height: 52,
+              borderRadius: 14,
+              flexShrink: 0,
+              background: service.isPrimary ? "rgba(200,146,42,0.16)" : colors.background,
+              border: `1.5px solid ${service.isPrimary ? colors.accent : colors.border}`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: service.isPrimary ? "0 2px 8px rgba(200,146,42,0.2)" : "0 1px 4px rgba(0,0,0,0.05)",
+            }}
+          >
+            <Icon aria-hidden="true" style={{ width: 24, height: 24, color: service.isPrimary ? colors.accent : colors.primary }} />
+          </div>
+
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+              <div
+                style={{
+                  fontFamily: "'Nunito', sans-serif",
+                  fontSize: 18,
+                  fontWeight: 700,
+                  color: service.isPrimary ? colors.primary : "#333",
+                  lineHeight: 1.25,
+                }}
+              >
+                {service.name}
+              </div>
+            </div>
+
+            {/* Tagline */}
+            <div
+              style={{
+                fontSize: 14,
+                fontWeight: 600,
+                letterSpacing: "0.01em",
+                fontFamily: "'Dancing Script', cursive",
+                color: service.isPrimary ? colors.accent : colors.primary,
+                marginBottom: 14,
+              }}
+            >
+              {service.tagline}
+            </div>
+          </div>
         </div>
 
-        {/* Name */}
-        <div style={{
-          fontFamily: "'Nunito', sans-serif", fontSize: 18, fontWeight: 700,
-          color: "#FFFFFF", lineHeight: 1.25, marginBottom: 4,
-        }}>
-          {service.name}
-        </div>
-
-        {/* Tagline — bumped size, weight and contrast */}
-        <div style={{
-          fontSize: 13, fontWeight: 600, letterSpacing: "0.02em",
-          fontFamily: "'Telma', cursive",
-          color: "#F0C060", marginBottom: 14,
-        }}>
-          {service.tagline}
-        </div>
-
-        {/* Description — weight 400 + contrast lifted to ~7:1 */}
-        <p style={{
-          fontSize: 14, color: "rgba(255,255,255,0.82)", lineHeight: 1.75,
-          fontWeight: 400, margin: "0 0 20px",
-        }}>
+        {/* Description */}
+        <p
+          style={{
+            fontSize: 14,
+            color: "#555",
+            lineHeight: 1.5,
+            fontWeight: 400,
+            margin: "0 0 16px",
+          }}
+        >
           {service.description}
         </p>
 
+        <div style={{
+          marginTop: 'auto',
+          padding: isMobile ? '0 15px 15px' : '0 20px 20px',
+          justifyContent: 'center',
+          display: isMobile ? 'flex': 'none'
+        }}>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleExpanded();
+            }}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: 0,
+              display: 'flex',
+              alignItems: 'center',
+              marginLeft: 'auto',
+            }}
+            aria-label={expanded ? "Collapse details" : "Expand details"}
+          >
+            {expanded ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={service.isPrimary ? colors.primary : colors.accent} strokeWidth="2">
+                <path d="M18 15l-6-6-6 6" />
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={service.isPrimary ? colors.primary : colors.accent} strokeWidth="2">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            )}
+          </button>
+        </div>
+
+
         {/* Highlights */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 22 }}>
-          {service.highlights.map(h => (
-            <span key={h} className="highlight-chip"
-              style={{ display: "flex", alignItems: "center", gap: 9, padding: "5px 8px" }}>
-              <IconCheck aria-hidden="true"
-                style={{ width: 13, height: 13, color: "#F0C060", strokeWidth: 2.5, flexShrink: 0 }} />
-              {h}
-            </span>
+        <div
+          style={{
+            display: expanded ? 'flex' : 'none',
+            flexDirection: 'column',
+            gap: 8,
+            marginBottom: 24,
+          }}
+        >
+          {service.highlights && service.highlights.map((highlight, idx) => (
+            <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={service.isPrimary ? colors.primary : colors.accent} strokeWidth="2">
+                <path d="M5 12l5 5L19 7" />
+              </svg>
+              <span style={{ fontSize: '13px', color: '#666' }}>{highlight}</span>
+            </div>
           ))}
         </div>
 
-        {/* CTA */}
-        <button
-          onClick={() => onContact(service.name)}
-          style={{
-            display: "inline-flex", alignItems: "center", gap: 7, cursor: "pointer",
-            background: service.isPrimary ? "#C8921A" : "rgba(200,146,42,0.15)",
-            border: service.isPrimary ? "none" : "1.5px solid rgba(200,146,42,0.55)",
-            color: service.isPrimary ? "#FFFFFF" : "#F5C842",
-            borderRadius: 9, padding: "10px 18px", fontSize: 13,
-            fontWeight: 700, fontFamily: "inherit", transition: "background 0.2s, transform 0.15s",
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.background = service.isPrimary ? "#d9a020" : "rgba(200,146,42,0.28)";
-            e.currentTarget.style.transform = "translateY(-1px)";
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.background = service.isPrimary ? "#C8921A" : "rgba(200,146,42,0.15)";
-            e.currentTarget.style.transform = "translateY(0)";
-          }}
-        >
-          <IconHandClick aria-hidden="true" style={{ width: 14, height: 14 }} />
-          {service.isPrimary ? "Book a Tour" : "Reach Out"}
-        </button>
+        {/* CTA Button - Properly spaced on both mobile and desktop */}
+        <div style={{
+          marginTop: 'auto',
+          padding: isMobile ? '0 15px 15px' : '0 20px 20px',
+          display: 'flex',
+          justifyContent: 'center'
+        }}>
+          <button
+            onClick={() => onContact(service.id)}
+            className="svc-card-cta"
+            style={{
+              background: service.isPrimary ? colors.primary : "transparent",
+              color: service.isPrimary ? "#fff" : colors.primary,
+              border: service.isPrimary ? `1px solid ${colors.primary}` : `1px solid ${colors.accent}`,
+              padding: '12px 24px',
+              borderRadius: '8px',
+              fontWeight: 600,
+              fontSize: '14px',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              width: '100%',
+              maxWidth: '200px',
+              boxShadow: service.isPrimary ? "0 2px 8px rgba(45, 90, 39, 0.2)" : "0 1px 4px rgba(0,0,0,0.05)",
+            }}
+            onMouseEnter={(e) => {
+              if (service.isPrimary) {
+                e.target.style.background = colors.secondary;
+                e.target.style.boxShadow = "0 3px 12px rgba(45, 90, 39, 0.3)";
+              } else {
+                e.target.style.borderColor = colors.primary;
+                e.target.style.color = colors.primary;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (service.isPrimary) {
+                e.target.style.background = colors.primary;
+                e.target.style.boxShadow = "0 2px 8px rgba(45, 90, 39, 0.2)";
+              } else {
+                e.target.style.borderColor = colors.accent;
+                e.target.style.color = colors.primary;
+              }
+            }}
+          >
+            {service.isPrimary ? "Book Your Tour" : "Contact Us"}
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -367,98 +416,11 @@ ServiceCard.propTypes = {
   service: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   onContact: PropTypes.func.isRequired,
-  highlighted: PropTypes.string,
+  highlighted: PropTypes.bool,
+  cardRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
-/** Trust stats row */
-const TrustBar = ({ stats }) => (
-  <div style={{
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
-    gap: 12,
-    marginBottom: 72,
-    animation: "fadeUp 0.5s ease 0.15s both",
-  }}>
-    {stats.map(s => (
-      <div key={s.label} className="stat-card">
-        <i
-          className={`ti ${s.icon}`}
-          aria-hidden="true"
-          style={{ fontSize: 20, color: "#E8B84B", display: "block", marginBottom: 10 }}
-        />
-        <div style={{
-          fontFamily: "'Nunito', sans-serif",
-          fontSize: 26,
-          fontWeight: 900,
-          color: "#fff",
-          lineHeight: 1,
-          marginBottom: 6,
-        }}>
-          {s.num}
-        </div>
-        <div style={{
-          fontSize: 11,
-          color: "rgba(255,255,255,0.38)",
-          textTransform: "uppercase",
-          letterSpacing: "0.07em",
-        }}>
-          {s.label}
-        </div>
-      </div>
-    ))}
-  </div>
-);
-
-TrustBar.propTypes = {
-  stats: PropTypes.arrayOf(PropTypes.shape({
-    num: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
-  })).isRequired,
-};
-
-/** Quick-nav filter tabs */
-const ServiceNav = ({ services, activeId, onSelect }) => (
-  <div style={{
-    display: "flex",
-    flexWrap: "wrap",
-    gap: 6,
-    marginBottom: 48,
-  }}
-    role="tablist"
-    aria-label="Filter services"
-  >
-    <button
-      role="tab"
-      aria-selected={activeId === "all"}
-      className={`nav-tab${activeId === "all" ? " active" : ""}`}
-      onClick={() => onSelect("all")}
-    >
-      <i className="ti ti-layout-grid" aria-hidden="true" style={{ fontSize: 13 }} />
-      All Services
-    </button>
-    {services.map(s => (
-      <button
-        key={s.id}
-        role="tab"
-        aria-selected={activeId === s.id}
-        className={`nav-tab${activeId === s.id ? " active" : ""}`}
-        onClick={() => onSelect(s.id)}
-      >
-        <i className={`ti ${s.icon}`} aria-hidden="true" style={{ fontSize: 13 }} />
-        {s.name.split(" ")[0]}
-      </button>
-    ))}
-  </div>
-);
-
-ServiceNav.propTypes = {
-  services: PropTypes.array.isRequired,
-  activeId: PropTypes.string.isRequired,
-  onSelect: PropTypes.func.isRequired,
-};
-
-/** Contact / CTA section */
+/** Contact / CTA section — styled to match the About page's "Get in Touch" tone */
 const ContactSection = ({ copy, prefillService }) => {
   const [copied, setCopied] = useState(false);
 
@@ -473,29 +435,21 @@ const ContactSection = ({ copy, prefillService }) => {
     <section
       style={{
         position: "relative",
-        borderTop: "1px solid rgba(200,146,42,0.22)",
-        paddingTop: 72,
-        marginTop: 80,
-        animation: "fadeUp 0.5s ease 0.3s both",
+        background: "#fff",
+        borderRadius: 24,
+        border: `1px solid ${colors.sand}`,
+        padding: "clamp(32px, 5vw, 56px)",
+        marginTop: 24,
+        animation: "fadeUp 0.5s ease 0.15s both",
       }}
       id="contact"
       aria-labelledby="contact-heading"
     >
-      {/* Decorative corner accent */}
-      <div style={{
-        position: "absolute",
-        top: -1,
-        left: 0,
-        width: 120,
-        height: 2,
-        background: "linear-gradient(to right, #C8921A, transparent)",
-      }} />
-
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "1fr",
-          gap: 32,
+          gap: 40,
           alignItems: "start",
         }}
         className="lg:grid-cols-[1fr_1fr]"
@@ -508,20 +462,19 @@ const ContactSection = ({ copy, prefillService }) => {
             id="contact-heading"
             style={{
               fontFamily: "'Nunito', sans-serif",
-              fontSize: "clamp(26px, 4vw, 42px)",
-              fontWeight: 900,
-              lineHeight: 1.08,
-              color: "#fff",
+              fontSize: "clamp(26px, 4vw, 40px)",
+              fontWeight: 700,
+              lineHeight: 1.15,
+              color: colors.brand,
               margin: "0 0 18px",
-              letterSpacing: "-0.02em",
             }}
           >
             {copy.contactHeadline.split(" ").slice(0, -2).join(" ")}{" "}
             <em
               style={{
-                color: "#E8B84B",
+                color: colors.gold,
                 fontStyle: "italic",
-                fontFamily: "'Telma', cursive",
+                fontFamily: "'Dancing Script', cursive",
               }}
             >
               {copy.contactHeadline.split(" ").slice(-2).join(" ")}
@@ -530,10 +483,9 @@ const ContactSection = ({ copy, prefillService }) => {
 
           <p
             style={{
-              fontSize: 15,
-              color: "rgba(255,255,255,0.55)",
-              lineHeight: 1.75,
-              fontWeight: 300,
+              fontSize: 15.5,
+              color: colors.textMuted,
+              lineHeight: 1.8,
               margin: "0 0 32px",
               maxWidth: 420,
             }}
@@ -556,16 +508,9 @@ const ContactSection = ({ copy, prefillService }) => {
               href={`mailto:${copy.email}?subject=Trip Enquiry${prefillService ? ` – ${prefillService}` : ""
                 }`}
               className="contact-btn-primary"
-              style={{
-                textDecoration: "none",
-                width: "100%",
-                justifyContent: "center",
-              }}
+              style={{ textDecoration: "none", width: "100%", justifyContent: "center" }}
             >
-              <IconMail
-                aria-hidden="true"
-                className="h-[18px] w-[18px]"
-              />
+              <IconMail aria-hidden="true" className="h-[18px] w-[18px]" />
               {copy.contactCta}
             </a>
 
@@ -574,123 +519,47 @@ const ContactSection = ({ copy, prefillService }) => {
               target="_blank"
               rel="noopener noreferrer"
               className="whatsapp-btn"
-              style={{
-                width: "100%",
-                justifyContent: "center",
-              }}
+              style={{ width: "100%", justifyContent: "center" }}
             >
-              <IconPhone
-                aria-hidden="true"
-                className="h-[17px] w-[17px]"
-              />
+              <IconPhone aria-hidden="true" className="h-[17px] w-[17px]" />
               WhatsApp Us
             </a>
           </div>
 
           {/* Meta links */}
-          <div
-            style={{
-              display: "flex",
-              gap: 14,
-              flexWrap: "wrap",
-            }}
-          >
-            <button
-              className="contact-meta-link"
-              onClick={copyEmail}
-            >
-              <IconCopy
-                aria-hidden="true"
-                className="h-[14px] w-[14px]"
-              />
+          <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+            <button className="contact-meta-link" onClick={copyEmail}>
+              <IconCopy aria-hidden="true" className="h-[14px] w-[14px]" />
               {copied ? "Copied!" : copy.email}
             </button>
 
-            <a
-              href={`tel:${copy.phone}`}
-              className="contact-meta-link"
-              style={{ textDecoration: "none" }}
-            >
-              <IconPhone
-                aria-hidden="true"
-                className="h-[14px] w-[14px]"
-              />
+            <a href={`tel:${copy.phone}`} className="contact-meta-link" style={{ textDecoration: "none" }}>
+              <IconPhone aria-hidden="true" className="h-[14px] w-[14px]" />
               {copy.phone}
             </a>
           </div>
         </div>
 
         {/* Right — promise cards */}
-        <div
-          style={{
-            display: "none",
-            flexDirection: "column",
-            gap: 12,
-          }}
-          className="lg:flex"
-        >
-          {PROMISE_CARDS.map((card, i) => {
-            const Icon = card.icon;
-
-            return (
-              <div
-                key={card.title}
-                style={{
-                  display: "flex",
-                  gap: 16,
-                  background: "rgba(26,12,6,0.6)",
-                  border: "1px solid rgba(200,146,42,0.18)",
-                  borderRadius: 12,
-                  padding: "16px 18px",
-                  animation: `fadeUp 0.4s ease ${0.1 + i * 0.07}s both`,
-                }}
-              >
-                <div
-                  style={{
-                    width: 38,
-                    height: 38,
-                    borderRadius: 10,
-                    background: "rgba(200,146,42,0.12)",
-                    border: "1px solid rgba(200,146,42,0.28)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
-                >
-                  <Icon
-                    aria-hidden="true"
-                    className="h-[18px] w-[18px] text-[#E8B84B]"
-                  />
-                </div>
-
-                <div>
-                  <div
-                    style={{
-                      fontSize: 13,
-                      fontWeight: 600,
-                      color: "#fff",
-                      marginBottom: 4,
-                      fontFamily: "'DM Sans', sans-serif",
-                    }}
-                  >
-                    {card.title}
-                  </div>
-
-                  <div
-                    style={{
-                      fontSize: 12,
-                      color: "rgba(255,255,255,0.45)",
-                      lineHeight: 1.6,
-                      fontWeight: 300,
-                    }}
-                  >
-                    {card.body}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+        <div style={{ display: "none", flexDirection: "column", gap: 12 }} className="lg:flex">
+          {PROMISE_CARDS.map((card) => (
+            <div
+              key={card.id}
+              style={{
+                background: colors.cream,
+                padding: "16px",
+                borderRadius: "8px",
+                border: `1px solid ${colors.sand}`,
+              }}
+            >
+              <h3 style={{ color: colors.brand, fontSize: 16, fontWeight: 600, margin: "0 0 8px" }}>
+                {card.title}
+              </h3>
+              <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.5 }}>
+                {card.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -700,6 +569,14 @@ const ContactSection = ({ copy, prefillService }) => {
 ContactSection.propTypes = {
   copy: PropTypes.object.isRequired,
   prefillService: PropTypes.string,
+};
+
+// Improved color definitions for better contrast
+const improvedColors = {
+  ...colors,
+  textMuted: "#4a5568", // Darker gray for better readability
+  brand: "#2d3748", // Darker blue-gray for better contrast
+  gold: "#d69e2e", // Slightly more saturated gold
 };
 
 // ─── ServicesPage ─────────────────────────────────────────────────────────────
@@ -717,12 +594,14 @@ export const ServicesPage = ({ setPage }) => {
   const [highlightedId, setHighlightedId] = useState(initialServiceId);
   const [contactPrefill, setContactPrefill] = useState(null);
   const contactRef = useRef(null);
+  const cardRefs = useRef({});
 
   const visibleServices = SERVICES_LIST;
 
   useSEO({
     title: "Our Services | Safaris, Transfers & More | IMUT Tours & Travel",
-    description: "Explore guided safaris, car hire, airport transfers, accommodation and visa support across East Africa.",
+    description:
+      "Explore guided safaris, car hire, airport transfers, accommodation and visa support across East Africa.",
     breadcrumbs: [
       { name: "Home", url: "/" },
       { name: "Services", url: "/services" },
@@ -745,80 +624,74 @@ export const ServicesPage = ({ setPage }) => {
   }, [initialServiceId]);
 
   return (
-    <div style={{ paddingTop: 68, minHeight: "100vh", background: "#fff" }}>
-      <PageHeader title={'Our Services'} />
-      <main
-        style={{
-          position: "relative",
-          minHeight: "100vh",
-          // background: "linear-gradient(160deg, #1a0c06 0%, #2e1510 50%, #3a2008 100%)",
-          fontFamily: "'DM Sans', 'Segoe UI', sans-serif",
-          overflowX: "hidden",
-        }}
-      >
+    <div style={{ paddingTop: 68, minHeight: "100vh", background: colors.cream }}>
+      <PageHeader title={"Our Services"} />
 
-        {/* Background image layer */}
-        <div style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: "url('/images/img_placeholder.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          opacity: 0.08,
-          zIndex: 0,
-          pointerEvents: "none",
-        }} />
-
-        {/* Gradient overlay */}
-        <div style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(160deg, #1a0c06 0%, #2e1510dd 50%, #3a200888 70%)",
-          zIndex: 0,
-          pointerEvents: "none",
-        }} />
-
-        <AmbientOrbs />
-
-        <div style={{
-          position: "relative",
-          zIndex: 2,
-          maxWidth: 1120,
-          margin: "0 auto",
-          padding: "clamp(48px,8vw,80px) clamp(16px,5vw,40px) clamp(64px,8vw,100px)",
-        }}>
-          {/* ── Services grid ─────────────────────────────────────────────────── */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-              gap: 20,
-              marginBottom: 16,
-            }}
-            role="tabpanel"
-            aria-label="Services list"
-          >
-            {visibleServices.map((service, i) => (
-              <ServiceCard
-                key={service.id}
-                service={service}
-                index={i}
-                onContact={handleContact}
-                highlighted={highlightedId === service.id}
-              />
-            ))}
+      <main style={{ fontFamily: "'DM Sans', 'Segoe UI', sans-serif" }}>
+        {/* Intro strip — mirrors the About page's cream-toned story section */}
+        <section style={{ background: colors.cream, padding: "40px 24px 8px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
+            <SectionLabel>What We Offer</SectionLabel>
+            <h1
+              style={{
+                fontSize: "clamp(28px, 4.5vw, 44px)",
+                color: colors.brand,
+                fontFamily: "'Nunito', sans-serif",
+                fontWeight: 700,
+                margin: "0 0 14px",
+              }}
+            >
+              Everything you need for your adventure
+            </h1>
+            <p className="hide-on-small"
+              style={{
+                color: colors.textMuted,
+                fontSize: 15.5,
+                lineHeight: 1.8,
+                maxWidth: 640,
+                margin: "0 auto",
+              }}
+            >
+              From guided safaris to airport transfers and visa support, every service is
+              handled with the same local knowledge and care that defines IMUT Tours.
+            </p>
           </div>
+        </section>
 
-          {/* ── Contact section ───────────────────────────────────────────────── */}
-          <div ref={contactRef}>
-            <ContactSection
-              copy={SERVICES_COPY}
-              prefillService={contactPrefill}
-            />
+        {/* Services grid — white section, matching the About page's "Core Values" block */}
+        <section style={{ background: "#fff", padding: "56px 24px 80px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+                gap: 24,
+              }}
+              role="list"
+              aria-label="Services list"
+            >
+              {visibleServices.map((service, i) => (
+                <ServiceCard
+                  key={service.id}
+                  service={service}
+                  index={i}
+                  onContact={handleContact}
+                  highlighted={highlightedId === service.id}
+                  cardRef={(el) => {
+                    cardRefs.current[service.id] = el;
+                  }}
+                />
+              ))}
+            </div>
           </div>
+        </section>
 
-        </div>
+        {/* Contact section — cream section, white card, matching About page's tone */}
+        <section style={{ background: colors.cream, padding: "0 24px 80px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }} ref={contactRef}>
+            <ContactSection copy={SERVICES_COPY} prefillService={contactPrefill} />
+          </div>
+        </section>
       </main>
     </div>
   );
