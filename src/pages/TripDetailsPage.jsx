@@ -161,6 +161,7 @@ export const TripDetailsPage = ({ setPage }) => {
 
         {/* Back button */}
         <button
+        className="hide-on-small"
           onClick={() => setPage("trips")}
           style={{
             position: "absolute", top: 20, left: 20,
@@ -168,6 +169,7 @@ export const TripDetailsPage = ({ setPage }) => {
             border: "1px solid rgba(255,255,255,0.25)", color: "#fff",
             borderRadius: 99, padding: "8px 16px", fontSize: 13,
             fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 6,
+            marginBottom:14
           }}
         >
           ← Trips

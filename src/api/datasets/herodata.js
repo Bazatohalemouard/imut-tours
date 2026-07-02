@@ -59,9 +59,9 @@ export const SERVICES = [
 export const HERO_COPY = {
   badge: "East Africa's Premier Travel Partner",
   headline: "One Partner.",
-  headlineEm: "Every Journey, Handled.",
+  headlineEm: "For, Every Tour & Safari Detail.",
   subheadline:
-    "From guided tours & wildlife safaris to hotel bookings and airport pickups, we handle every detail so you travel without a worry. Specialized in Rwanda adventures, communities and city tours; and other East Africa destinations.",
+    "From guided tours & wildlife safaris, to hotel bookings and airport pickups; we handle every detail so you travel with full comfort. Specialized in Rwanda adventures, communities, city tours; and other East Africa destinations.",
   servicesLabel: "Our services",
   destinationsLabel: "Where do you want to go?",
   ctaPrimary: "Available Trips",

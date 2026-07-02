@@ -90,7 +90,7 @@ if (typeof document !== "undefined" && !document.getElementById("tours-hero-styl
  */
 const AbstractOverlay = () => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  
+
   useEffect(() => {
     const updateDimensions = () => {
       setDimensions({
@@ -105,7 +105,7 @@ const AbstractOverlay = () => {
 
   return (
     <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-      
+
       {/* Large floating geometric shapes - visible on all screens */}
       <div style={{
         position: "absolute",
@@ -118,7 +118,7 @@ const AbstractOverlay = () => {
         transform: "rotate(-15deg)",
         animation: "floatUp 8s ease-in-out infinite",
       }} />
-      
+
       <div style={{
         position: "absolute",
         bottom: "15%",
@@ -132,23 +132,23 @@ const AbstractOverlay = () => {
       }} />
 
       {/* Diamond pattern grid - African textile inspired */}
-      <svg 
-        width="100%" 
-        height="100%" 
+      <svg
+        width="100%"
+        height="100%"
         style={{ position: "absolute", top: 0, left: 0 }}
         aria-hidden="true"
       >
         <defs>
           <pattern id="diamondMesh" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M20,0 L40,20 L20,40 L0,20 Z" 
-              fill="none" 
-              stroke="rgba(242,183,5,0.08)" 
+            <path d="M20,0 L40,20 L20,40 L0,20 Z"
+              fill="none"
+              stroke="rgba(242,183,5,0.08)"
               strokeWidth="0.5"
             />
-            <circle cx="20" cy="20" r="1" fill="rgba(242,183,5,0.15)"/>
+            <circle cx="20" cy="20" r="1" fill="rgba(242,183,5,0.15)" />
           </pattern>
         </defs>
-        <rect width="100%" height="100%" fill="url(#diamondMesh)" opacity="0.6"/>
+        <rect width="100%" height="100%" fill="url(#diamondMesh)" opacity="0.6" />
       </svg>
 
       {/* Drifting particles - visible movement */}
@@ -211,9 +211,9 @@ const AbstractOverlay = () => {
 
       {/* Diagonal accent lines */}
       <svg width="100%" height="100%" style={{ position: "absolute", top: 0, left: 0 }} aria-hidden="true">
-        <line x1="80%" y1="0%" x2="100%" y2="40%" stroke="rgba(242,183,5,0.08)" strokeWidth="1"/>
-        <line x1="85%" y1="0%" x2="100%" y2="30%" stroke="rgba(242,183,5,0.05)" strokeWidth="0.5"/>
-        <line x1="0%" y1="70%" x2="20%" y2="100%" stroke="rgba(242,183,5,0.06)" strokeWidth="1"/>
+        <line x1="80%" y1="0%" x2="100%" y2="40%" stroke="rgba(242,183,5,0.08)" strokeWidth="1" />
+        <line x1="85%" y1="0%" x2="100%" y2="30%" stroke="rgba(242,183,5,0.05)" strokeWidth="0.5" />
+        <line x1="0%" y1="70%" x2="20%" y2="100%" stroke="rgba(242,183,5,0.06)" strokeWidth="1" />
       </svg>
     </div>
   );
@@ -239,12 +239,12 @@ const ServiceCard = ({ service, setPage, index }) => {
         gap: "12px",
         width: "100%",
         padding: "14px 16px",
-        background: service.isPrimary 
+        background: service.isPrimary
           ? "linear-gradient(135deg, rgba(251,241,228,0.95), rgba(255,248,236,0.9))"
           : "linear-gradient(135deg, rgba(251,241,228,0.85), rgba(245,230,211,0.8))",
         backdropFilter: "blur(8px)",
-        border: service.isPrimary 
-          ? "1.5px solid rgba(45,90,39,0.3)" 
+        border: service.isPrimary
+          ? "1.5px solid rgba(45,90,39,0.3)"
           : "1px solid rgba(45,90,39,0.15)",
         borderRadius: "12px",
         cursor: "pointer",
@@ -278,7 +278,7 @@ const ServiceCard = ({ service, setPage, index }) => {
         width: "42px",
         height: "42px",
         borderRadius: "10px",
-        background: service.isPrimary 
+        background: service.isPrimary
           ? "linear-gradient(135deg, rgba(45,90,39,0.12), rgba(74,140,65,0.08))"
           : "rgba(45,90,39,0.06)",
         display: "flex",
@@ -303,28 +303,30 @@ const ServiceCard = ({ service, setPage, index }) => {
         }}>
           {service.name}
         </div>
-        <div style={{
-          fontFamily: "'Inter', sans-serif",
-          fontSize: "clamp(11px, 1.8vw, 12px)",
-          color: "var(--htw-acacia)",
-          lineHeight: 1.3,
-          fontWeight: 400,
-          display: "-webkit-box",
-          WebkitLineClamp: 1,
-          WebkitBoxOrient: "vertical",
-          overflow: "hidden",
-        }}>
+        <div
+          className="hide-on-small"
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "clamp(11px, 1.8vw, 12px)",
+            color: "var(--htw-acacia)",
+            lineHeight: 1.3,
+            fontWeight: 400,
+            display: "-webkit-box",
+            WebkitLineClamp: 1,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}>
           {service.tagline}
         </div>
       </div>
 
       {/* Arrow indicator */}
-      <svg 
-        width="16" 
-        height="16" 
-        viewBox="0 0 24 24" 
-        fill="none" 
-        stroke="var(--htw-sunset)" 
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="var(--htw-sunset)"
         strokeWidth="2"
         style={{ flexShrink: 0, opacity: 0.5, position: "relative", zIndex: 1 }}
       >
@@ -361,6 +363,7 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
   const [visibleServices, setVisibleServices] = useState(4);
   const [showAllMobile, setShowAllMobile] = useState(false);
   const servicesRef = useRef(null);
+  const isDesktop = window.innerWidth >= 1200;
 
   // Responsive service display logic
   useEffect(() => {
@@ -374,7 +377,7 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
         setVisibleServices(SERVICES.length);
       }
     };
-    
+
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -416,26 +419,26 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
       <AbstractOverlay />
 
       {/* Content */}
-      <div style={{ 
-        position: "relative", 
-        zIndex: 2, 
+      <div style={{
+        position: "relative",
+        zIndex: 2,
         flex: 1,
         display: "flex",
         flexDirection: "column",
         width: "100%",
         maxWidth: "1200px",
         margin: "0 auto",
-        padding: "clamp(32px, 6vh, 60px) clamp(16px, 4vw, 32px) 0",
+        padding: "clamp(82px, 6vh, 60px) clamp(16px, 4vw, 32px) 0",
       }}>
-        
-        {/* Hero text - compact on mobile */}
+
+        {/* Hero text - optimized for responsive sizing */}
         <div style={{ marginBottom: "clamp(24px, 4vh, 40px)" }}>
-          {/* Compact headline */}
+          {/* Optimized headline */}
           <h1 style={{
             fontFamily: "'Fraunces', serif",
             fontSize: "clamp(28px, 6vw, 56px)",
             fontWeight: 700,
-            lineHeight: 1.1,
+            lineHeight: 1.2,
             color: "#FFF8EE",
             margin: "20px 0 12px",
             textShadow: "0 2px 12px rgba(18,7,3,0.5)",
@@ -445,22 +448,26 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
               fontStyle: "italic",
               fontWeight: 500,
               color: "var(--htw-gold)",
+              fontSize: "clamp(24px, 5vw, 48px)", // Slightly smaller than main headline
             }}>
               {HERO_COPY.headlineEm}
             </em>
           </h1>
 
-          {/* Subheadline - shorter on mobile */}
-          <p style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "clamp(13px, 2vw, 15px)",
-            color: "rgba(255,248,238,0.9)",
-            fontWeight: 400,
-            lineHeight: 1.6,
-            maxWidth: "480px",
-            margin: 0,
-            textShadow: "0 1px 8px rgba(18,7,3,0.4)",
-          }}>
+          {/* Optimized subheadline */}
+          <p
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              // fontSize: "clamp(13px, 2vw, 15px)",
+              fontSize: isDesktop ? "22px" : "13px",
+              color: "rgba(255,248,238,0.9)",
+              fontWeight: 400,
+              lineHeight: isDesktop? 1.9 : 1.6,
+              maxWidth: "1000px",
+              margin: "20px 0 20px",
+              textShadow: "0 1px 8px rgba(18,7,3,0.4)",
+            }}
+          >
             {HERO_COPY.subheadline}
           </p>
         </div>
@@ -503,7 +510,7 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
         </div>
 
         {/* Services section */}
-        <div style={{ 
+        <div style={{
           marginTop: "auto",
           paddingBottom: "clamp(24px, 4vh, 40px)",
         }}>
@@ -521,7 +528,7 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
           </p>
 
           {/* Mobile: 2-column vertical scroll | Tablet+: auto grid */}
-          <div 
+          <div
             ref={servicesRef}
             className="htw-scrollbar-hide"
             style={{
@@ -534,9 +541,9 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
             }}
           >
             {displayedServices.map((service, index) => (
-              <ServiceCard 
-                key={service.id} 
-                service={service} 
+              <ServiceCard
+                key={service.id}
+                service={service}
                 setPage={setPage}
                 index={index}
               />
@@ -574,12 +581,12 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
               }}
             >
               {showAllMobile ? "Show Less" : 'View More'}
-              <IconChevronDown 
-                size={16} 
-                style={{ 
+              <IconChevronDown
+                size={16}
+                style={{
                   transform: showAllMobile ? "rotate(180deg)" : "rotate(0deg)",
                   transition: "transform 0.3s",
-                }} 
+                }}
               />
             </button>
           )}
