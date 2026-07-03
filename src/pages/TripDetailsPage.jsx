@@ -243,36 +243,6 @@ export const TripDetailsPage = ({ setPage }) => {
           {/* ── LEFT COLUMN ─────────────────────────────────────────────────── */}
           <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
 
-            {/* Rating summary */}
-            <div
-              style={{
-                background: "#fff",
-                borderRadius: 16,
-                padding: "20px 22px",
-                border: `1px solid ${colors.sand}`,
-                display: "flex",
-                alignItems: "center",
-                gap: 20,
-                flexWrap: "wrap",
-              }}
-            >
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
-                <span style={{ fontSize: "clamp(32px, 5vw, 44px)", fontWeight: 800, color: colors.brand, fontFamily: "'Nunito', sans-serif", lineHeight: 1 }}>
-                  {trip.rating}
-                </span>
-                <StarRating value={trip.rating} size={16} />
-              </div>
-              <div style={{ width: 1, height: 48, background: colors.sand, flexShrink: 0 }} />
-              <div>
-                <p style={{ fontSize: 15, fontWeight: 600, color: colors.brand, margin: "0 0 2px" }}>
-                  {trip.reviews} verified reviews
-                </p>
-                <p style={{ fontSize: 13, color: colors.textMuted, margin: 0 }}>
-                  Based on past traveler feedback
-                </p>
-              </div>
-            </div>
-
             {/* Highlights */}
             <div>
               <SectionTitle>Trip Highlights</SectionTitle>
