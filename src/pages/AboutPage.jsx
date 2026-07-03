@@ -83,14 +83,14 @@ export const AboutPage = ({ setPage }) => {
       } />
 
       {/* Story section */}
-      <section style={{ background: colors.cream, padding: "40px 24px" }}>
+      <section style={{ background: colors.cream, padding: "15px 20px" }}>
         <div
           style={{
             maxWidth: 1200,
             margin: "0 auto",
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: 60,
+            gap: 40,
             alignItems: "center",
           }}
         >
@@ -101,7 +101,7 @@ export const AboutPage = ({ setPage }) => {
                 color: colors.brand,
                 fontFamily: "'Nunito', sans-serif",
                 fontWeight: 700,
-                margin: "0 0 20px",
+                margin: "0 0 10px",
               }}
             >
               Get to know us
@@ -148,7 +148,7 @@ export const AboutPage = ({ setPage }) => {
       </section>
 
       {/* Values */}
-      <section style={{ background: "#fff", padding: "80px 24px" }}>
+      <section style={{ background: "#fff", padding: "20px 20px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <p
@@ -221,7 +221,7 @@ export const AboutPage = ({ setPage }) => {
       </section>
 
       {/* Team */}
-      <section style={{ background: colors.cream, padding: "80px 24px" }}>
+      <section style={{ background: colors.cream, padding: "40px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
 
           {/* Header */}

@@ -64,6 +64,6 @@ export const HERO_COPY = {
     "From guided tours & wildlife safaris, to hotel bookings and airport pickups; we handle every detail so you travel with full comfort. Specialized in Rwanda adventures, communities, city tours; and other East Africa destinations.",
   servicesLabel: "Our services",
   destinationsLabel: "Where do you want to go?",
-  ctaPrimary: "Available Trips",
+  ctaPrimary: "Explore Trips",
   ctaSecondary: "Our Services",
 };

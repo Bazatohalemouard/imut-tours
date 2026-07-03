@@ -91,154 +91,13 @@ export const ContactPage = () => {
         style={{
           maxWidth: 1200,
           margin: "0 auto",
-          padding: "60px 0px",
+          padding: "15px 20px",
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
           gap: 48,
           alignItems: "start",
         }}
       >
-        {/* Form */}
-        <div>
-          <h2
-            style={{
-              fontSize: 24,
-              fontWeight: 700,
-              color: colors.brand,
-              fontFamily: "'Nunito', sans-serif",
-              margin: "0 0 28px",
-            }}
-          >
-            Send Us a Message
-          </h2>
-
-          {submitted ? (
-            <div
-              style={{
-                background: "#fff",
-                border: `2px solid ${colors.jungle}`,
-                borderRadius: 20,
-                padding: "40px 32px",
-                textAlign: "center",
-              }}
-            >
-              <div style={{ marginBottom: 16 }}>
-                <img src={messageSentIcon} alt="Message Sent" width={64} height={64} />
-              </div>
-              <h3
-                style={{
-                  fontSize: 22,
-                  fontWeight: 700,
-                  color: colors.brand,
-                  fontFamily: "'Nunito', sans-serif",
-                  margin: "0 0 10px",
-                }}
-              >
-                Message Received!
-              </h3>
-              <p style={{ color: colors.textMuted, fontSize: 15, lineHeight: 1.7 }}>
-                Thank you {form.name}! Our team will get back to you within 24
-                hours.
-              </p>
-            </div>
-          ) : (
-            <div
-              style={{
-                background: "#fff",
-                borderRadius: 20,
-                padding: "32px 28px",
-                border: `1px solid ${colors.sand}`,
-                display: "flex",
-                flexDirection: "column",
-                gap: 16,
-              }}
-            >
-              {[
-                { field: "name", label: "Full Name *", placeholder: "Your full name", type: "text" },
-                { field: "email", label: "Email *", placeholder: "your@email.com", type: "email" },
-                { field: "phone", label: "Phone / WhatsApp", placeholder: "+1 234 567 8900", type: "tel" },
-              ].map(({ field, label, placeholder, type }) => (
-                <div key={field}>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: 13,
-                      fontWeight: 600,
-                      color: colors.brand,
-                      marginBottom: 6,
-                      letterSpacing: "0.02em",
-                    }}
-                  >
-                    {label}
-                  </label>
-                  <input
-                    type={type}
-                    placeholder={placeholder}
-                    value={form[field]}
-                    onChange={(e) => handleChange(field, e.target.value)}
-                    style={inputStyle}
-                    onFocus={(e) =>
-                      (e.target.style.borderColor = colors.gold)
-                    }
-                    onBlur={(e) =>
-                      (e.target.style.borderColor = colors.sand)
-                    }
-                  />
-                </div>
-              ))}
-
-              <div>
-                <label
-                  htmlFor="message"
-                  style={{
-                    display: "block",
-                    fontSize: 13,
-                    fontWeight: 600,
-                    color: colors.brand,
-                    marginBottom: 6,
-                  }}
-                >
-                  Your Message *
-                </label>
-                <textarea
-                  id="message"
-                  placeholder="Tell us about your dream East African experience..."
-                  rows={4}
-                  value={form.message}
-                  onChange={(e) => handleChange("message", e.target.value)}
-                  style={{
-                    ...inputStyle,
-                    resize: "vertical",
-                    minHeight: 100,
-                  }}
-                  onFocus={(e) => (e.target.style.borderColor = colors.gold)}
-                  onBlur={(e) => (e.target.style.borderColor = colors.sand)}
-                />
-              </div>
-
-              <button
-                onClick={handleSubmit}
-                disabled={submitting}
-                style={{
-                  background: submitting ? colors.textMuted : colors.gold,
-                  color: "#fff",
-                  border: "none",
-                  cursor: submitting ? "not-allowed" : "pointer",
-                  padding: "15px",
-                  borderRadius: 12,
-                  fontSize: 16,
-                  fontWeight: 700,
-                  width: "100%",
-                  transition: "background 0.2s",
-                  letterSpacing: "0.02em",
-                }}
-              >
-                {submitting ? "Sending..." : "Send My Enquiry →"}
-              </button>
-            </div>
-          )}
-        </div>
-
         {/* Contact Info */}
         <div>
           <h2
@@ -247,13 +106,13 @@ export const ContactPage = () => {
               fontWeight: 700,
               color: colors.brand,
               fontFamily: "'Nunito', sans-serif",
-              margin: "0 0 28px",
+              margin: "0 0 10px",
             }}
           >
             Our Offices
           </h2>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {offices.map((o) => (
               <div
                 key={o.city}
@@ -389,6 +248,146 @@ export const ContactPage = () => {
               </div>
             </div>
           </div>
+        </div>
+        {/* Form */}
+        <div>
+          <h2
+            style={{
+              fontSize: 24,
+              fontWeight: 700,
+              color: colors.brand,
+              fontFamily: "'Nunito', sans-serif",
+              margin: "0 0 10px",
+            }}
+          >
+            Send Us a Message
+          </h2>
+
+          {submitted ? (
+            <div
+              style={{
+                background: "#fff",
+                border: `2px solid ${colors.jungle}`,
+                borderRadius: 20,
+                padding: "20px 32px",
+                textAlign: "center",
+              }}
+            >
+              <div style={{ marginBottom: 16 }}>
+                <img src={messageSentIcon} alt="Message Sent" width={64} height={64} />
+              </div>
+              <h3
+                style={{
+                  fontSize: 22,
+                  fontWeight: 700,
+                  color: colors.brand,
+                  fontFamily: "'Nunito', sans-serif",
+                  margin: "0 0 10px",
+                }}
+              >
+                Message Received!
+              </h3>
+              <p style={{ color: colors.textMuted, fontSize: 15, lineHeight: 1.7 }}>
+                Thank you {form.name}! Our team will get back to you within 24
+                hours.
+              </p>
+            </div>
+          ) : (
+            <div
+              style={{
+                background: "#fff",
+                borderRadius: 20,
+                padding: "32px 28px",
+                border: `1px solid ${colors.sand}`,
+                display: "flex",
+                flexDirection: "column",
+                gap: 10,
+              }}
+            >
+              {[
+                { field: "name", label: "Full Name *", placeholder: "Your full name", type: "text" },
+                { field: "email", label: "Email *", placeholder: "your@email.com", type: "email" },
+                { field: "phone", label: "Phone / WhatsApp", placeholder: "+1 234 567 8900", type: "tel" },
+              ].map(({ field, label, placeholder, type }) => (
+                <div key={field}>
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: colors.brand,
+                      marginBottom: 6,
+                      letterSpacing: "0.02em",
+                    }}
+                  >
+                    {label}
+                  </label>
+                  <input
+                    type={type}
+                    placeholder={placeholder}
+                    value={form[field]}
+                    onChange={(e) => handleChange(field, e.target.value)}
+                    style={inputStyle}
+                    onFocus={(e) =>
+                      (e.target.style.borderColor = colors.gold)
+                    }
+                    onBlur={(e) =>
+                      (e.target.style.borderColor = colors.sand)
+                    }
+                  />
+                </div>
+              ))}
+
+              <div>
+                <label
+                  htmlFor="message"
+                  style={{
+                    display: "block",
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: colors.brand,
+                    marginBottom: 6,
+                  }}
+                >
+                  Your Message *
+                </label>
+                <textarea
+                  id="message"
+                  placeholder="Tell us about your dream East African experience..."
+                  rows={4}
+                  value={form.message}
+                  onChange={(e) => handleChange("message", e.target.value)}
+                  style={{
+                    ...inputStyle,
+                    resize: "vertical",
+                    minHeight: 100,
+                  }}
+                  onFocus={(e) => (e.target.style.borderColor = colors.gold)}
+                  onBlur={(e) => (e.target.style.borderColor = colors.sand)}
+                />
+              </div>
+
+              <button
+                onClick={handleSubmit}
+                disabled={submitting}
+                style={{
+                  background: submitting ? colors.textMuted : colors.gold,
+                  color: "#fff",
+                  border: "none",
+                  cursor: submitting ? "not-allowed" : "pointer",
+                  padding: "15px",
+                  borderRadius: 12,
+                  fontSize: 16,
+                  fontWeight: 700,
+                  width: "100%",
+                  transition: "background 0.2s",
+                  letterSpacing: "0.02em",
+                }}
+              >
+                {submitting ? "Sending..." : "Send My Enquiry →"}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
