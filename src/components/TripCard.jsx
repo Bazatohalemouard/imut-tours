@@ -1,4 +1,4 @@
-// ─── Trip Card Component (Safari-Inspired Abstract Visual System) ─────────
+// ─── Trip Card Component ───────────────────────────────────────────────────
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,208 +12,389 @@ import kenyaFlag from "../assets/flags/kenya.png";
 import southSudanFlag from "../assets/flags/south-sudan.png";
 import clockIcon from "../assets/icons/clock.png";
 import groupIcon from "../assets/icons/group-users.png";
-import difficultyIcon from "../assets/icons/challenge.png";
 
 /**
- * ── Design system notes ─────────────────────────────────────────────────
- * Every decorative element below is grounded in one idea: a game-drive at
- * golden hour. Instead of generic dots/blobs, the card now carries three
- * coordinated marks, all built from the existing color tokens only:
+ * Card layout, top to bottom:
+ *   1. Image — fixed 4:3 aspect-ratio, always first, always the same
+ *      shape. Because nothing above it can vary in height, every card
+ *      in a row lines its image up identically regardless of title or
+ *      category length.
+ *   2. Category — single line, truncated ("Wildlife +2" if there are
+ *      several). Always visible.
+ *   3. Title — never clipped or ellipsized; it wraps to as many lines
+ *      as it needs, with font-size stepping down at smaller
+ *      breakpoints so long titles stay readable without being cut.
+ *      Always visible (card height simply varies with title length).
+ *   4. Subtitle — supporting copy, hidden on mobile, shown from the
+ *      sm breakpoint up (not essential at a glance).
+ *   5. Meta row — duration is always visible; group size joins from
+ *      sm up. Difficulty was removed per product decision.
+ *   6. Footer — a chevron affordance always shown; the card itself is
+ *      the tap target, so a repeated "More details" label is only
+ *      added back in on large screens as a design nicety.
  *
- *  1. SIGNATURE — "Acacia Horizon": a low-opacity sunburst + acacia-tree
- *     silhouette sitting in the header corner, the single bold moment.
- *  2. "Migration trail": a dotted route line with waypoint marks replaces
- *     the old wavy contour paths over the image — reads as a map/GPS track.
- *  3. "Beadwork trim": a thin zig-zag (triangle) strip borrowed from East
- *     African beadwork patterns, used sparingly as a footer divider instead
- *     of a flat rule.
- *
- * Restraint: only #1 is bold. #2 and #3 stay quiet so the photo still leads.
+ * Hover/focus motion is handled with plain CSS instead of JS state,
+ * which is why `hovered` was removed — one less re-render, and it
+ * behaves correctly for both mouse and keyboard focus for free.
  */
 
-const AcaciaHorizonMark = ({ gold, hovered }) => (
-  <svg
-    width="110"
-    height="110"
-    viewBox="0 0 110 110"
-    style={{
-      position: "absolute",
-      top: -14,
-      right: -14,
-      pointerEvents: "none",
-      zIndex: 1,
-    }}
-  >
-    <g
-      style={{
-        transformOrigin: "88px 22px",
-        transform: hovered ? "rotate(14deg)" : "rotate(0deg)",
-        transition: "transform 0.6s ease",
-      }}
-    >
-      {Array.from({ length: 10 }).map((_, i) => {
-        const angle = (i / 10) * Math.PI * 2;
-        const x2 = 88 + Math.cos(angle) * 34;
-        const y2 = 22 + Math.sin(angle) * 34;
-        return (
-          <line
-            key={i}
-            x1={88 + Math.cos(angle) * 18}
-            y1={22 + Math.sin(angle) * 18}
-            x2={x2}
-            y2={y2}
-            stroke={gold}
-            strokeWidth="1"
-            opacity="0.22"
-          />
-        );
-      })}
-      <circle cx="88" cy="22" r="15" fill={gold} opacity="0.14" />
-    </g>
-    {/* Acacia silhouette on the horizon */}
-    <g opacity="0.28">
-      <line x1="0" y1="62" x2="110" y2="62" stroke={gold} strokeWidth="0.75" opacity="0.5" />
-      <path
-        d="M46 62 L50 40 L48 40 L52 26 L54 34 L58 20 L60 34 L64 26 L62 40 L60 40 L64 62 Z"
-        fill={gold}
-      />
-      <line x1="55" y1="62" x2="55" y2="40" stroke={gold} strokeWidth="1.5" />
-    </g>
-  </svg>
-);
+let stylesInjected = false;
 
-const MigrationTrail = ({ gold, sand }) => (
-  <svg
-    style={{
-      position: "absolute",
-      bottom: 0,
-      left: 0,
-      width: "100%",
-      height: "34%",
-      zIndex: 3,
-      pointerEvents: "none",
-    }}
-    viewBox="0 0 400 120"
-    preserveAspectRatio="none"
-  >
-    <path
-      id="trailPath"
-      d="M-10,70 Q90,30 180,72 T410,50"
-      fill="none"
-      stroke={sand}
-      strokeWidth="1"
-      strokeDasharray="1 9"
-      strokeLinecap="round"
-      opacity="0.55"
-    />
-    {[0.08, 0.3, 0.52, 0.74, 0.94].map((t, i) => {
-      // approximate points along the quadratic path for waypoint dots
-      const x = -10 + t * 420;
-      const y = 70 - Math.sin(t * Math.PI) * 28;
-      return <circle key={i} cx={x} cy={y} r="2.2" fill={gold} opacity="0.5" />;
-    })}
-  </svg>
-);
+function injectStyles() {
+  if (stylesInjected || typeof document === "undefined") return;
+  stylesInjected = true;
+  const style = document.createElement("style");
+  style.setAttribute("data-trip-card", "true");
+  style.textContent = `
+    .tc-card {
+      appearance: none;
+      -webkit-appearance: none;
+      box-sizing: border-box;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      font: inherit;
+      background: #fff;
+      border-radius: 14px;
+      border: 1px solid ${colors.sand};
+      padding: 0;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
 
-const BeadworkTrim = ({ gold, sand }) => (
-  <div
-    style={{
-      height: 6,
-      width: "100%",
-      backgroundImage: `linear-gradient(45deg, ${gold} 25%, transparent 25%), linear-gradient(-45deg, ${sand} 25%, transparent 25%)`,
-      backgroundSize: "12px 12px",
-      backgroundPosition: "0 0, 0 0",
-      opacity: 0.5,
-    }}
-  />
-);
+    .tc-card:hover,
+    .tc-card:focus-visible {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(22, 48, 42, 0.14);
+      border-color: transparent;
+    }
+
+    .tc-card:focus-visible {
+      outline: 2px solid ${colors.gold};
+      outline-offset: 2px;
+    }
+
+    /* ── Image ────────────────────────────────────────────────── */
+
+    .tc-image-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: ${colors.sand}33;
+      flex-shrink: 0;
+    }
+
+    .tc-image-blur,
+    .tc-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .tc-image-blur {
+      filter: blur(10px);
+      transform: scale(1.06);
+    }
+
+    .tc-image {
+      opacity: 0;
+      transition: opacity 0.35s ease, transform 0.45s ease;
+    }
+
+    .tc-image.is-loaded {
+      opacity: 1;
+    }
+
+    .tc-card:hover .tc-image,
+    .tc-card:focus-visible .tc-image {
+      transform: scale(1.05);
+    }
+
+    .tc-image-scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.32) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .tc-badge-wrap {
+      display: inline-block;
+      transform: scale(0.7);
+      transform-origin: top left;
+    }
+
+    @media (min-width: 480px) {
+      .tc-badge-wrap { transform: scale(0.85); }
+    }
+
+    @media (min-width: 640px) {
+      .tc-badge-wrap { transform: scale(1); }
+    }
+
+    .tc-chip-row {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .tc-country-chip {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px;
+      border-radius: 99px;
+      backdrop-filter: blur(4px);
+      flex-shrink: 0;
+    }
+
+    .tc-country-chip img,
+    .tc-country-chip span.tc-flag-fallback {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .tc-country-name {
+      display: none;
+      padding-right: 3px;
+      white-space: nowrap;
+    }
+
+    @media (min-width: 480px) {
+      .tc-country-chip { padding: 3px 8px 3px 3px; }
+      .tc-country-name { display: inline; }
+    }
+
+    /* ── Body ─────────────────────────────────────────────────── */
+
+    .tc-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 10px 10px 10px;
+    }
+
+    @media (min-width: 640px) {
+      .tc-body { padding: 14px 14px 14px; }
+    }
+
+    @media (min-width: 1024px) {
+      .tc-body { padding: 16px 18px 16px; }
+    }
+
+    .tc-category {
+      font-family: 'Nunito', sans-serif;
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: ${colors.gold};
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0 0 4px;
+    }
+
+    @media (min-width: 640px) {
+      .tc-category { font-size: 10.5px; margin-bottom: 5px; }
+    }
+
+    @media (min-width: 1024px) {
+      .tc-category { font-size: 11.5px; margin-bottom: 6px; }
+    }
+
+    .tc-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      color: ${colors.brand};
+      margin: 0 0 6px;
+      font-size: 13px;
+      line-height: 1.3;
+      /* Intentionally not clamped/truncated — titles wrap in full,
+         font-size steps down at smaller breakpoints instead. */
+    }
+
+    @media (min-width: 480px) {
+      .tc-title { font-size: 13.5px; }
+    }
+
+    @media (min-width: 640px) {
+      .tc-title { font-size: 15px; margin-bottom: 8px; }
+    }
+
+    @media (min-width: 1024px) {
+      .tc-title { font-size: 16.5px; }
+    }
+
+    .tc-subtitle {
+      display: none;
+      color: ${colors.textMuted};
+      margin: 0 0 8px;
+    }
+
+    @media (min-width: 640px) {
+      .tc-subtitle {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        font-size: 12px;
+        line-height: 1.4;
+        min-height: 2.8em;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .tc-subtitle { font-size: 13px; }
+    }
+
+    .tc-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 6px;
+    }
+
+    @media (min-width: 640px) {
+      .tc-meta-row { gap: 12px; padding-top: 8px; }
+    }
+
+    .tc-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      color: ${colors.textMuted};
+      white-space: nowrap;
+    }
+
+    .tc-meta-item img {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 640px) {
+      .tc-meta-item { font-size: 11px; gap: 5px; }
+      .tc-meta-item img { width: 13px; height: 13px; }
+    }
+
+    @media (min-width: 1024px) {
+      .tc-meta-item { font-size: 12px; }
+      .tc-meta-item img { width: 14px; height: 14px; }
+    }
+
+    .tc-meta-secondary {
+      display: none;
+    }
+
+    @media (min-width: 640px) {
+      .tc-meta-secondary { display: flex; }
+    }
+
+    .tc-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .tc-cta-text {
+      display: none;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: ${colors.brand};
+    }
+
+    @media (min-width: 1024px) {
+      .tc-cta-text { display: inline; }
+    }
+
+    .tc-chevron {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: ${colors.sand}55;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .tc-card:hover .tc-chevron,
+    .tc-card:focus-visible .tc-chevron {
+      background: ${colors.gold};
+    }
+
+    .tc-card:hover .tc-chevron svg,
+    .tc-card:focus-visible .tc-chevron svg {
+      stroke: #fff;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+const fetchCountryFlag = (country) => {
+  if (country === "Rwanda") return rwandaFlag;
+  if (country === "Uganda") return ugandaFlag;
+  if (country === "Tanzania") return tanzaniaFlag;
+  if (country === "Burundi") return burundiFlag;
+  if (country === "Kenya") return kenyaFlag;
+  if (country === "South Sudan") return southSudanFlag;
+  return "";
+};
+
+// Keeps the category line to a single row regardless of how many
+// categories a trip has: "Wildlife" or "Wildlife +2".
+const formatCategory = (category) => {
+  if (!Array.isArray(category)) return category;
+  if (category.length <= 1) return category[0] ?? "";
+  return `${category[0]} +${category.length - 1}`;
+};
 
 export const TripCard = ({ trip }) => {
-  const [hovered, setHovered] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const navigate = useNavigate();
 
-  const fetchCountryFlag = (country) => {
-    if (country === "Rwanda") return rwandaFlag;
-    if (country === "Uganda") return ugandaFlag;
-    if (country === "Tanzania") return tanzaniaFlag;
-    if (country === "Burundi") return burundiFlag;
-    if (country === "Kenya") return kenyaFlag;
-    if (country === "South Sudan") return southSudanFlag;
-    return "";
-  };
+  if (typeof document !== "undefined") injectStyles();
+
+  const flag = fetchCountryFlag(trip.country);
 
   return (
     <button
-      style={{
-        background: "#fff",
-        borderRadius: 20,
-        overflow: "hidden",
-        border: `1px solid ${colors.sand}`,
-        outline: hovered ? `1px solid ${colors.gold}33` : "1px solid transparent",
-        outlineOffset: 3,
-        cursor: "pointer",
-        transition: "all 0.25s",
-        transform: hovered ? "translateY(-6px)" : "translateY(0)",
-        boxShadow: hovered ? "0 16px 48px rgba(61,31,31,0.12)" : "none",
-        padding: 0,
-        position: "relative",
-      }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      type="button"
+      className="tc-card"
       onClick={() => navigate(`/trips/${trip.id}`)}
-      onKeyDown={(e) => e.key === "Enter" && navigate(`/trips/${trip.id}`)}
     >
-      {/* Header */}
-      <div style={{ padding: "10px 20px 10px", position: "relative", overflow: "hidden" }}>
-        <AcaciaHorizonMark gold={colors.gold} hovered={hovered} />
-        <h3
-          style={{
-            fontSize: 20,
-            fontWeight: 700,
-            color: colors.brand,
-            fontFamily: "'Nunito', sans-serif",
-            margin: "0 0 4px",
-            position: "relative",
-            zIndex: 2,
-          }}
-        >
-          {trip.title}
-        </h3>
-        <div
-          style={{
-            fontSize: 11,
-            fontWeight: 700,
-            fontFamily: "'Nunito', sans-serif",
-            color: colors.gold,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            marginBottom: 6,
-            position: "relative",
-            zIndex: 2,
-          }}
-        >
-          {Array.isArray(trip.category)
-            ? trip.category.join(", ")
-            : trip.category}
-        </div>
-      </div>
-
-      {/* Image Section */}
-      <div style={{ position: "relative", paddingBottom: "60%", overflow: "hidden" }}>
+      {/* Image — always the first element, fixed aspect-ratio, so it
+          lines up identically across every card in the row */}
+      <div className="tc-image-wrap">
         <img
-          src={`/images/img_placeholder.png`}
-          alt={`${trip.title} placeholder`}
-          aria-hidden
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            filter: "blur(12px)",
-            transform: "scale(1.05)",
-          }}
+          src="/images/img_placeholder.png"
+          alt=""
+          aria-hidden="true"
+          className="tc-image-blur"
         />
         <img
           src={trip.image}
@@ -221,128 +402,53 @@ export const TripCard = ({ trip }) => {
           loading="lazy"
           decoding="async"
           onLoad={() => setLoaded(true)}
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            opacity: loaded ? 1 : 0,
-            objectFit: "cover",
-            transition: "opacity 0.4s, transform 0.5s",
-            transform: hovered ? "scale(1.05)" : "scale(1)",
-          }}
+          className={`tc-image${loaded ? " is-loaded" : ""}`}
         />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            top: 12,
-            left: 12,
-            display: "flex",
-            gap: 6,
-            flexWrap: "wrap",
-          }}
-        >
-          {trip.badge && <Badge>{trip.badge}</Badge>}
-          <span
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 5,
-              background: "rgba(0,0,0,0.45)",
-              color: "#fff",
-              fontSize: 11,
-              fontWeight: 600,
-              padding: "3px 9px",
-              borderRadius: 99,
-              backdropFilter: "blur(4px)",
-            }}
-          >
-            {fetchCountryFlag(trip.country) ? (
-              <img
-                src={fetchCountryFlag(trip.country)}
-                alt={trip.country}
-                style={{ width: 16, height: 16, borderRadius: "50%", objectFit: "cover" }}
-              />
+        <div className="tc-image-scrim" aria-hidden="true" />
+
+        <div className="tc-chip-row">
+          {trip.badge ? (
+            <span className="tc-badge-wrap">
+              <Badge>{trip.badge}</Badge>
+            </span>
+          ) : (
+            <span />
+          )}
+          <span className="tc-country-chip">
+            {flag ? (
+              <img src={flag} alt="" />
             ) : (
-              <span
-                style={{
-                  width: 16,
-                  height: 16,
-                  borderRadius: "50%",
-                  background: "rgba(255,255,255,0.3)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: 9,
-                }}
-              />
+              <span className="tc-flag-fallback" style={{ background: "rgba(255,255,255,0.3)" }} />
             )}
-            {trip.country}
+            <span className="tc-country-name">{trip.country}</span>
+          </span>
+        </div>
+      </div>
+
+      {/* Body */}
+      <div className="tc-body">
+        <p className="tc-category">{formatCategory(trip.category)}</p>
+        <h3 className="tc-title">{trip.title}</h3>
+
+        {trip.subtitle && <p className="tc-subtitle">{trip.subtitle}</p>}
+
+        <div className="tc-meta-row">
+          <span className="tc-meta-item">
+            <img src={clockIcon} alt="" />
+            {trip.duration}
+          </span>
+          <span className="tc-meta-item tc-meta-secondary">
+            <img src={groupIcon} alt="" />
+            {trip.groupSize} pax
           </span>
         </div>
 
-        <MigrationTrail gold={colors.gold} sand={colors.sand} />
-      </div>
-
-      {/* Details Section */}
-      <div style={{ padding: "20px 20px 22px" }}>
-        <p style={{ color: colors.textMuted, fontSize: 13, margin: "0 0 14px" }}>
-          {trip.subtitle}
-        </p>
-        <div
-          style={{
-            display: "flex",
-            gap: 16,
-            marginBottom: 14,
-            flexWrap: "wrap",
-          }}
-        >
-          {[
-            { icon: clockIcon, val: trip.duration },
-            { icon: groupIcon, val: `${trip.groupSize} pax` },
-            { icon: difficultyIcon, val: trip.difficulty },
-          ].map((m, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <img
-                src={m.icon}
-                alt={m.val}
-                style={{ width: 16, height: 16, borderRadius: "50%", objectFit: "cover" }}
-              />
-              <span style={{ fontSize: 12, color: colors.textMuted }}>
-                {m.val}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        <BeadworkTrim gold={colors.gold} sand={colors.sand} />
-
-        <div
-          style={{
-            paddingTop: 12,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <span
-            style={{
-              fontSize: 12,
-              fontWeight: 600,
-              color: colors.brand,
-              textDecoration: "underline",
-              textUnderlineOffset: 3,
-            }}
-          >
-            More Details
+        <div className="tc-footer">
+          <span className="tc-cta-text">View trip</span>
+          <span className="tc-chevron" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={colors.brand} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.2s ease" }}>
+              <path d="M9 6l6 6-6 6" />
+            </svg>
           </span>
         </div>
       </div>
@@ -352,6 +458,7 @@ export const TripCard = ({ trip }) => {
 
 TripCard.propTypes = {
   trip: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     image: PropTypes.string,
     title: PropTypes.string,
     badge: PropTypes.string,
@@ -361,7 +468,6 @@ TripCard.propTypes = {
     subtitle: PropTypes.string,
     duration: PropTypes.string,
     groupSize: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    difficulty: PropTypes.string,
     rating: PropTypes.number,
     reviews: PropTypes.number,
   }).isRequired,

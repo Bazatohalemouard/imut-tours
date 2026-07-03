@@ -19,6 +19,7 @@ import guaranteeIcon from "../assets/icons/authenticity.png";
 import whatsappIcon from "../assets/icons/whatsapp.png";
 import { Spinner } from "../components/Spinner";
 import { fetchTrips } from "../api/APIHandler";
+import PageHeader from "../components/PageHeader";
 
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -87,7 +88,7 @@ export const TripDetailsPage = ({ setPage }) => {
   useEffect(() => {
     const loadTrip = async () => {
       try {
-        const trips = await fetchTrips ();
+        const trips = await fetchTrips();
         const foundTrip = trips.find(
           (item) => String(item.id) === String(tripId)
         );
@@ -134,7 +135,11 @@ export const TripDetailsPage = ({ setPage }) => {
 
   return (
     <div style={{ paddingTop: 68, minHeight: "100vh", background: colors.cream }}>
-
+      <PageHeader title={trip.title} breadcrumb={
+        <span>
+          <a href="/">Home</a> / <a href="/trips">Trips</a>
+        </span>
+      } />
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <div style={{ position: "relative", width: "100%", height: "clamp(320px, 55vw, 580px)", overflow: "hidden" }}>
         {/* Blurred placeholder */}
@@ -161,7 +166,7 @@ export const TripDetailsPage = ({ setPage }) => {
 
         {/* Back button */}
         <button
-        className="hide-on-small"
+          className="hide-on-small"
           onClick={() => setPage("trips")}
           style={{
             position: "absolute", top: 20, left: 20,
@@ -169,7 +174,7 @@ export const TripDetailsPage = ({ setPage }) => {
             border: "1px solid rgba(255,255,255,0.25)", color: "#fff",
             borderRadius: 99, padding: "8px 16px", fontSize: 13,
             fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 6,
-            marginBottom:14
+            marginBottom: 14
           }}
         >
           ← Trips
@@ -185,7 +190,6 @@ export const TripDetailsPage = ({ setPage }) => {
         >
           {/* Badges row */}
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 14, alignItems: "center" }}>
-            {trip.badge && <Badge>{trip.badge}</Badge>}
             <span
               style={{
                 display: "flex", alignItems: "center", gap: 6,
@@ -197,27 +201,16 @@ export const TripDetailsPage = ({ setPage }) => {
               {flag && <img src={flag} alt={trip.country} style={{ width: 16, height: 16, borderRadius: "50%", objectFit: "cover" }} />}
               {trip.country}
             </span>
+            {trip.badge && <Badge>{trip.badge}</Badge>}
             <span
               style={{
                 background: "rgba(200,146,42,0.85)", color: "#fff",
                 fontSize: 12, fontWeight: 700, padding: "4px 10px", borderRadius: 99,
               }}
             >
-              {trip.category}
+              {trip.category.join(" / ")}
             </span>
           </div>
-
-          <h1
-            style={{
-              fontSize: "clamp(26px, 5vw, 52px)",
-              fontFamily: "'Nunito', sans-serif",
-              fontWeight: 700, color: "#fff",
-              margin: "0 0 6px", lineHeight: 1.15,
-              textShadow: "0 2px 12px rgba(0,0,0,0.3)",
-            }}
-          >
-            {trip.title}
-          </h1>
           <p style={{ fontSize: "clamp(14px, 2vw, 17px)", color: "rgba(255,255,255,0.8)", margin: "0 0 20px" }}>
             {trip.subtitle}
           </p>
