@@ -39,34 +39,20 @@ export const Footer = ({ setPage }) => (
             title: "Explore",
             links: ["Home", "Trips", "About Us", "Contact"],
             pages: ["home", "trips", "about", "contact"],
+            newTab: false,
           },
           {
             title: "Services",
             links: ["Tours", "Car Rentals", "Airport Transfers", "Taxi & Cab Service", "Accommodation"],
             pages: ["services", "services", "services", "services", "services"],
+            newTab: false,
           },
-          // {
-          //   title: "Destinations",
-          //   links: [
-          //     "Volcanoes NP",
-          //     "Nyungwe Forest",
-          //     "Lake Kivu",
-          //     "Bwindi Forest",
-          //     "Queen Elizabeth NP",
-          //   ],
-          //   pages: new Array(5).fill("trips"),
-          // },
-          // {
-          //   title: "Experiences",
-          //   links: [
-          //     "Gorilla Trekking",
-          //     "Chimp Tracking",
-          //     "Big Five Safari",
-          //     "River Safaris",
-          //     "Cultural Tours",
-          //   ],
-          //   pages: new Array(5).fill("trips"),
-          // },
+          {
+            title: "Social Media",
+            links: ["Instagram"],
+            pages: ["https://www.instagram.com/imut_tours/"],
+            newTab: true,
+          },
         ].map((col) => (
           <div key={col.title}>
             <h4
@@ -85,7 +71,13 @@ export const Footer = ({ setPage }) => (
               {col.links.map((link, i) => (
                 <li key={i} style={{ marginBottom: 10 }}>
                   <button
-                    onClick={() => setPage(col.pages[i])}
+                    onClick={() => {
+                      if (col.newTab) {
+                        window.open(col.pages[i], '_blank');
+                      } else {
+                        setPage(col.pages[i]);
+                      }
+                    }}
                     style={{
                       background: "none",
                       border: "none",
@@ -125,9 +117,10 @@ export const Footer = ({ setPage }) => (
           © 2026 IMUT Tours. A division of International Marathon United Technology Rwanda Ltd.
         </p>
         <div style={{ display: "flex", gap: 16 }}>
-          {[].map((item) => (
+          {["Instagram", "Twitter", "Facebook"].map((item) => (
             <button
               key={item}
+              onClick={() => window.open(item.toLowerCase(), '_blank')}
               style={{
                 background: "none",
                 border: "none",
