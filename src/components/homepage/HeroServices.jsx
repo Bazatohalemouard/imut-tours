@@ -240,20 +240,20 @@ const ServiceCard = ({ service, setPage, index }) => {
         width: "100%",
         padding: "14px 16px",
         background: service.isPrimary
-          ? "linear-gradient(135deg, rgba(251,241,228,0.95), rgba(255,248,236,0.9))"
-          : "linear-gradient(135deg, rgba(251,241,228,0.85), rgba(245,230,211,0.8))",
+          ? "white" // Changed to pure white for clarity
+          : "white", // Changed to pure white for clarity
         backdropFilter: "blur(8px)",
         border: service.isPrimary
-          ? "1.5px solid rgba(45,90,39,0.3)"
-          : "1px solid rgba(45,90,39,0.15)",
+          ? "1.5px solid rgba(45,90,39,0.1)"
+          : "1px solid rgba(45,90,39,0.08)",
         borderRadius: "12px",
         cursor: "pointer",
         textAlign: "left",
         transition: "all 0.2s ease",
         transform: isPressed ? "scale(0.98)" : "scale(1)",
         boxShadow: service.isPrimary
-          ? "0 4px 16px rgba(20,8,4,0.15)"
-          : "0 2px 8px rgba(20,8,4,0.1)",
+          ? "0 4px 16px rgba(20,8,4,0.08)"
+          : "0 2px 8px rgba(20,8,4,0.05)",
         position: "relative",
         overflow: "hidden",
         animationDelay: `${index * 0.1}s`,
@@ -279,8 +279,8 @@ const ServiceCard = ({ service, setPage, index }) => {
         height: "42px",
         borderRadius: "10px",
         background: service.isPrimary
-          ? "linear-gradient(135deg, rgba(45,90,39,0.12), rgba(74,140,65,0.08))"
-          : "rgba(45,90,39,0.06)",
+          ? "linear-gradient(135deg, rgba(45,90,39,0.08), rgba(74,140,65,0.04))"
+          : "rgba(45,90,39,0.04)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
