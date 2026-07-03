@@ -15,7 +15,6 @@ export const TripsPage = ({ setPage }) => {
   const [country, setCountry] = useState("All");
   const [category, setCategory] = useState("All");
   const [countries, setCountries] = useState([]);
-  const [search, setSearch] = useState("");
 
   const [countriesLoading, setCountriesLoading] = useState(true);
   useSEO({
@@ -45,6 +44,17 @@ export const TripsPage = ({ setPage }) => {
     });
   }, []);
 
+  const categories = [
+    "All",
+    "Parks & Wildlife",
+    "Eco-Parks",
+    "Cultural & Heritage",
+    "Historical",
+    "City Tour",
+    "Leisure",
+    "Relax",
+  ];
+
   const filtered = trips.filter(
     (t) =>
       (country === "All" || t.country === country) &&
@@ -58,6 +68,16 @@ export const TripsPage = ({ setPage }) => {
           <a href="/">Home</a> / <span>Trips</span>
         </span>
       } />
+
+      <TripFilterBar
+        countries={countries}
+        categories={categories}
+        country={country}
+        setCountry={setCountry}
+        category={category}
+        setCategory={setCategory}
+        tripCount={filtered.length}
+      />
 
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px" }}>
         {loading && <Spinner />}
