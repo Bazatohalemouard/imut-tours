@@ -76,7 +76,11 @@ export const AboutPage = ({ setPage }) => {
 
   return (
     <div style={{ paddingTop: 68, minHeight: "100vh" }}>
-      <PageHeader title={'About Us'}/>
+      <PageHeader title={'Who We Are'} breadcrumb={
+        <span>
+          <a href="/">Home</a> / <span>About Us</span>
+        </span>
+      } />
 
       {/* Story section */}
       <section style={{ background: colors.cream, padding: "40px 24px" }}>
@@ -100,7 +104,7 @@ export const AboutPage = ({ setPage }) => {
                 margin: "0 0 20px",
               }}
             >
-             Get to know who we are
+              Get to know us
             </h2>
             <p
               style={{

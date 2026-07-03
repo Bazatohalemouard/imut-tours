@@ -1,25 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-/**
- * PageHeader
- * -----------------------------------------------------------------------
- * Reusable hero header for listing/collection pages (trips, lodges,
- * journals, etc). Carries the brand's jungle gradient + a hand-drawn
- * "route line" signature that ties every header back to the idea of a
- * journey, while staying generic enough to drop onto any page.
- *
- * Usage:
- *   <PageHeader
- *     eyebrow="Our Journeys"
- *     title="All Trips & Safaris"
- *     subtitle="Hand-picked routes through Africa's wild heart."
- *     meta="128 trips across 14 countries"
- *   >
- *     <ExpandableFilterBar ... />
- *   </PageHeader>
- */
-
 const defaultTheme = {
   jungle: "#16302A",
   jungleLight: "#2F5D45",
@@ -54,6 +35,7 @@ function injectStyles() {
       height: 100%;
       pointer-events: none;
       opacity: 0.55;
+      z-index: 1;
     }
 
     .pgh-route path {
@@ -84,61 +66,45 @@ function injectStyles() {
       color: transparent;
     }
 
-    /* New abstract background elements */
-    .pgh-abstract-bg {
+    /* -----------------------------------------------------------------
+       "Thousand Hills" background system
+       - .pgh-hills-glow  : soft dawn light, sets the mood
+       - .pgh-hills-far   : furthest, faintest ridge (always shown)
+       - .pgh-hills-mid   : middle ridge, added from small screens up
+       - .pgh-hills-near  : nearest ridge, carries the terrace banding,
+                             always shown (it anchors the header base)
+       - .pgh-hills-mist  : thin drifting fog line along the ridgeline
+       All colors are drawn from the theme tokens passed into the
+       component (jungle / jungleLight / sunset / mist) — no new hues.
+    ----------------------------------------------------------------- */
+
+    .pgh-hills-glow,
+    .pgh-hills-far,
+    .pgh-hills-mid,
+    .pgh-hills-near,
+    .pgh-hills-mist {
       position: absolute;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      overflow: hidden;
+      z-index: 0;
     }
 
-    .pgh-abstract-bg::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: 
-        radial-gradient(circle at 10% 20%, rgba(232, 150, 74, 0.08) 0%, transparent 20%),
-        radial-gradient(circle at 90% 80%, rgba(232, 150, 74, 0.06) 0%, transparent 20%),
-        radial-gradient(circle at 50% 50%, rgba(47, 93, 69, 0.04) 0%, transparent 30%);
-      animation: pgh-float 25s ease-in-out infinite;
+    .pgh-hills-mid { display: none; }
+
+    .pgh-hills-mist {
+      opacity: 0.5;
+      animation: pgh-mist-drift 22s ease-in-out infinite;
     }
 
-    .pgh-abstract-bg::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 10px,
-          rgba(232, 150, 74, 0.03) 10px,
-          rgba(232, 150, 74, 0.03) 20px
-        ),
-        repeating-linear-gradient(
-          -45deg,
-          transparent,
-          transparent 10px,
-          rgba(232, 150, 74, 0.03) 10px,
-          rgba(232, 150, 74, 0.03) 20px
-        );
-      opacity: 0.6;
+    @keyframes pgh-mist-drift {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(3%); }
     }
 
-    @keyframes pgh-float {
-      0%, 100% { transform: translate(0, 0); }
-      25% { transform: translate(-10px, -10px); }
-      50% { transform: translate(10px, 10px); }
-      75% { transform: translate(-10px, 10px); }
+    @media (min-width: 640px) {
+      .pgh-hills-mid { display: block; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -148,28 +114,30 @@ function injectStyles() {
         stroke-dashoffset: 0;
         opacity: 1;
       }
-      
-      .pgh-abstract-bg::before {
+
+      .pgh-hills-mist {
         animation: none !important;
       }
     }
 
     @media (max-width: 640px) {
-      .pgh-route { width: 100%; opacity: 0.35; }
+      .pgh-route { width: 100%; opacity: 0.3; }
+    }
+
+    /* Reduce space on mobile */
+    @media (max-width: 768px) {
+      .pgh-breadcrumb {
+        margin-bottom: 8px !important;
+      }
     }
   `;
   document.head.appendChild(style);
 }
 
 export default function PageHeader({
-  eyebrow,
   title,
-  subtitle,
-  meta,
   breadcrumb,
   colors,
-  align = "left",
-  children,
   className,
   style,
 }) {
@@ -178,20 +146,80 @@ export default function PageHeader({
   }, []);
 
   const c = { ...defaultTheme, ...colors };
-  const isCenter = align === "center";
+  const uid = React.useId ? React.useId().replace(/:/g, "") : "pgh";
 
   return (
     <header
       className={`pgh-root${className ? ` ${className}` : ''}`}
       style={{
         background: `linear-gradient(135deg, ${c.jungle} 0%, ${c.jungleLight} 100%)`,
-        padding: "56px 24px 40px",
+        padding: "20px 16px 24px",
         ...style
       }}
     >
-      {/* Abstract background elements for safari theme */}
-      <div className="pgh-abstract-bg"></div>
-      
+      {/* Dawn glow — the sun catching the ridgelines at first light */}
+      <svg className="pgh-hills-glow" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <radialGradient id={`glow-${uid}`} cx="78%" cy="8%" r="55%">
+            <stop offset="0%" stopColor={c.sunset} stopOpacity="0.22" />
+            <stop offset="100%" stopColor={c.sunset} stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <rect width="100" height="100" fill={`url(#glow-${uid})`} />
+      </svg>
+
+      {/* Far ridge — faintest, sets the sense of many hills receding into haze */}
+      <svg className="pgh-hills-far" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+        <path
+          d="M0,190 C90,140 170,205 260,170 C350,135 430,195 520,160 C610,125 690,190 780,155
+             C870,120 950,185 1040,150 C1110,125 1160,155 1200,140 L1200,300 L0,300 Z"
+          fill={c.mistFaint}
+          opacity="0.14"
+        />
+      </svg>
+
+      {/* Mid ridge — hidden on the smallest screens to keep the mobile header calm */}
+      <svg className="pgh-hills-mid" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+        <path
+          d="M0,220 C110,165 210,235 310,190 C410,145 500,215 600,175
+             C700,135 790,205 890,170 C990,135 1080,190 1200,175 L1200,300 L0,300 Z"
+          fill={c.jungleLight}
+          opacity="0.35"
+        />
+      </svg>
+
+      {/* Near ridge — anchors the header base and carries a fine terrace
+          banding (hillside agricultural terraces are one of the most
+          recognisable features of the Rwandan countryside) */}
+      <svg className="pgh-hills-near" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <clipPath id={`ridge-clip-${uid}`}>
+            <path d="M0,255 C130,200 230,265 340,225 C450,185 540,250 650,215
+                     C760,180 850,240 960,210 C1050,185 1130,220 1200,205 L1200,300 L0,300 Z" />
+          </clipPath>
+          <pattern id={`terrace-${uid}`} width="6" height="9" patternUnits="userSpaceOnUse">
+            <rect width="6" height="9" fill={c.jungle} />
+            <rect width="6" height="1.4" fill={c.mist} opacity="0.16" />
+          </pattern>
+        </defs>
+        <g clipPath={`url(#ridge-clip-${uid})`}>
+          <rect width="1200" height="300" fill={`url(#terrace-${uid})`} />
+        </g>
+      </svg>
+
+      {/* Fog line — a thin drifting band of mist sitting along the ridge,
+          nodding to the mist that famously hangs over Rwanda's hills */}
+      <svg className="pgh-hills-mist" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+        <path
+          d="M0,225 C150,195 300,240 450,210 C600,180 750,220 900,195 C1000,178 1100,195 1200,190"
+          fill="none"
+          stroke={c.mist}
+          strokeOpacity="0.28"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+      </svg>
+
       {/* Signature: a hand-drawn route line plotting a "journey" across the hero */}
       <svg
         className="pgh-route"
@@ -215,10 +243,10 @@ export default function PageHeader({
           margin: "0 auto",
           position: "relative",
           zIndex: 1,
-          textAlign: isCenter ? "center" : "left",
+          textAlign: "left",
           display: "flex",
           flexDirection: "column",
-          alignItems: isCenter ? "center" : "flex-start",
+          alignItems: "flex-start",
         }}
       >
         {breadcrumb && (
@@ -239,27 +267,11 @@ export default function PageHeader({
           </nav>
         )}
 
-        {eyebrow && (
-          <p
-            className="pgh-eyebrow"
-            style={{
-              color: c.mist,
-              fontSize: 12,
-              fontWeight: 700,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              marginBottom: 14,
-            }}
-          >
-            {eyebrow}
-          </p>
-        )}
-
         {title && (
           <h1
             className="pgh-title"
             style={{
-              fontSize: "clamp(32px, 5vw, 56px)",
+              fontSize: "clamp(28px, 5vw, 48px)",
               fontFamily: "'Nunito', sans-serif",
               fontWeight: 800,
               letterSpacing: "-0.01em",
@@ -270,57 +282,15 @@ export default function PageHeader({
             {title}
           </h1>
         )}
-
-        {subtitle && (
-          <p
-            style={{
-              color: c.mist,
-              fontSize: 16,
-              lineHeight: 1.5,
-              maxWidth: 560,
-              margin: "14px 0 0",
-              fontWeight: 400,
-            }}
-          >
-            {subtitle}
-          </p>
-        )}
-
-        {meta && (
-          <div
-            style={{
-              marginTop: 22,
-              paddingTop: 16,
-              borderTop: `1px solid ${c.hairline}`,
-              width: isCenter ? "auto" : "100%",
-              color: c.mistFaint,
-              fontSize: 13,
-              fontWeight: 500,
-            }}
-          >
-            {meta}
-          </div>
-        )}
-
-        {children && (
-          <div style={{ marginTop: meta ? 20 : 28, width: "100%" }}>
-            {children}
-          </div>
-        )}
       </div>
     </header>
   );
 }
 
 PageHeader.propTypes = {
-  eyebrow: PropTypes.string,
   title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string,
-  meta: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   breadcrumb: PropTypes.node,
   colors: PropTypes.object,
-  align: PropTypes.oneOf(['left', 'center']),
-  children: PropTypes.node,
   className: PropTypes.string,
   style: PropTypes.object
 };

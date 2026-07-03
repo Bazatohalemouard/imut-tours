@@ -45,17 +45,6 @@ export const TripsPage = ({ setPage }) => {
     });
   }, []);
 
-  const categories = [
-    "All",
-    "Parks & Wildlife",
-    "Eco-Parks",
-    "Cultural & Heritage",
-    "Historical",
-    "City Tour",
-    "Leisure",
-    "Relax",
-  ];
-
   const filtered = trips.filter(
     (t) =>
       (country === "All" || t.country === country) &&
@@ -64,8 +53,11 @@ export const TripsPage = ({ setPage }) => {
 
   return (
     <div style={{ paddingTop: 68, minHeight: "100vh", background: "#fff" }}>
-      <PageHeader title={'Tours & Safaris'} subtitle={''} />
-
+      <PageHeader title={'Tours & Safaris'} breadcrumb={
+        <span>
+          <a href="/">Home</a> / <span>Trips</span>
+        </span>
+      } />
 
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px" }}>
         {loading && <Spinner />}

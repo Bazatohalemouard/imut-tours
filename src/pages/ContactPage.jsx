@@ -82,7 +82,11 @@ export const ContactPage = () => {
   return (
     <div style={{ paddingTop: 68, minHeight: "100vh", background: colors.cream }}>
       {/* Header */}
-      <PageHeader title={'Reach out to Us'}/>
+      <PageHeader title={'Reach out to Us'} breadcrumb={
+        <span>
+          <a href="/">Home</a> / <span>Contact Us</span>
+        </span>
+      } />
       <div
         style={{
           maxWidth: 1200,

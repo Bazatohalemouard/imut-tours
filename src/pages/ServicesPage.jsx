@@ -368,7 +368,11 @@ export const ServicesPage = ({ setPage }) => {
 
   return (
     <div style={{ paddingTop: 68, minHeight: "100vh", background: colors.cream }}>
-      <PageHeader title={"Our Services"} />
+      <PageHeader title={'Our Services'} breadcrumb={
+        <span>
+          <a href="/">Home</a> / <span>Services</span>
+        </span>
+      } />
 
       <main style={{ fontFamily: "'DM Sans', 'Segoe UI', sans-serif" }}>
         {/* Intro strip — mirrors the About page's cream-toned story section */}
