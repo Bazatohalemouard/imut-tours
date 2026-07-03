@@ -12,6 +12,7 @@ import kenyaFlag from "../assets/flags/kenya.png";
 import southSudanFlag from "../assets/flags/south-sudan.png";
 import clockIcon from "../assets/icons/clock.png";
 import groupIcon from "../assets/icons/group-users.png";
+import difficultyIcon from "../assets/icons/challenge.png";
 
 /**
  * Card layout, top to bottom:
@@ -25,10 +26,13 @@ import groupIcon from "../assets/icons/group-users.png";
  *      as it needs, with font-size stepping down at smaller
  *      breakpoints so long titles stay readable without being cut.
  *      Always visible (card height simply varies with title length).
- *   4. Subtitle — supporting copy, hidden on mobile, shown from the
- *      sm breakpoint up (not essential at a glance).
- *   5. Meta row — duration is always visible; group size joins from
- *      sm up. Difficulty was removed per product decision.
+ *   4. Subtitle — full 2-line description, hidden on mobile, shown
+ *      from the sm breakpoint up.
+ *   5. Meta — on mobile, duration/difficulty are swapped out for a
+ *      single clipped line of the description instead (more useful
+ *      at a glance than "5 Days" alone on a very narrow card). From
+ *      sm up, duration + difficulty return as icon+label pairs, with
+ *      group size added at lg.
  *   6. Footer — a chevron affordance always shown; the card itself is
  *      the tap target, so a repeated "More details" label is only
  *      added back in on large screens as a design nicety.
@@ -242,6 +246,22 @@ function injectStyles() {
       .tc-title { font-size: 16.5px; }
     }
 
+    .tc-mobile-desc {
+      display: block;
+      font-size: 10.5px;
+      line-height: 1.4;
+      color: ${colors.textMuted};
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: auto;
+      padding-top: 6px;
+    }
+
+    @media (min-width: 640px) {
+      .tc-mobile-desc { display: none; }
+    }
+
     .tc-subtitle {
       display: none;
       color: ${colors.textMuted};
@@ -265,7 +285,7 @@ function injectStyles() {
     }
 
     .tc-meta-row {
-      display: flex;
+      display: none;
       align-items: center;
       gap: 8px;
       margin-top: auto;
@@ -273,7 +293,7 @@ function injectStyles() {
     }
 
     @media (min-width: 640px) {
-      .tc-meta-row { gap: 12px; padding-top: 8px; }
+      .tc-meta-row { display: flex; gap: 12px; padding-top: 8px; }
     }
 
     .tc-meta-item {
@@ -307,7 +327,7 @@ function injectStyles() {
       display: none;
     }
 
-    @media (min-width: 640px) {
+    @media (min-width: 1024px) {
       .tc-meta-secondary { display: flex; }
     }
 
@@ -430,12 +450,17 @@ export const TripCard = ({ trip }) => {
         <p className="tc-category">{formatCategory(trip.category)}</p>
         <h3 className="tc-title">{trip.title}</h3>
 
+        {trip.subtitle && <p className="tc-mobile-desc">{trip.subtitle}</p>}
         {trip.subtitle && <p className="tc-subtitle">{trip.subtitle}</p>}
 
         <div className="tc-meta-row">
           <span className="tc-meta-item">
             <img src={clockIcon} alt="" />
             {trip.duration}
+          </span>
+          <span className="tc-meta-item">
+            <img src={difficultyIcon} alt="" />
+            {trip.difficulty}
           </span>
           <span className="tc-meta-item tc-meta-secondary">
             <img src={groupIcon} alt="" />
@@ -468,6 +493,7 @@ TripCard.propTypes = {
     subtitle: PropTypes.string,
     duration: PropTypes.string,
     groupSize: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    difficulty: PropTypes.string,
     rating: PropTypes.number,
     reviews: PropTypes.number,
   }).isRequired,
