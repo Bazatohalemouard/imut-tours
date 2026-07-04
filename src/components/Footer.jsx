@@ -73,9 +73,14 @@ export const Footer = ({ setPage }) => (
                   <button
                     onClick={() => {
                       if (col.newTab) {
+                        trackEvent(
+                          "Navigation",
+                          `Clicked ${col.pages[i]} Link`,
+                          "Footer section"
+                        );
                         window.open(col.pages[i], '_blank');
                       } else {
-                        setPage(col.pages[i]);
+                        setPage(col.pages[i], null, "Footer section");
                       }
                     }}
                     style={{
