@@ -43,7 +43,7 @@ export const FeaturedTrips = ({ trips, tripsLoading, setPage }) => {
                         </h2>
                     </div>
                     <button
-                        onClick={() => setPage("trips")}
+                        onClick={() => setPage("trips", null, "Featured trips section")}
                         style={{
                             background: "none",
                             border: `1.5px solid ${colors.brand}`,
@@ -79,7 +79,7 @@ export const FeaturedTrips = ({ trips, tripsLoading, setPage }) => {
                         }}
                     >
                         {trips.map((trip) => (
-                            <TripCard key={trip.id} trip={trip} setPage={setPage} />
+                            <TripCard key={trip.id} trip={trip} />
                         ))}
                     </div>
                 )}

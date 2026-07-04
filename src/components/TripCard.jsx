@@ -13,6 +13,7 @@ import southSudanFlag from "../assets/flags/south-sudan.png";
 import clockIcon from "../assets/icons/clock.png";
 import groupIcon from "../assets/icons/group-users.png";
 import difficultyIcon from "../assets/icons/challenge.png";
+import { trackEvent } from "../utils/analytics";
 
 /**
  * Card layout, top to bottom:
@@ -405,7 +406,14 @@ export const TripCard = ({ trip }) => {
     <button
       type="button"
       className="tc-card"
-      onClick={() => navigate(`/trips/${trip.id}`)}
+      onClick={() => {
+        trackEvent(
+          "Trip details view",
+          `Viewed ${trip.title}`,
+          "Trip Card"
+        );
+        navigate(`/trips/${trip.id}`)
+      }}
     >
       {/* Image — always the first element, fixed aspect-ratio, so it
           lines up identically across every card in the row */}

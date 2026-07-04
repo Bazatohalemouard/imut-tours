@@ -228,7 +228,7 @@ const ServiceCard = ({ service, setPage, index }) => {
   return (
     <button
       type="button"
-      onClick={() => setPage("services", { id: service.id })}
+      onClick={() => setPage("services", { id: service.id }, "Hero Section")}
       onMouseDown={() => setIsPressed(true)}
       onMouseUp={() => setIsPressed(false)}
       onMouseLeave={() => setIsPressed(false)}
@@ -462,7 +462,7 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
               fontSize: isDesktop ? "22px" : "13px",
               color: "rgba(255,248,238,0.9)",
               fontWeight: 400,
-              lineHeight: isDesktop? 1.9 : 1.6,
+              lineHeight: isDesktop ? 1.9 : 1.6,
               maxWidth: "1000px",
               margin: "20px 0 20px",
               textShadow: "0 1px 8px rgba(18,7,3,0.4)",
@@ -476,7 +476,7 @@ export const HeroServices = ({ countries, countriesLoading, setPage, fetchCountr
         <div style={{ marginBottom: "clamp(28px, 5vh, 20px)" }}>
           <button
             type="button"
-            onClick={() => setPage("trips")}
+            onClick={() => setPage("trips", null, "Hero section")}
             style={{
               display: "inline-flex",
               alignItems: "center",

@@ -8,12 +8,15 @@ import { AboutPage } from "./pages/AboutPage";
 import { ContactPage } from "./pages/ContactPage";
 import { TripDetailsPage } from "./pages/TripDetailsPage";
 import ServicesPage from "./pages/ServicesPage";
+import PageTracking from "./utils/PageTracking";
+import { trackEvent } from "./utils/analytics";
+
 
 export default function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const setPage = (page, payload = null) => {
+  const setPage = (page, payload = null, section = null) => {
     const routes = {
       home: "/",
       locations: "/locations",
@@ -22,6 +25,12 @@ export default function App() {
       contact: "/contact",
       services: "/services",
     };
+
+    trackEvent(
+      "Navigation",
+      `Clicked ${routes[page]} Link`,
+      section ?? ""
+    );
 
     if (payload) {
       navigate(routes[page], { state: { payload } });
@@ -63,6 +72,7 @@ export default function App() {
 
       <Navbar activePage={getActivePage()} setPage={setPage} />
       <main>
+        <PageTracking />
         <Routes>
           <Route path="/" element={<HomePage setPage={setPage} />} />
           <Route path="/locations" element={<LocationsPage setPage={setPage} />} />
