@@ -20,6 +20,7 @@ import whatsappIcon from "../assets/icons/whatsapp.png";
 import { Spinner } from "../components/Spinner";
 import { fetchTrips } from "../api/APIHandler";
 import PageHeader from "../components/PageHeader";
+import { trackEvent } from "../utils/analytics";
 
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -414,7 +415,14 @@ export const TripDetailsPage = ({ setPage }) => {
 
                 {/* CTA */}
                 <button
-                  onClick={() => setBookingOpen(true)}
+                  onClick={() => {
+                    trackEvent(
+                      "Lead",
+                      `Booking Trip ${trip.title}`,
+                      "Trip Details Page"
+                    );
+                    setBookingOpen(true);
+                  }}
                   style={{
                     width: "100%", background: colors.gold, color: "#fff",
                     border: "none", borderRadius: 12, padding: "15px",
@@ -429,6 +437,13 @@ export const TripDetailsPage = ({ setPage }) => {
 
                 <a
                   href="https://wa.me/250788608794"
+                  onClick={() =>
+                    trackEvent(
+                      "Lead",
+                      `Whatsapp Contact ${trip.title}`,
+                      "Trip Details Page"
+                    )
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ textDecoration: "none" }}
