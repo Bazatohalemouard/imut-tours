@@ -10,6 +10,8 @@ import emailIcon from "../assets/icons/email.png";
 import fastResponseIcon from "../assets/icons/fast-response.png";
 import messageSentIcon from "../assets/icons/mail-sent.png";
 import PageHeader from "../components/PageHeader";
+import { trackEvent } from "../utils/analytics";
+
 
 
 // ─── Contact Page ─────────────────────────────────────────────────────────────
@@ -40,6 +42,11 @@ export const ContactPage = () => {
   const handleSubmit = () => {
     if (!form.name || !form.email || !form.message) return;
     setSubmitting(true);
+    trackEvent(
+      "Lead",
+      `Message submitted`,
+      "Contact Us Page"
+    )
     setTimeout(() => {
       setSubmitting(false);
       setSubmitted(true);
@@ -196,6 +203,13 @@ export const ContactPage = () => {
               </div>
               <a
                 href="https://wa.me/250788608794"
+                onClick={() =>
+                  trackEvent(
+                    "Lead",
+                    "Whatsapp Message Clicked",
+                    "Contact Us Page"
+                  )
+                }
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ textDecoration: "none" }}

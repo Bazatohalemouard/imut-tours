@@ -11,6 +11,7 @@ import {
 import { SERVICES_LIST, SERVICES_COPY, PROMISE_CARDS } from "../api/datasets/servicesdata";
 import PageHeader from "../components/PageHeader";
 import ServiceCard from "../components/ServiceCard";
+import { trackEvent } from "../utils/analytics";
 
 // ─── Keyframe injection ───────────────────────────────────────────────────────
 // Same light theme as AboutPage — cream / white sections, brand + gold accents.
@@ -250,6 +251,13 @@ const ContactSection = ({ copy, prefillService }) => {
             <a
               href={`mailto:${copy.email}?subject=Trip Enquiry${prefillService ? ` – ${prefillService}` : ""
                 }`}
+              onClick={() =>
+                trackEvent(
+                  "Lead",
+                  "Email",
+                  "Services Page"
+                )
+              }
               className="contact-btn-primary"
               style={{ textDecoration: "none", width: "100%", justifyContent: "center" }}
             >
@@ -259,6 +267,13 @@ const ContactSection = ({ copy, prefillService }) => {
 
             <a
               href={copy.whatsapp}
+              onClick={() =>
+                trackEvent(
+                  "Lead",
+                  `Whatsapp Contact ${trip.title}`,
+                  "Services Page"
+                )
+              }
               target="_blank"
               rel="noopener noreferrer"
               className="whatsapp-btn"
@@ -353,6 +368,11 @@ export const ServicesPage = ({ setPage }) => {
 
   const handleContact = (serviceName) => {
     setContactPrefill(serviceName);
+    trackEvent(
+      "Lead",
+      `Contact Us ${serviceName}`,
+      "Service Page"
+    )
     setTimeout(() => {
       contactRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 50);

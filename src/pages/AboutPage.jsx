@@ -129,7 +129,7 @@ export const AboutPage = ({ setPage }) => {
               While Rwanda remains the heart of what we do, our guides also lead tours through Uganda, Kenya, Tanzania, Burundi, and South Sudan, bringing the same depth of local knowledge and care to every region we cover.
             </p>
             <button
-              onClick={() => setPage("contact")}
+              onClick={() => setPage("contact", null, "About Us Page")}
               style={{
                 background: colors.jungle,
                 color: "#fff",
