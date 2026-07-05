@@ -162,8 +162,10 @@ export const TripDetailsPage = ({ setPage }) => {
             transition: "opacity 0.5s ease",
           }}
         />)}
-        {/* Gradient overlay */}
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(26,10,10,0.85) 0%, rgba(26,10,10,0.2) 55%, transparent 100%)" }} />
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.15) 75%, transparent 100%)"
+        }} />
 
         {/* Back button */}
         <button
@@ -197,6 +199,7 @@ export const TripDetailsPage = ({ setPage }) => {
                 background: "rgba(0,0,0,0.45)", backdropFilter: "blur(4px)",
                 color: "#fff", fontSize: 12, fontWeight: 600,
                 padding: "4px 10px", borderRadius: 99,
+                textShadow: "0 1px 2px rgba(0,0,0,0.5)",
               }}
             >
               {flag && <img src={flag} alt={trip.country} style={{ width: 16, height: 16, borderRadius: "50%", objectFit: "cover" }} />}
@@ -207,12 +210,23 @@ export const TripDetailsPage = ({ setPage }) => {
               style={{
                 background: "rgba(200,146,42,0.85)", color: "#fff",
                 fontSize: 12, fontWeight: 700, padding: "4px 10px", borderRadius: 99,
+                textShadow: "0 1px 2px rgba(0,0,0,0.35)",
               }}
             >
               {trip.category.join(" / ")}
             </span>
           </div>
-          <p style={{ fontSize: "clamp(14px, 2vw, 17px)", color: "rgba(255,255,255,0.8)", margin: "0 0 20px" }}>
+
+          {/*
+            Subtitle previously sat directly on the photo at 80%-opacity
+            white with nothing behind it — the weakest point on a bright
+            image. Now full-opacity white plus its own text-shadow, so
+            legibility doesn't rely on the gradient alone.
+          */}
+          <p style={{
+            fontSize: "clamp(14px, 2vw, 17px)", color: "#fff", margin: "0 0 20px",
+            textShadow: "0 1px 4px rgba(0,0,0,0.65)",
+          }}>
             {trip.subtitle}
           </p>
 
