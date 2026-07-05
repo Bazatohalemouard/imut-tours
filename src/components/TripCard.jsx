@@ -30,10 +30,12 @@ import { trackEvent } from "../utils/analytics";
  *   4. Subtitle — full 2-line description, hidden on mobile, shown
  *      from the sm breakpoint up.
  *   5. Meta — on mobile, duration/difficulty are swapped out for a
- *      single clipped line of the description instead (more useful
- *      at a glance than "5 Days" alone on a very narrow card). From
- *      sm up, duration + difficulty return as icon+label pairs, with
- *      group size added at lg.
+ *      clamped multi-line snippet of the description instead, sitting
+ *      directly under the title (more useful at a glance than "5 Days"
+ *      alone on a very narrow card, and a short title leaves more room
+ *      for it to show before it clips). From sm up, duration +
+ *      difficulty return as icon+label pairs, with group size added
+ *      at lg.
  *   6. Footer — a chevron affordance always shown; the card itself is
  *      the tap target, so a repeated "More details" label is only
  *      added back in on large screens as a design nicety.
@@ -86,10 +88,17 @@ function injectStyles() {
     .tc-image-wrap {
       position: relative;
       width: 100%;
-      aspect-ratio: 4 / 3;
+      /* Slightly shorter than a true 4:3 on mobile to trim card
+         height; back to 4:3 from sm up where the body has more
+         breathing room anyway. */
+      aspect-ratio: 3 / 2;
       overflow: hidden;
       background: ${colors.sand}33;
       flex-shrink: 0;
+    }
+
+    @media (min-width: 640px) {
+      .tc-image-wrap { aspect-ratio: 4 / 3; }
     }
 
     .tc-image-blur,
@@ -192,7 +201,7 @@ function injectStyles() {
       display: flex;
       flex-direction: column;
       flex: 1;
-      padding: 10px 10px 10px;
+      padding: 8px 10px 8px;
     }
 
     @media (min-width: 640px) {
@@ -226,9 +235,16 @@ function injectStyles() {
 
     .tc-title {
       font-family: 'Nunito', sans-serif;
-      font-weight: 700;
+      /* Slightly lighter on mobile — 700 read as too heavy at this
+         size. Bumped back up to 700 from sm up, where the larger font
+         size can carry the extra weight without feeling heavy. */
+      font-weight: 600;
       color: ${colors.brand};
-      margin: 0 0 6px;
+      /* Tight bottom margin on mobile so the description sticks right
+         below the title instead of floating away from it. Restored to
+         a roomier margin from sm up, where the description lives in
+         its own dedicated slot (.tc-subtitle) rather than right below. */
+      margin: 0 0 2px;
       font-size: 13px;
       line-height: 1.3;
       /* Intentionally not clamped/truncated — titles wrap in full,
@@ -240,7 +256,7 @@ function injectStyles() {
     }
 
     @media (min-width: 640px) {
-      .tc-title { font-size: 15px; margin-bottom: 8px; }
+      .tc-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
     }
 
     @media (min-width: 1024px) {
@@ -248,15 +264,22 @@ function injectStyles() {
     }
 
     .tc-mobile-desc {
-      display: block;
+      /* Sits directly under the title in normal flow, then grows
+         (flex: 1) to soak up whatever space is left above the footer,
+         which now sticks to the bottom of the card. A short title
+         means more room grows into this box; a long title leaves
+         less. -webkit-line-clamp is just the safety clip so overly
+         long copy still cuts off cleanly with an ellipsis rather than
+         spilling out of the grown box. */
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
       font-size: 10.5px;
       line-height: 1.4;
       color: ${colors.textMuted};
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-top: auto;
-      padding-top: 6px;
+      margin: 0;
     }
 
     @media (min-width: 640px) {
@@ -337,18 +360,34 @@ function injectStyles() {
       align-items: center;
       justify-content: flex-end;
       gap: 6px;
-      margin-top: 10px;
+      /* Mobile: the grown .tc-mobile-desc already pushes this down,
+         but margin-top: auto is kept as a fallback so the footer
+         still pins to the bottom of the card even when there's no
+         description to grow (e.g. trip.subtitle is empty). */
+      margin-top: auto;
+      padding-top: 8px;
+    }
+
+    @media (min-width: 640px) {
+      /* From sm up, .tc-meta-row already owns the auto margin that
+         pushes content to the bottom of the card, so the footer just
+         needs its small fixed gap underneath it — giving it its own
+         margin-top: auto here would split the leftover space between
+         the two and open an odd gap between meta-row and the footer. */
+      .tc-footer { margin-top: 0; padding-top: 8px; }
     }
 
     .tc-cta-text {
-      display: none;
       font-size: 12.5px;
-      font-weight: 700;
+      /* Lighter on mobile — 700 felt too heavy next to the now-600
+         title. Back to 700 from sm up, same as the title's weight
+         step-up. */
+      font-weight: 600;
       color: ${colors.brand};
     }
 
-    @media (min-width: 1024px) {
-      .tc-cta-text { display: inline; }
+    @media (min-width: 640px) {
+      .tc-cta-text { font-weight: 700; }
     }
 
     .tc-chevron {
@@ -455,7 +494,7 @@ export const TripCard = ({ trip }) => {
 
       {/* Body */}
       <div className="tc-body">
-        <p className="tc-category">{formatCategory(trip.category)}</p>
+        <p className="tc-category hide-on-small">{formatCategory(trip.category)}</p>
         <h3 className="tc-title">{trip.title}</h3>
 
         {trip.subtitle && <p className="tc-mobile-desc">{trip.subtitle}</p>}
@@ -477,7 +516,7 @@ export const TripCard = ({ trip }) => {
         </div>
 
         <div className="tc-footer">
-          <span className="tc-cta-text">View trip</span>
+          <span className="tc-cta-text">More details</span>
           <span className="tc-chevron" aria-hidden="true">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={colors.brand} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.2s ease" }}>
               <path d="M9 6l6 6-6 6" />
