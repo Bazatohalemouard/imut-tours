@@ -632,29 +632,47 @@ export const fetchCountries = () => new Promise((resolve) => setTimeout(() => {
 }, 800));
 
 
-export const sendToWhatsApp = (form, trip) => {
-  const msg = `
-*New Booking Request*
+export const submitBooking = async (form, trip) => {
+  try {
+    const bookingData = {
+      name: `${form.firstName} ${form.lastName}`,
+      email: form.email,
+      booking_date: new Date().toISOString().split('T')[0],
+      service: "Trip Booking",
+      trip_title: trip.title,
+      trip_duration: trip.duration,
+      trip_country: trip.country,
+      trip_price: trip.price.toString(),
+      trip_currency: trip.currency,
+      first_name: form.firstName,
+      last_name: form.lastName,
+      phone: form.phone,
+      nationality: form.nationality,
+      travelers: form.travelers.toString(),
+      start_date: form.startDate,
+      accommodation: form.accommodation || "No preference",
+      dietary_needs: form.dietaryNeeds || "None",
+      special_requests: form.specialRequests || "None"
+    };
 
-*Trip:* ${trip.title}
-*Duration:* ${trip.duration} | *Country:* ${trip.country}
+    const response = await apiClient.post('/bookings', {
+      body: JSON.stringify(bookingData),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
 
-*Traveler Details*
-- Name: ${form.firstName} ${form.lastName}
-- Email: ${form.email}
-- Phone: ${form.phone}
-- Nationality: ${form.nationality}
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-*Trip Preferences*
-- Travelers: ${form.travelers}
-- Start Date: ${form.startDate}
-- Accommodation: ${form.accommodation || "No preference"}
-- Dietary Needs: ${form.dietaryNeeds || "None"}
-- Special Requests: ${form.specialRequests || "None"}
-
-*Estimated Total:* $${(trip.price * Number.parseInt(form.travelers)).toLocaleString()} ${trip.currency}
-  `.trim();
-
-  const encoded = encodeURIComponent(msg);
-  window.open(`https://wa.me/250788608794?text=${encoded}`, "_blank");
+    const result = await response.json();
+    return { success: true, data: result };
+  } catch (error) {
+    console.error('Booking submission failed:', error);
+    return {
+      success: false,
+      error: error.message || 'Failed to submit booking request'
+    };
+  }
 };

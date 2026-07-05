@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { colors } from "../theme/colors";
-import { sendToWhatsApp } from "../api/APIHandler";
+import { submitBooking } from "../api/APIHandler";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const STEPS = ["Your Details", "Trip Preferences", "Review & Confirm"];
@@ -100,8 +100,8 @@ const StepIndicator = ({ current, total }) => (
               i < current
                 ? colors.jungle
                 : i === current
-                ? colors.brand
-                : colors.sand,
+                  ? colors.brand
+                  : colors.sand,
             color: i <= current ? "#fff" : colors.textMuted,
             transition: "all 0.3s",
             flexShrink: 0,
@@ -242,14 +242,21 @@ export const BookingModal = ({ trip, isOpen, onClose }) => {
     setStep((s) => s - 1);
   };
 
-  const handleSubmit = () => {
-  setSubmitting(true);
-  setTimeout(() => {
-    sendToWhatsApp(form, trip);
-    setSubmitting(false);
-    setSubmitted(true);
-  }, 600);
-};
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    try {
+      const result = await submitBooking(form, trip);
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        console.error('Booking submission failed:', result.error);
+      }
+    } catch (error) {
+      console.error('Unexpected error during booking:', error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -462,9 +469,9 @@ export const BookingModal = ({ trip, isOpen, onClose }) => {
                       (e.target.style.borderColor = colors.gold)
                     }
                     onBlur={(e) =>
-                      (e.target.style.borderColor = errors.firstName
-                        ? "#C0392B"
-                        : colors.sand)
+                    (e.target.style.borderColor = errors.firstName
+                      ? "#C0392B"
+                      : colors.sand)
                     }
                   />
                 </Field>
@@ -479,9 +486,9 @@ export const BookingModal = ({ trip, isOpen, onClose }) => {
                       (e.target.style.borderColor = colors.gold)
                     }
                     onBlur={(e) =>
-                      (e.target.style.borderColor = errors.lastName
-                        ? "#C0392B"
-                        : colors.sand)
+                    (e.target.style.borderColor = errors.lastName
+                      ? "#C0392B"
+                      : colors.sand)
                     }
                   />
                 </Field>
@@ -496,9 +503,9 @@ export const BookingModal = ({ trip, isOpen, onClose }) => {
                   style={focusStyle("email")}
                   onFocus={(e) => (e.target.style.borderColor = colors.gold)}
                   onBlur={(e) =>
-                    (e.target.style.borderColor = errors.email
-                      ? "#C0392B"
-                      : colors.sand)
+                  (e.target.style.borderColor = errors.email
+                    ? "#C0392B"
+                    : colors.sand)
                   }
                 />
               </Field>
@@ -516,9 +523,9 @@ export const BookingModal = ({ trip, isOpen, onClose }) => {
                   style={focusStyle("phone")}
                   onFocus={(e) => (e.target.style.borderColor = colors.gold)}
                   onBlur={(e) =>
-                    (e.target.style.borderColor = errors.phone
-                      ? "#C0392B"
-                      : colors.sand)
+                  (e.target.style.borderColor = errors.phone
+                    ? "#C0392B"
+                    : colors.sand)
                   }
                 />
               </Field>
@@ -586,9 +593,9 @@ export const BookingModal = ({ trip, isOpen, onClose }) => {
                       (e.target.style.borderColor = colors.gold)
                     }
                     onBlur={(e) =>
-                      (e.target.style.borderColor = errors.startDate
-                        ? "#C0392B"
-                        : colors.sand)
+                    (e.target.style.borderColor = errors.startDate
+                      ? "#C0392B"
+                      : colors.sand)
                     }
                   />
                 </Field>
