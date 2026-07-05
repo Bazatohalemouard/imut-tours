@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { IMUTLogo } from "../components/IMUTLogo";
 import { colors } from "../theme/colors";
+import { trackEvent } from "../utils/analytics";
 
 export const Footer = ({ setPage }) => (
   <footer style={{ background: colors.jungle, color: "#fff" }}>

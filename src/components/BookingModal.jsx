@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { colors } from "../theme/colors";
 import { submitBooking } from "../api/APIHandler";
+import { trackEvent } from "../utils/analytics";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const STEPS = ["Your Details", "Trip Preferences", "Review & Confirm"];
@@ -245,6 +246,11 @@ export const BookingModal = ({ trip, isOpen, onClose }) => {
   const handleSubmit = async () => {
     setSubmitting(true);
     try {
+      trackEvent (
+        "Lead",
+        `Booking Submitted - ${trip.title}`,
+        "Booking Modal"
+      )
       const result = await submitBooking(form, trip);
       if (result.success) {
         setSubmitted(true);
