@@ -1,19 +1,125 @@
-import axios from 'axios';
-
 const API_URL = import.meta.env.VITE_API_URL;
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-  headers: {
-    "X-API-KEY": import.meta.env.VITE_API_KEY,
-  },
-});
+/**
+ * Generic API request helper
+ */
+async function apiRequest(endpoint, options = {}) {
+  const response = await fetch(`${API_URL}${endpoint}`, {
+    headers: {
+      "Content-Type": "application/json",
+      "X-API-KEY": API_KEY,
+      ...(options.headers || {}),
+    },
+    ...options,
+  });
 
-export const fetchTrips = async () => {
-  const { data } = await apiClient.get("/api/trips/");
+  let data = {};
+
+  try {
+    data = await response.json();
+  } catch {
+    // Ignore empty responses
+  }
+
+  if (!response.ok) {
+    throw new Error(
+      data.error ||
+      data.message ||
+      `Request failed (${response.status})`
+    );
+  }
+
   return data;
-};
+}
+
+/**
+ * Fetch all trips
+ */
+export async function fetchTrips() {
+  return await apiRequest("/api/trips/");
+}
+
+/**
+ * Submit booking
+ */
+export async function submitBooking(form, trip) {
+  try {
+    const bookingData = {
+      name: `${form.firstName} ${form.lastName}`,
+      email: form.email,
+      booking_date: new Date().toISOString().split("T")[0],
+
+      service: "Trip Booking",
+
+      trip_title: trip.title,
+      trip_duration: trip.duration,
+      trip_country: trip.country,
+      trip_price: trip.price.toString(),
+      trip_currency: trip.currency,
+
+      first_name: form.firstName,
+      last_name: form.lastName,
+      phone: form.phone,
+      nationality: form.nationality,
+
+      travelers: form.travelers.toString(),
+      start_date: form.startDate,
+
+      accommodation: form.accommodation || "No preference",
+      dietary_needs: form.dietaryNeeds || "None",
+      special_requests: form.specialRequests || "None",
+    };
+
+    const result = await apiRequest("/api/send-booking/", {
+      method: "POST",
+      body: JSON.stringify(bookingData),
+    });
+
+    return {
+      success: true,
+      data: result,
+    };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
+}
+
+/**
+ * Submit contact message
+ */
+export async function submitMessage(form) {
+  try {
+    const messageData = {
+      name: form.name,
+      email: form.email,
+      phone: form.phone,
+      message: form.message,
+    };
+
+    const result = await apiRequest("/api/send-message/", {
+      method: "POST",
+      body: JSON.stringify(messageData),
+    });
+
+    return {
+      success: true,
+      data: result,
+    };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
+}
 
 export const fetchLocations = () =>
   new Promise((resolve) =>
@@ -630,49 +736,3 @@ export const fetchCountries = () => new Promise((resolve) => setTimeout(() => {
     },
   ]);
 }, 800));
-
-
-export const submitBooking = async (form, trip) => {
-  try {
-    const bookingData = {
-      name: `${form.firstName} ${form.lastName}`,
-      email: form.email,
-      booking_date: new Date().toISOString().split('T')[0],
-      service: "Trip Booking",
-      trip_title: trip.title,
-      trip_duration: trip.duration,
-      trip_country: trip.country,
-      trip_price: trip.price.toString(),
-      trip_currency: trip.currency,
-      first_name: form.firstName,
-      last_name: form.lastName,
-      phone: form.phone,
-      nationality: form.nationality,
-      travelers: form.travelers.toString(),
-      start_date: form.startDate,
-      accommodation: form.accommodation || "No preference",
-      dietary_needs: form.dietaryNeeds || "None",
-      special_requests: form.specialRequests || "None"
-    };
-
-    const response = await apiClient.post('/bookings', {
-      body: JSON.stringify(bookingData),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const result = await response.json();
-    return { success: true, data: result };
-  } catch (error) {
-    console.error('Booking submission failed:', error);
-    return {
-      success: false,
-      error: error.message || 'Failed to submit booking request'
-    };
-  }
-};

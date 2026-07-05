@@ -11,6 +11,7 @@ import fastResponseIcon from "../assets/icons/fast-response.png";
 import messageSentIcon from "../assets/icons/mail-sent.png";
 import PageHeader from "../components/PageHeader";
 import { trackEvent } from "../utils/analytics";
+import { submitMessage } from "../api/APIHandler";
 
 
 
@@ -20,10 +21,6 @@ export const ContactPage = () => {
     name: "",
     email: "",
     phone: "",
-    country: "",
-    tripType: "",
-    dates: "",
-    groupSize: "",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -39,18 +36,28 @@ export const ContactPage = () => {
 
   const handleChange = (field, val) => setForm((f) => ({ ...f, [field]: val }));
 
-  const handleSubmit = () => {
+
+  const handleSubmit = async () => {
     if (!form.name || !form.email || !form.message) return;
-    setSubmitting(true);
-    trackEvent(
-      "Lead",
-      `Message submitted`,
-      "Contact Us Page"
-    )
-    setTimeout(() => {
+    try {
+      setSubmitting(true);
+      trackEvent(
+        "Lead",
+        `Message submitted`,
+        "Contact Us Page"
+      )
+      const result = await submitMessage(form);
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        console.error('Booking submission failed:', result.error);
+      }
+    } catch (error) {
+      console.error('Unexpected error during booking:', error);
+    } finally {
       setSubmitting(false);
       setSubmitted(true);
-    }, 1500);
+    }
   };
 
   const inputStyle = {
