@@ -1,6 +1,20 @@
-import trips from "./datasets/trips";
+import axios from 'axios';
 
-// ─── Dummy Data ───────────────────────────────────────────────────────────────
+const API_URL = import.meta.env.VITE_API_URL;
+const API_KEY = import.meta.env.VITE_API_KEY;
+
+const apiClient = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+  headers: {
+    "X-API-KEY": import.meta.env.VITE_API_KEY,
+  },
+});
+
+export const fetchTrips = async () => {
+  const { data } = await apiClient.get("/api/trips/");
+  return data;
+};
+
 export const fetchLocations = () =>
   new Promise((resolve) =>
     setTimeout(() => {
@@ -616,13 +630,6 @@ export const fetchCountries = () => new Promise((resolve) => setTimeout(() => {
     },
   ]);
 }, 800));
-
-export const fetchTrips = () =>
-  new Promise((resolve) =>
-    setTimeout(() => {
-      resolve(trips);
-    }, 900)
-  );
 
 
 export const sendToWhatsApp = (form, trip) => {
