@@ -477,10 +477,6 @@ export const TripDetailsPage = ({ setPage }) => {
                     Chat on WhatsApp
                   </button>
                 </a>
-
-                <p style={{ fontSize: 12, color: colors.textMuted, textAlign: "center", margin: 0, lineHeight: 1.6 }}>
-                  Free cancellation up to 30 days before
-                </p>
               </div>
             </div>
 
