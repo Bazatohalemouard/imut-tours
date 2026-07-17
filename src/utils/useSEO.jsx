@@ -104,12 +104,12 @@ export function buildTripSchema(trip) {
   return {
     "@context":    "https://schema.org",
     "@type":       "TouristTrip",
-    "name":        trip.name,
-    "description": trip.description,
+    "name":        trip.title,
+    "description": trip.subtitle,
     "touristType": "Adventure",
     "itinerary": {
       "@type": "ItemList",
-      "name":  trip.destination ?? "East Africa",
+      "name":  trip.country ?? "East Africa",
     },
     "provider": buildProvider(),
     "offers": {

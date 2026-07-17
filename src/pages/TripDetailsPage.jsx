@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useSEO, buildTripSchema } from "../utils/useSEO";
 import PropTypes from "prop-types";
 import { colors } from "../theme/colors";
-import { StarRating } from "../components/StarRating";
 import { Badge } from "../components/Badge";
 import { BookingModal } from "../components/BookingModal";
 import rwandaFlag from "../assets/flags/rwanda.png";
@@ -105,12 +104,12 @@ export const TripDetailsPage = ({ setPage }) => {
 
   useSEO({
     title: trip ? `${trip.title} | IMUT Tours & Travel` : "Trip Details | IMUT Tours & Travel",
-    description: trip?.description,
+    description: trip?.subtitle,
     schemas: trip ? [buildTripSchema(trip)] : [],
     breadcrumbs: trip ? [
       { name: "Home", url: "/" },
       { name: "Trips", url: "/trips" },
-      { name: trip.name, url: `/trips/${trip.id}` },
+      { name: trip.title, url: `/trips/${trip.id}` },
     ] : [],
   });
 
