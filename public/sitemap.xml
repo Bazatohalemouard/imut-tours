@@ -30,8 +30,8 @@
   ============================================================
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <!-- ======================================================
        CORE / GLOBAL PAGES
@@ -85,38 +85,38 @@
   </url>
 
   <url>
-    <loc>https://imut-tours.com/trips/101</loc>
+    <loc>https://imut-tours.com/trips/2</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://imut-tours.com/trips/102</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://imut-tours.com/trips/112</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://imut-tours.com/trips/201</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://imut-tours.com/trips/206</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://imut-tours.com/trips/5</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://imut-tours.com/trips/6</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://imut-tours.com/trips/7</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://imut-tours.com/trips/8</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://imut-tours.com/trips/11</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -131,64 +131,224 @@
     <loc>https://imut-tours.com/trips/1</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <!-- #1 search term for Rwanda tourism globally -->
+    <priority>0.8</priority>
+    <!-- Rwanda Adventure Safari Circuit -->
   </url>
 
   <url>
-    <loc>https://imut-tours.com/trips/101</loc>
+    <loc>https://imut-tours.com/trips/2</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <!-- Akagera Big Five Safari -->
   </url>
 
   <url>
-    <loc>https://imut-tours.com/trips/102</loc>
+    <loc>https://imut-tours.com/trips/3</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <!-- Rwanda Gorilla Trekking -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/4</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <!-- Buhanga Sacred Forest & Royal Trail -->
   </url>
 
   <url>
-    <loc>https://imut-tours.com/trips/103</loc>
+    <loc>https://imut-tours.com/trips/5</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <!-- Nyandungu Eco-Park Wetlands -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/6</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <!-- Rwanda Scenic & Cultural Expedition -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/7</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <!-- Nyungwe Forest Chimpanzee Trek -->
   </url>
 
   <url>
-    <loc>https://imut-tours.com/trips/104</loc>
+    <loc>https://imut-tours.com/trips/8</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <!-- Royal Heritage & Memorial Journey -->
   </url>
 
   <url>
-    <loc>https://imut-tours.com/trips/105</loc>
+    <loc>https://imut-tours.com/trips/9</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <!-- Akagera Big Five: One Day Safari -->
   </url>
 
   <url>
-    <loc>https://imut-tours.com/trips/106</loc>
+    <loc>https://imut-tours.com/trips/10</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.9</priority>
+    <!-- Kigali Arts & Gallery Weekend -->
   </url>
 
   <url>
-    <loc>https://imut-tours.com/trips/107</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://imut-tours.com/trips/108</loc>
+    <loc>https://imut-tours.com/trips/11</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <!-- Volcanoes Hike & Cultural Trail -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/12</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Post Conference Lake Kivu Wellness Retreat -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/13</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Genocide Memorial & Healing Journey -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/14</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Kigali After Dark: Flavors & Rooftop Sunsets -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/15</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Explore Rwanda: Culture, Eco-Parks & Lakes -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/16</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Congo Nile Trail Cycling Tour -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/17</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <!-- Gorillas & Golden Monkeys Combo Trek -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/18</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Lake Kivu Weekend Getaway -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/19</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Kigali Executive Golf & Networking Day -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/20</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Karongi & Lake Kivu Islands -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/21</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Twin Lakes & Tea Country Tour -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/22</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Corporate Team Building at Lake Muhazi -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/23</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Kigali City & Culture Tour -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/24</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Gishwati-Mukura Chimpanzee Trek -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/25</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- One Day Gorilla Trekking Express -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/26</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Eastern Lakes & Legacy Trail -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/27</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Kigali Wetlands & Green Spaces -->
+  </url>
+
+  <url>
+    <loc>https://imut-tours.com/trips/28</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <!-- Half Day Kigali Orientation for Delegates -->
   </url>
 
   <!-- ======================================================
@@ -224,20 +384,6 @@
   </url>
 
   <url>
-    <loc>https://imut-tours.com/trips/204</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://imut-tours.com/trips/205</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
     <loc>https://imut-tours.com/trips/206</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -260,41 +406,6 @@
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://imut-tours.com/trips/kenya/14</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://imut-tours.com/trips/kenya/701</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://imut-tours.com/trips/kenya/702</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://imut-tours.com/trips/kenya/703</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://imut-tours.com/trips/kenya/704</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
 
   <!-- ======================================================
@@ -327,20 +438,6 @@
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://imut-tours.com/trips/502</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://imut-tours.com/trips/503</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
 
   <!-- ======================================================
@@ -378,13 +475,6 @@
   <!-- ======================================================
        SOUTH SUDAN TOURS
        ====================================================== -->
-
-  <url>
-    <loc>https://imut-tours.com/trips/1201</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
 
   <url>
     <loc>https://imut-tours.com/trips/1202</loc>
