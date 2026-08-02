@@ -2,6 +2,27 @@ import PropTypes from "prop-types";
 import { IMUTLogo } from "../components/IMUTLogo";
 import { colors } from "../theme/colors";
 import { trackEvent } from "../utils/analytics";
+import rwandaFlag from "../assets/flags/rwanda.png";
+import southSudanFlag from "../assets/flags/south-sudan.png";
+
+const offices = [
+  {
+    flag: rwandaFlag,
+    city: "Kigali",
+    country: "Rwanda",
+    address: "KK 35 Ave, Kigali",
+    phone: "+250 788 608 794",
+    email: "customersupport@imut-tours.com",
+  },
+  {
+    flag: southSudanFlag,
+    city: "Juba",
+    country: "South Sudan",
+    address: "Juba Town",
+    phone: "+211 (0)917 876 617",
+    email: null,
+  },
+];
 
 export const Footer = ({ setPage }) => (
   <footer style={{ background: colors.jungle, color: "#fff" }}>
@@ -22,17 +43,84 @@ export const Footer = ({ setPage }) => (
       >
         <div>
           <IMUTLogo size={36} light />
-          <p
-            style={{
-              color: "rgba(255,255,255,0.6)",
-              fontSize: 14,
-              lineHeight: 1.7,
-              margin: "16px 0 0",
-              maxWidth: 260,
-            }}
-          >
-            Crafting unforgettable Rwandan adventures, from gorilla treks to immersive safaris and beyond across East Africa.
-          </p>
+          <ul style={{ listStyle: "none", padding: 0, marginTop: 10 }}>
+            {offices.map((office) => (
+              <li key={office.city} style={{ marginBottom: 20 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    marginBottom: 6,
+                  }}
+                >
+                  <img
+                    src={office.flag}
+                    alt={`${office.country} flag`}
+                    style={{
+                      width: 18,
+                      height: 12,
+                      objectFit: "cover",
+                      borderRadius: 2,
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 600,
+                      color: "#fff",
+                    }}
+                  >
+                    {office.city}, {office.country}
+                  </span>
+                </div>
+                <p
+                  style={{
+                    color: "rgba(255,255,255,0.65)",
+                    fontSize: 13,
+                    lineHeight: 1.7,
+                    margin: 0,
+                  }}
+                >
+                  {office.address}
+                </p>
+                <a
+                  href={`tel:${office.phone.replace(/[^+\d]/g, "")}`}
+                  style={{
+                    color: "rgba(255,255,255,0.65)",
+                    fontSize: 13,
+                    lineHeight: 1.7,
+                    textDecoration: "none",
+                    display: "block",
+                  }}
+                  onMouseEnter={(e) => (e.target.style.color = "#fff")}
+                  onMouseLeave={(e) =>
+                    (e.target.style.color = "rgba(255,255,255,0.65)")
+                  }
+                >
+                  {office.phone}
+                </a>
+                {office.email && (
+                  <a
+                    href={`mailto:${office.email}`}
+                    style={{
+                      color: "rgba(255,255,255,0.65)",
+                      fontSize: 13,
+                      lineHeight: 1.7,
+                      textDecoration: "none",
+                      display: "block",
+                    }}
+                    onMouseEnter={(e) => (e.target.style.color = "#fff")}
+                    onMouseLeave={(e) =>
+                      (e.target.style.color = "rgba(255,255,255,0.65)")
+                    }
+                  >
+                    {office.email}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
 
         {[
