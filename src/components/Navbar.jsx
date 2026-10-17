@@ -53,7 +53,7 @@ export const Navbar = ({ activePage, setPage }) => {
           onClick={() => { setPage("home"); setMenuOpen(false); }}
           style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
         >
-          <IMUTLogo size={36} light={transparent} />
+          <IMUTLogo size={86} light={transparent} />
         </button>
 
         {/* Desktop links */}

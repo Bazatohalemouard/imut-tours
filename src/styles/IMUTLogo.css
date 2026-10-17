@@ -1,0 +1,10 @@
+.imut-logo {
+  position: relative;
+}
+
+/* Mobile screens only */
+@media (max-width: 767px) {
+  .imut-logo {
+    left: -10px;
+  }
+}
