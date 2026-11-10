@@ -3,7 +3,7 @@ import { IMUTLogo } from "../components/IMUTLogo";
 import { colors } from "../theme/colors";
 import { trackEvent } from "../utils/analytics";
 import rwandaFlag from "../assets/flags/rwanda.png";
-import southSudanFlag from "../assets/flags/south-sudan.png";
+// import southSudanFlag from "../assets/flags/south-sudan.png";
 
 const offices = [
   {
@@ -14,14 +14,14 @@ const offices = [
     phone: "+250 788 608 794",
     email: "customersupport@imut-tours.com",
   },
-  {
-    flag: southSudanFlag,
-    city: "Juba",
-    country: "South Sudan",
-    address: "Juba Town",
-    phone: "+211 (0)917 876 617",
-    email: null,
-  },
+  // {
+  //   flag: southSudanFlag,
+  //   city: "Juba",
+  //   country: "South Sudan",
+  //   address: "Juba Town",
+  //   phone: "+211 (0)917 876 617",
+  //   email: null,
+  // },
 ];
 
 export const Footer = ({ setPage }) => (

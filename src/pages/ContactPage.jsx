@@ -83,14 +83,14 @@ export const ContactPage = () => {
       phone: "+250 788 608 794",
       email: "customersupport@imut-tours.com",
     },
-    {
-      flag: southSudanFlag,
-      city: "Juba",
-      country: "South Sudan",
-      address: "Juba Town",
-      phone: "+211 (0)917 876 617",
-      email: null,
-    },
+    // {
+    //   flag: southSudanFlag,
+    //   city: "Juba",
+    //   country: "South Sudan",
+    //   address: "Juba Town",
+    //   phone: "+211 (0)917 876 617",
+    //   email: null,
+    // },
   ];
 
   return (
