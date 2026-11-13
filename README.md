@@ -1,4 +1,4 @@
-# IMUT Tours
+# Rwanda Noble Tours
 
 A responsive, mobile-first React app with two features:
 1. **File Upload** — upload Excel/CSV files and preview them in a styled table

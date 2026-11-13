@@ -4,7 +4,7 @@ import "../styles/IMUTLogo.css";
 export const IMUTLogo = ({ size = 40, light = false }) => (
   <img
     src="/imut-logo.png"
-    alt="IMUT Tours"
+    alt="Rwanda Noble Tours"
     className="imut-logo"
     style={{
       height: size,

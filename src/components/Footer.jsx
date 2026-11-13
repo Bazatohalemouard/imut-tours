@@ -208,7 +208,7 @@ export const Footer = ({ setPage }) => (
         }}
       >
         <p style={{ color: "rgba(255,255,255,0.45)", fontSize: 13, margin: 0 }}>
-          © 2026 IMUT Tours. A division of International Marathon United Technology Rwanda Ltd.
+          © 2026 Rwanda Noble Tours. A division of International Marathon United Technology Rwanda Ltd.
         </p>
         <div style={{ display: "flex", gap: 16 }}>
           {["Instagram", "Twitter", "Facebook"].map((item) => (

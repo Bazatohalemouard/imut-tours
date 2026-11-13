@@ -357,7 +357,7 @@ export const ServicesPage = ({ setPage }) => {
   const visibleServices = SERVICES_LIST;
 
   useSEO({
-    title: "Our Services | Safaris, Transfers & More | IMUT Tours & Travel",
+    title: "Our Services | Safaris, Transfers & More | Rwanda Noble Tours & Travel",
     description:
       "Explore guided safaris, car hire, airport transfers, accommodation and visa support across East Africa.",
     breadcrumbs: [
@@ -420,7 +420,7 @@ export const ServicesPage = ({ setPage }) => {
               }}
             >
               From guided safaris to airport transfers and visa support, every service is
-              handled with the same local knowledge and care that defines IMUT Tours.
+              handled with the same local knowledge and care that defines Rwanda Noble Tours.
             </p>
           </div>
         </section>

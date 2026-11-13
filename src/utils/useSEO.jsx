@@ -17,7 +17,7 @@ import { useEffect, useRef } from "react";
 // ─── Site constants ───────────────────────────────────────────────────────────
 // Single source of truth — update once, reflected everywhere.
 export const SITE = {
-  name:    "IMUT Tours & Travel",
+  name:    "Rwanda Noble Tours & Travel",
   url:     "https://www.imut-tours.com",
   phone:   "+250 788 608 794",
   email:   "info@imut-tours.com",

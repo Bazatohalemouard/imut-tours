@@ -15,11 +15,11 @@ import PageHeader from "../components/PageHeader";
 // ─── About Page ───────────────────────────────────────────────────────────────
 export const AboutPage = ({ setPage }) => {
   useSEO({
-    title: "About Us | IMUT Tours & Travel",
-    description: "IMUT Tours leads authentic safaris across Rwanda, with expert-guided tours extending into Uganda, Kenya, Tanzania, Burundi, and South Sudan.",
+    title: "About Us | Rwanda Noble Tours & Travel",
+    description: "Rwanda Noble Tours leads authentic safaris across Rwanda, with expert-guided tours extending into Uganda, Kenya, Tanzania, Burundi, and South Sudan.",
     schemas: [
       buildOrganizationSchema(),
-      buildWebPageSchema({ name: "About Us", description: "IMUT Tours leads authentic safaris across Rwanda, with expert-guided tours extending into Uganda, Kenya, Tanzania, Burundi, and South Sudan.", path: "/about" }),
+      buildWebPageSchema({ name: "About Us", description: "Rwanda Noble Tours leads authentic safaris across Rwanda, with expert-guided tours extending into Uganda, Kenya, Tanzania, Burundi, and South Sudan.", path: "/about" }),
     ],
     breadcrumbs: [
       { name: "Home", url: "/" },
@@ -115,7 +115,7 @@ export const AboutPage = ({ setPage }) => {
               }}
             >
               IMUT stands for International Marathon United Technology, a name rooted in our origins as a logistics company.
-              Our hearts, though, were always drawn to the wild. That passion led us to create IMUT Tours, a specialist division dedicated to authentic East African adventures.
+              Our hearts, though, were always drawn to the wild. That passion led us to create Rwanda Noble Tours, a specialist division dedicated to authentic East African adventures.
 
             </p>
             <p

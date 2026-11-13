@@ -103,7 +103,7 @@ export const TripDetailsPage = ({ setPage }) => {
   }, [tripId]);
 
   useSEO({
-    title: trip ? `${trip.title} | IMUT Tours & Travel` : "Trip Details | IMUT Tours & Travel",
+    title: trip ? `${trip.title} | Rwanda Noble Tours & Travel` : "Trip Details | Rwanda Noble Tours & Travel",
     description: trip?.subtitle,
     schemas: trip ? [buildTripSchema(trip)] : [],
     breadcrumbs: trip ? [

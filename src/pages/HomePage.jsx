@@ -21,8 +21,8 @@ export const HomePage = ({ setPage }) => {
   const [countries, setCountries] = useState([]);
   const [countriesLoading, setCountriesLoading] = useState(true);
   useSEO({
-    title: "Home | IMUT Tours & Travel",
-    description: "Discover unforgettable East African adventures with IMUT Tours & Travel. From thrilling safaris to cultural immersions, we handle every detail for your perfect trip.",
+    title: "Home | Rwanda Noble Tours & Travel",
+    description: "Discover unforgettable East African adventures with Rwanda Noble Tours & Travel. From thrilling safaris to cultural immersions, we handle every detail for your perfect trip.",
     breadcrumbs: [
       { name: "Home", url: "/" },
     ],

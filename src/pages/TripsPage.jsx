@@ -234,7 +234,7 @@ export const TripsPage = ({ setPage }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useSEO({
-    title: "Trips | IMUT Tours & Travel",
+    title: "Trips | Rwanda Noble Tours & Travel",
     description: "Explore our range of exciting trips and safaris across East Africa. Find the perfect adventure for you.",
     breadcrumbs: [
       { name: "Home", url: "/" },

@@ -26,7 +26,7 @@ export const ContactPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   useSEO({
-    title: "Contact Us | IMUT Tours & Travel",
+    title: "Contact Us | Rwanda Noble Tours & Travel",
     description: "Get in touch with our team in Kigali. We reply within 24 hours.",
     breadcrumbs: [
       { name: "Home", url: "/" },

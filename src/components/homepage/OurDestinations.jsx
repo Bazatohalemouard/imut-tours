@@ -74,7 +74,7 @@ export const OurDestinations = ({ countries, countriesLoading, fetchCountryFlag 
                             margin: "0 0 32px",
                         }}
                     >
-                        IMUT Tours operates deep in the heart of East Africa — our
+                        Rwanda Noble Tours operates deep in the heart of East Africa — our
                         destinations span {countryText}, each with its own wild beauty and
                         unforgettable experiences.
                     </p>
