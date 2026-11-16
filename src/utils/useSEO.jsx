@@ -20,7 +20,7 @@ export const SITE = {
   name:    "Rwanda Noble Tours & Travel",
   url:     "https://www.imut-tours.com",
   phone:   "+250 788 608 794",
-  email:   "info@imut-tours.com",
+  email:   "customer.supportrwandanoble.tours",
   locale:  "en_RW",
   address: {
     country:  "RW",

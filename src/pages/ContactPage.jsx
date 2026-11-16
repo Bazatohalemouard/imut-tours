@@ -81,7 +81,7 @@ export const ContactPage = () => {
       country: "Rwanda",
       address: "KK 35 Ave, Kigali",
       phone: "+250 788 608 794",
-      email: "customersupport@imut-tours.com",
+      email: "customer.support@rwandanoble.tours",
     },
     // {
     //   flag: southSudanFlag,

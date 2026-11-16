@@ -32,7 +32,7 @@ export const SERVICES_COPY = {
   contactCta: "Send Us a Message",
   contactAlt: "Or call us directly",
   phone: "+250 788 608 794",
-  email: "customersupport@imut-tours.com",
+  email: "customer.support@rwandanoble.tours",
   whatsapp: "https://wa.me/250788608794",
 };
 
